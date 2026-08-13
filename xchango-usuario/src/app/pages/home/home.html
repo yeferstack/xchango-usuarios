@@ -1,0 +1,264 @@
+<div class="page">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo__mark">🐵</span>
+      <span class="logo__text">XchanGo</span>
+    </div>
+
+    <div class="search">
+      <svg
+        class="search__icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar trueques..."
+        [(ngModel)]="busqueda"
+        class="search__input"
+      />
+    </div>
+
+    <nav class="nav">
+      <a class="nav__item nav__item--active" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 11l9-8 9 8"></path>
+          <path d="M5 10v10h14V10"></path>
+        </svg>
+        Inicio
+      </a>
+      <a class="nav__item" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 3v18M3 12h18"></path>
+        </svg>
+        Explorar
+      </a>
+      <a class="nav__item" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 1l4 4-4 4"></path>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+          <path d="M7 23l-4-4 4-4"></path>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+        </svg>
+        Mis trueques
+      </a>
+      <a class="nav__item" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        Servicios
+      </a>
+      <a class="nav__item" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.38 8.38 0 0 1 3.5 11.5 8.38 8.38 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"
+          ></path>
+        </svg>
+        Mensajes
+      </a>
+      <a class="nav__item" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+          ></path>
+        </svg>
+        Favoritos
+      </a>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" type="button" aria-label="Notificaciones">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
+        </svg>
+        <span class="icon-btn__badge" *ngIf="notificaciones > 0">{{ notificaciones }}</span>
+      </button>
+      <button class="avatar-btn" type="button">
+        <img src="https://i.pravatar.cc/40?img=68" alt="Foto de perfil" class="avatar-btn__img" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="sidebar__title">Tipos de trueques</h2>
+      <ul class="sidebar__list">
+        <li *ngFor="let categoria of categorias">
+          <button
+            type="button"
+            class="sidebar__item"
+            [class.sidebar__item--active]="categoriaSeleccionada === categoria.id"
+            (click)="seleccionarCategoria(categoria.id)"
+          >
+            {{ categoria.nombre }}
+          </button>
+        </li>
+      </ul>
+
+      <button class="publish-btn" type="button" (click)="publicarTrueque()">
+        Publicar un trueque
+        <span class="publish-btn__plus">+</span>
+      </button>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+      <div class="toolbar">
+        <div class="tabs">
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'bienes'"
+            (click)="seleccionarFiltro('bienes')"
+          >
+            Bienes Físicos
+          </button>
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'servicios'"
+            (click)="seleccionarFiltro('servicios')"
+          >
+            Servicios
+          </button>
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'digitales'"
+            (click)="seleccionarFiltro('digitales')"
+          >
+            Digitales
+          </button>
+        </div>
+
+        <button class="sort" type="button">
+          {{ orden }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <section class="grid">
+        <article class="card" *ngFor="let trueque of truequesFiltrados">
+          <div class="card__image-wrap">
+            <img [src]="trueque.imagen" [alt]="trueque.titulo" class="card__image" />
+            <span [class]="claseBadge(trueque.tipo)">{{ trueque.tipo }}</span>
+            <button
+              class="card__fav"
+              type="button"
+              [class.card__fav--active]="trueque.favorito"
+              (click)="alternarFavorito(trueque, $event)"
+              aria-label="Agregar a favoritos"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                [attr.fill]="trueque.favorito ? 'currentColor' : 'none'"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="card__body">
+            <h3 class="card__title">{{ trueque.titulo }}</h3>
+            <div class="card__footer">
+              <div class="card__author">
+                <img [src]="trueque.avatar" alt="" class="card__avatar" />
+                <span>por {{ trueque.autor }}</span>
+                <span class="card__dot">·</span>
+                <svg
+                  class="card__pin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>{{ trueque.ciudad }}</span>
+              </div>
+              <button class="card__cta" type="button">Intercambio</button>
+            </div>
+          </div>
+        </article>
+
+        <p class="grid__empty" *ngIf="truequesFiltrados.length === 0">
+          No encontramos trueques con esos filtros. Prueba con otra categoría o búsqueda.
+        </p>
+      </section>
+
+      <section class="benefits">
+        <div class="benefit" *ngFor="let beneficio of beneficios">
+          <span class="benefit__icon">
+            <svg
+              *ngIf="beneficio.icono === 'shield'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"></path>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'users'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="9" cy="8" r="3.5"></circle>
+              <path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"></path>
+              <circle cx="17" cy="9" r="2.5"></circle>
+              <path d="M22 20c0-2.5-1.8-4.5-4-5.3"></path>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'bolt'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2"></polygon>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'chat'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.38 8.38 0 0 1 3.5 11.5 8.38 8.38 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"
+              ></path>
+            </svg>
+          </span>
+          <div>
+            <h4 class="benefit__title">{{ beneficio.titulo }}</h4>
+            <p class="benefit__desc">{{ beneficio.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
