@@ -1,0 +1,131 @@
+<div class="perfil-page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img src="Logo Mono.jpeg" alt="XchanGo" class="navbar__logo" />
+            <span class="navbar__brand-name">XchanGo</span>
+        </div>
+
+        <nav class="navbar__pill">
+            <a class="navbar__link"><span class="material-icons">home</span> Inicio</a>
+            <a class="navbar__link"><span class="material-icons">search</span> Explorar</a>
+            <a class="navbar__link"><span class="material-icons">swap_horiz</span> Mis trueques</a>
+            <a class="navbar__link"><span class="material-icons">apps</span> Servicios</a>
+            <a class="navbar__link"><span class="material-icons">chat_bubble_outline</span> Mensajes</a>
+            <a class="navbar__link"><span class="material-icons">favorite_border</span> Favoritos</a>
+        </nav>
+
+        <div class="navbar__actions">
+            <button class="navbar__icon-btn" aria-label="Notificaciones">
+                <span class="material-icons">notifications_none</span>
+            </button>
+            <div class="navbar__avatar">
+                <img src="/assets/avatar-miguel.jpg" alt="Miguel Perez" />
+            </div>
+            <span class="material-icons navbar__chevron">expand_more</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="perfil">
+
+        <section class="perfil__card perfil__hero">
+
+            <!-- Columna izquierda: avatar + nombre + rating -->
+            <div class="perfil__identity">
+                <div class="perfil__avatar-wrap">
+                    <img class="perfil__avatar" src="/assets/avatar-miguel.jpg" alt="Foto de perfil de Miguel Perez" />
+                    <button class="perfil__avatar-edit" aria-label="Cambiar foto de perfil">
+                        <span class="material-icons">photo_camera</span>
+                    </button>
+                </div>
+
+                <h1 class="perfil__name">Miguel Perez</h1>
+
+                <div class="perfil__rating">
+                    <h2 class="perfil__rating-title">Calificaciones y opiniones</h2>
+                    <div class="perfil__stars" aria-label="4 de 5 estrellas">
+                        <span class="material-icons is-filled">star</span>
+                        <span class="material-icons is-filled">star</span>
+                        <span class="material-icons is-filled">star</span>
+                        <span class="material-icons is-filled">star</span>
+                        <span class="material-icons">star</span>
+                    </div>
+                    <p class="perfil__rating-note">
+                        (Solo será visible públicamente tras recibir 5 calificaciones).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Columna derecha: grid de opciones -->
+            <div class="perfil__options">
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">badge</span>
+                    <div>
+                        <h3 class="option-card__title">Tu información</h3>
+                        <p class="option-card__desc">Nombre elegido y datos para identificarte.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">account_circle</span>
+                    <div>
+                        <h3 class="option-card__title">Datos de tu cuenta</h3>
+                        <p class="option-card__desc">Datos que representan tu cuenta de XchanGo.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">shield</span>
+                    <div>
+                        <h3 class="option-card__title">Seguridad</h3>
+                        <p class="option-card__desc">Seguridad de tu cuenta.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">location_on</span>
+                    <div>
+                        <h3 class="option-card__title">Ubicación</h3>
+                        <p class="option-card__desc">Ubicación guardada en tu cuenta.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">lock_outline</span>
+                    <div>
+                        <h3 class="option-card__title">Privacidad</h3>
+                        <p class="option-card__desc">Privacidad y control sobre el uso de tus datos.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card" type="button">
+                    <span class="option-card__icon material-icons">chat_bubble_outline</span>
+                    <div>
+                        <h3 class="option-card__title">Chats</h3>
+                        <p class="option-card__desc">Tus chats más recientes.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+                <button class="option-card option-card--wide" type="button">
+                    <span class="option-card__icon material-icons">grid_view</span>
+                    <div>
+                        <h3 class="option-card__title">Mis Publicaciones</h3>
+                        <p class="option-card__desc">Aquí encontrarás todas tus publicaciones.</p>
+                    </div>
+                    <span class="material-icons option-card__chevron">chevron_right</span>
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+</div>
