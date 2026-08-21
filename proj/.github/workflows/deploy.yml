@@ -23,20 +23,23 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: proj/package-lock.json
 
       - name: Install dependencies
+        working-directory: ./proj
         run: npm ci
 
       - name: Build Angular
+        working-directory: ./proj
         run: npm run build -- --base-href=/Xchango/
 
       - name: Copy index.html to 404.html for SPA routing
-        run: cp dist/xchango/browser/index.html dist/xchango/browser/404.html
+        run: cp proj/dist/xchango/browser/index.html proj/dist/xchango/browser/404.html
 
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist/xchango/browser
+          path: proj/dist/xchango/browser
 
   deploy:
     name: Deploy to GitHub Pages
