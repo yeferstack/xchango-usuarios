@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ac1",
+    "usuarioId": "u9",
+    "adminId": "a1",
+    "accion": "Suspensión",
+    "descripcion": "Cuenta suspendida por reportes reiterados.",
+    "fecha": "2026-08-17T16:20:00"
+  },
+  {
+    "id": "ac2",
+    "usuarioId": "u5",
+    "adminId": "a2",
+    "accion": "Advertencia",
+    "descripcion": "Advertencia enviada por información engañosa en una publicación.",
+    "fecha": "2026-08-16T11:05:00"
+  },
+  {
+    "id": "ac3",
+    "usuarioId": "u14",
+    "adminId": "a2",
+    "accion": "Eliminación",
+    "descripcion": "Publicación eliminada por contenido inapropiado.",
+    "fecha": "2026-08-02T09:40:00"
+  },
+  {
+    "id": "ac4",
+    "usuarioId": "u12",
+    "adminId": "a2",
+    "accion": "Aprobación",
+    "descripcion": "Reporte revisado y descartado.",
+    "fecha": "2026-08-12T15:10:00"
+  },
+  {
+    "id": "ac5",
+    "usuarioId": "u14",
+    "adminId": "a1",
+    "accion": "Advertencia",
+    "descripcion": "Advertencia por publicar contenido no permitido.",
+    "fecha": "2026-07-27T08:55:00"
+  },
+  {
+    "id": "ac6",
+    "usuarioId": "u3",
+    "adminId": "a1",
+    "accion": "Suspensión",
+    "descripcion": "Cuenta suspendida tras acumular reportes.",
+    "fecha": "2026-08-09T17:30:00"
+  },
+  {
+    "id": "ac7",
+    "usuarioId": "u9",
+    "adminId": "a1",
+    "accion": "Eliminación",
+    "descripcion": "Publicación eliminada por producto no permitido.",
+    "fecha": "2026-08-10T14:02:00"
+  },
+  {
+    "id": "ac8",
+    "usuarioId": "u3",
+    "adminId": "a2",
+    "accion": "Eliminación",
+    "descripcion": "Publicación eliminada por servicio no permitido.",
+    "fecha": "2026-08-08T10:48:00"
+  }
+]

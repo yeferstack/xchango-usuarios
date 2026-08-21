@@ -1,0 +1,167 @@
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <a class="marca" routerLink="/home">
+        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <span class="marca-texto">XchanGo</span>
+    </a>
+
+    <nav class="nav-pill">
+        <a routerLink="/home" class="nav-item activo">
+            <app-icono nombre="home"></app-icono> Inicio
+        </a>
+        <a routerLink="/explorar" class="nav-item">
+            <app-icono nombre="search"></app-icono> Explorar
+        </a>
+        <a routerLink="/mis-trueques" class="nav-item">
+            <app-icono nombre="swap_horiz"></app-icono> Mis trueques
+        </a>
+        <a routerLink="/servicios" class="nav-item">
+            <app-icono nombre="apps"></app-icono> Servicios
+        </a>
+        <a routerLink="/mensajes" class="nav-item">
+            <app-icono nombre="chat_bubble_outline"></app-icono> Mensajes
+        </a>
+        <a routerLink="/favoritos" class="nav-item">
+            <app-icono nombre="favorite_border"></app-icono> Favoritos
+        </a>
+    </nav>
+
+    <div class="nav-derecha">
+        <button class="btn-campana" type="button">
+            <app-icono nombre="notifications_none"></app-icono>
+        </button>
+        <div class="avatar-nav">
+            <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+        </div>
+        <app-icono nombre="expand_more"></app-icono>
+    </div>
+</header>
+
+<!-- ===== CONTENEDOR BEIGE ===== -->
+<main class="contenedor">
+    <div class="panel">
+
+        <!-- Columna izquierda: identidad -->
+        <aside class="columna-identidad">
+            <button class="btn-volver" type="button" (click)="volver()">
+                <app-icono nombre="arrow_back"></app-icono> Volver
+            </button>
+
+            <div class="foto-perfil">
+                <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+            </div>
+
+            <h2 class="nombre">Miguel Perez</h2>
+
+            <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
+            <div class="estrellas">
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+            </div>
+            <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
+        </aside>
+
+        <!-- Tarjeta blanca: contenido -->
+        <section class="tarjeta">
+
+            <header class="tarjeta-encabezado encabezado-flex">
+                <div>
+                    <h1 class="titulo">Mis publicaciones</h1>
+                    <p class="descripcion">Administra los trueques que has publicado.</p>
+                </div>
+                <button class="btn-guardar" type="button" routerLink="/publicar">
+                    <app-icono nombre="add"></app-icono> Publicar trueque
+                </button>
+            </header>
+
+            <!-- Resumen -->
+            <div class="resumen">
+                <div class="resumen-item">
+                    <span class="resumen-valor">{{ totalActivas() }}</span>
+                    <span class="resumen-etiqueta">Publicaciones activas</span>
+                </div>
+                <div class="resumen-item">
+                    <span class="resumen-valor">{{ totalPropuestas() }}</span>
+                    <span class="resumen-etiqueta">Propuestas recibidas</span>
+                </div>
+                <div class="resumen-item">
+                    <span class="resumen-valor">{{ totalVistas() }}</span>
+                    <span class="resumen-etiqueta">Visitas totales</span>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filtros">
+                <button class="filtro" type="button" *ngFor="let f of filtros" [class.activo]="filtro() === f.id"
+                    (click)="cambiarFiltro(f.id)">
+                    {{ f.etiqueta }}
+                    <span class="filtro-contador">{{ contarPor(f.id) }}</span>
+                </button>
+            </div>
+
+            <!-- Grilla de publicaciones -->
+            <div class="grilla" *ngIf="publicacionesFiltradas().length > 0">
+                <article class="pub" *ngFor="let p of publicacionesFiltradas()">
+
+                    <div class="pub-imagen">
+                        <img [src]="p.imagen" [alt]="p.titulo" />
+                        <span class="estado" [ngClass]="'estado--' + p.estado">
+                            {{ etiquetaEstado(p.estado) }}
+                        </span>
+                    </div>
+
+                    <div class="pub-cuerpo">
+                        <span class="categoria">{{ p.categoria }}</span>
+                        <h3 class="pub-titulo">{{ p.titulo }}</h3>
+
+                        <p class="pub-meta">
+                            <app-icono nombre="place"></app-icono> {{ p.ciudad }}
+                            <span class="separador">·</span>
+                            {{ p.fechaCreacion }}
+                        </p>
+
+                        <div class="pub-stats">
+                            <span><app-icono nombre="visibility"></app-icono> {{ p.vistas }}</span>
+                            <span><app-icono nombre="swap_horiz"></app-icono> {{ p.propuestas }}</span>
+                        </div>
+                    </div>
+
+                    <div class="pub-acciones">
+                        <button class="btn-accion" type="button" [routerLink]="['/trueque', p.id]">
+                            <app-icono nombre="visibility"></app-icono> Ver
+                        </button>
+
+                        <button class="btn-accion" type="button" *ngIf="p.estado !== 'finalizada'"
+                            [routerLink]="['/trueque', p.id, 'editar']">
+                            <app-icono nombre="edit"></app-icono> Editar
+                        </button>
+
+                        <button class="btn-accion" type="button" *ngIf="p.estado !== 'finalizada'"
+                            (click)="alternarPausa(p.id)">
+                            <app-icono [nombre]="p.estado === 'activa' ? 'pause' : 'play_arrow'"></app-icono>
+                            {{ p.estado === 'activa' ? 'Pausar' : 'Activar' }}
+                        </button>
+
+                        <button class="btn-accion btn-accion--peligro" type="button" (click)="eliminar(p.id)">
+                            <app-icono nombre="delete_outline"></app-icono> Eliminar
+                        </button>
+                    </div>
+
+                </article>
+            </div>
+
+            <!-- Estado vacío -->
+            <div class="sin-datos" *ngIf="publicacionesFiltradas().length === 0">
+                <app-icono nombre="inventory_2"></app-icono>
+                <h3>No hay publicaciones aquí</h3>
+                <p>Cuando publiques un trueque aparecerá en esta sección.</p>
+            </div>
+
+        </section>
+        
+
+    </div>
+</main>

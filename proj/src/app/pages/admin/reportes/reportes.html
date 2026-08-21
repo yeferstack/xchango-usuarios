@@ -1,0 +1,174 @@
+<div class="cabecera">
+  <app-filtro-fechas (cambio)="cambiarRango($event)" />
+
+  <div class="exportar">
+    <button type="button" class="btn" (click)="exportarCSV()">
+      <app-icon name="download" [size]="16" /> Excel (CSV)
+    </button>
+    <button type="button" class="btn btn--oscuro" (click)="exportarPDF()">
+      <app-icon name="file-text" [size]="16" /> PDF
+    </button>
+  </div>
+</div>
+
+@if (exportando()) {
+  <div class="aviso">
+    <app-icon name="check-circle" [size]="17" />
+    Exportación en formato {{ exportando() }} generada correctamente.
+  </div>
+}
+
+<!-- HU65: panel con reportes de usuarios, publicaciones e intercambios -->
+@if (resumen(); as m) {
+  <section class="grid-stats">
+    <app-stat-card etiqueta="Usuarios registrados" [valor]="m.usuarios" icono="users" [variacion]="variacion('usuarios')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Usuarios nuevos" [valor]="comparativas()['usuariosNuevos']?.actual ?? 0" icono="user-check" tono="ok" [variacion]="variacion('usuariosNuevos')" />
+    <app-stat-card etiqueta="Publicaciones" [valor]="m.publicaciones" icono="package" [variacion]="variacion('publicaciones')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Intercambios" [valor]="m.intercambios" icono="swap" [variacion]="variacion('intercambios')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Reportes recibidos" [valor]="comparativas()['reportes']?.actual ?? 0" icono="shield-alert" tono="warn" [variacion]="variacion('reportes')" />
+  </section>
+}
+
+<!-- HU66 + HU69: gráficos por categoría y ubicación, en tiempo real -->
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Actividad de usuarios</h3>
+        <p class="panel__sub">Evolución en el periodo seleccionado</p>
+      </div>
+      <span class="vivo"><span class="vivo__punto"></span> Tiempo real</span>
+    </div>
+    <app-chart-linea [datos]="actividad()" color="#a1785a" />
+  </div>
+
+  <div class="panel">
+    <div class="panel__head">
+      <h3 class="panel__titulo">Por categoría</h3>
+    </div>
+    <app-chart-dona [datos]="categorias()" unidad="Publicaciones" />
+  </div>
+</section>
+
+<section class="grid-2 grid-2--inv">
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Actividad por ubicación</h3>
+        <p class="panel__sub">Municipios de Casanare</p>
+      </div>
+    </div>
+    <app-chart-barras [datos]="ubicaciones()" color="#7d6144" />
+  </div>
+
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Intercambios realizados</h3>
+        <p class="panel__sub">Trueques completados</p>
+      </div>
+    </div>
+    <app-chart-linea [datos]="intercambios()" color="#2f7d5d" />
+  </div>
+</section>
+
+<!-- HU70 + HU76: alertas automáticas y ranking -->
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Alertas de actividad sospechosa</h3>
+        <p class="panel__sub">Detectadas automáticamente por el sistema</p>
+      </div>
+    </div>
+
+    @if (alertas().length) {
+      @for (a of alertas(); track a.id) {
+        <div class="alerta">
+          <span [class]="'alerta__icono alerta__icono--' + a.prioridad">
+            <app-icon name="alert" [size]="15" />
+          </span>
+          <div>
+            <p class="alerta__titulo">{{ a.titulo }}</p>
+            <p class="alerta__texto">{{ a.mensaje }}</p>
+            <span class="alerta__meta">{{ a.fecha | date: 'dd MMM yyyy, HH:mm' }}</span>
+          </div>
+          <span style="margin-left: auto; align-self: center">
+            <app-badge-estado [estado]="a.prioridad" [etiqueta]="'Prioridad ' + a.prioridad" />
+          </span>
+        </div>
+      }
+    } @else {
+      <p class="vacio">No hay alertas activas.</p>
+    }
+  </div>
+
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Usuarios más activos</h3>
+        <p class="panel__sub">Publicaciones + intercambios</p>
+      </div>
+    </div>
+
+    <ul class="rank">
+      @for (u of ranking(); track u.id; let i = $index) {
+        <li class="rank__item">
+          <span [class]="'rank__pos rank__pos--' + (i + 1)">{{ i + 1 }}</span>
+          <div class="rank__cuerpo">
+            <p class="rank__nombre">{{ u.nombre }}</p>
+            <span class="rank__meta">{{ u.ubicacion }} · {{ u.publicaciones }} publicaciones</span>
+          </div>
+          <span class="rank__valor">{{ u.publicaciones + u.intercambios }}</span>
+        </li>
+      } @empty {
+        <li><p class="vacio">Sin datos de usuarios.</p></li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- HU71 + HU72: historial de acciones y métricas de comportamiento -->
+<div class="panel">
+  <div class="panel__head">
+    <div>
+      <h3 class="panel__titulo">Historial de acciones administrativas</h3>
+      <p class="panel__sub">
+        @if (desde() || hasta()) {
+          Filtrado por el rango seleccionado
+        } @else {
+          Todas las acciones registradas
+        }
+      </p>
+    </div>
+  </div>
+
+  @if (historial().length) {
+    <div class="tabla-scroll">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Acción</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Administrador</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (h of historial(); track h.id) {
+            <tr>
+              <td class="td-fuerte">{{ h.usuarioNombre }}</td>
+              <td><app-badge-estado [estado]="h.accion.toLowerCase()" [etiqueta]="h.accion" /></td>
+              <td>{{ h.descripcion }}</td>
+              <td>{{ h.fecha | date: 'dd MMM yyyy, HH:mm' }}</td>
+              <td>{{ h.administrador }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="vacio">No hay acciones registradas en ese rango de fechas.</p>
+  }
+</div>

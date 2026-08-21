@@ -1,0 +1,26 @@
+[
+  {
+    "id": "el1",
+    "publicacionId": "pub11",
+    "usuarioId": "u9",
+    "adminId": "a1",
+    "motivo": "Producto no permitido",
+    "fecha": "2026-08-10"
+  },
+  {
+    "id": "el2",
+    "publicacionId": "pub12",
+    "usuarioId": "u3",
+    "adminId": "a2",
+    "motivo": "Servicio no permitido",
+    "fecha": "2026-08-08"
+  },
+  {
+    "id": "el3",
+    "publicacionId": "pub13",
+    "usuarioId": "u14",
+    "adminId": "a2",
+    "motivo": "Contenido inapropiado",
+    "fecha": "2026-08-02"
+  }
+]

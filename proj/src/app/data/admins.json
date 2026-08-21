@@ -1,0 +1,22 @@
+[
+  {
+    "id": "a1",
+    "nombre": "Miguel Admin",
+    "email": "admin@xchango.com",
+    "password": "admin123",
+    "rol": "admin",
+    "estado": "activo",
+    "avatar": "https://i.pravatar.cc/80?img=68",
+    "ultimoAcceso": "2026-08-18T09:12:00"
+  },
+  {
+    "id": "a2",
+    "nombre": "Ana Moderadora",
+    "email": "moderador@xchango.com",
+    "password": "mod123",
+    "rol": "moderador",
+    "estado": "activo",
+    "avatar": "https://i.pravatar.cc/80?img=45",
+    "ultimoAcceso": "2026-08-17T18:40:00"
+  }
+]

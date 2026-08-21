@@ -1,0 +1,102 @@
+[
+  {
+    "id": "not1",
+    "usuarioId": "u12",
+    "tipo": "solicitud",
+    "referenciaId": "tr7",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Julián Ospina quiere truequear por tu publicación \"Juego de sala de 3 puestos\".",
+    "leida": false,
+    "fecha": "2026-08-18T10:12:00"
+  },
+  {
+    "id": "not2",
+    "usuarioId": "u2",
+    "tipo": "solicitud",
+    "referenciaId": "tr8",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Luisa Cárdenas quiere truequear por tu publicación \"Clases de inglés personalizadas\".",
+    "leida": false,
+    "fecha": "2026-08-19T09:05:00"
+  },
+  {
+    "id": "not3",
+    "usuarioId": "u5",
+    "tipo": "solicitud",
+    "referenciaId": "tr9",
+    "titulo": "Nueva solicitud de trueque",
+    "mensaje": "Óscar Peña quiere truequear por tu publicación \"Reparación de computadores\".",
+    "leida": false,
+    "fecha": "2026-08-19T14:40:00"
+  },
+  {
+    "id": "not4",
+    "usuarioId": "u2",
+    "tipo": "aceptada",
+    "referenciaId": "tr6",
+    "titulo": "Tu solicitud fue aceptada",
+    "mensaje": "Valentina Ríos aceptó tu propuesta. Continúa la negociación por WhatsApp.",
+    "leida": true,
+    "fecha": "2026-08-14T16:30:00"
+  },
+  {
+    "id": "not5",
+    "usuarioId": "u12",
+    "tipo": "rechazada",
+    "referenciaId": "tr2",
+    "titulo": "Tu solicitud fue rechazada",
+    "mensaje": "Carlos Ospina rechazó tu propuesta por \"Bicicleta todoterreno rin 29\".",
+    "leida": true,
+    "fecha": "2026-08-01T11:20:00"
+  },
+  {
+    "id": "not6",
+    "usuarioId": "u1",
+    "tipo": "completada",
+    "referenciaId": "tr10",
+    "titulo": "Trueque completado",
+    "mensaje": "El trueque con Diego Salamanca quedó cerrado. Ya puedes calificar la experiencia.",
+    "leida": false,
+    "fecha": "2026-08-18T18:00:00"
+  },
+  {
+    "id": "not7",
+    "usuarioId": "u4",
+    "tipo": "recordatorio",
+    "referenciaId": "tr6",
+    "titulo": "Tienes una solicitud sin responder",
+    "mensaje": "La propuesta de Daniela Torres lleva varios días esperando tu respuesta.",
+    "leida": false,
+    "fecha": "2026-08-19T08:00:00"
+  },
+  {
+    "id": "not8",
+    "usuarioId": "u12",
+    "tipo": "recordatorio",
+    "referenciaId": "pub6",
+    "titulo": "Publicación pausada hace tiempo",
+    "mensaje": "\"Juego de sala de 3 puestos\" lleva pausada varios días. Actívala para recibir propuestas.",
+    "leida": false,
+    "fecha": "2026-08-19T08:00:00"
+  },
+  {
+    "id": "not9",
+    "usuarioId": "u7",
+    "tipo": "verificacion",
+    "referenciaId": null,
+    "titulo": "Verifica tu cuenta",
+    "mensaje": "Tu cuenta sigue sin verificar. Confirma tu correo para poder publicar.",
+    "leida": false,
+    "fecha": "2026-08-15T07:30:00"
+  },
+  {
+    "id": "not10",
+    "usuarioId": "u14",
+    "tipo": "moderacion",
+    "referenciaId": "pub13",
+    "titulo": "Publicación retirada",
+    "mensaje": "Tu publicación fue retirada por contenido inapropiado. Revisa las normas de la comunidad.",
+    "leida": true,
+    "fecha": "2026-08-02T09:45:00"
+  }
+]

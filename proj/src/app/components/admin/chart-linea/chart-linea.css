@@ -1,0 +1,6 @@
+.linea { padding: 15px 6px 4px; }
+.linea__plot { display: flex; align-items: end; gap: 10px; height: 145px; border-bottom: 1px solid #eadfd3; background: repeating-linear-gradient(to bottom, transparent 0 35px, #f2ebe4 36px); }
+.linea__punto { position: relative; flex: 1; min-width: 8px; max-width: 22px; height: 9px; border-radius: 50%; transform: translateY(5px); box-shadow: 0 0 0 4px rgba(161, 120, 90, .12); }
+.linea__punto span { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); color: #806f61; font-size: 10px; }
+.linea__labels { display: flex; gap: 10px; padding-top: 9px; color: #a08f80; font-size: 11px; text-align: center; }
+.linea__labels span { flex: 1; }

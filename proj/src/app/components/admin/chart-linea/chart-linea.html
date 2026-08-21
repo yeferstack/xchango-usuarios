@@ -1,0 +1,12 @@
+<div class="linea">
+	<div class="linea__plot">
+		@for (dato of datos(); track dato.label) {
+			<div class="linea__punto" [style.bottom.%]="(dato.valor / maximo()) * 88" [style.background]="color()" [title]="dato.label + ': ' + dato.valor">
+				<span>{{ dato.valor }}</span>
+			</div>
+		}
+	</div>
+	<div class="linea__labels">
+		@for (dato of datos(); track dato.label) { <span>{{ dato.label }}</span> }
+	</div>
+</div>

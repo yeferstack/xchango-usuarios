@@ -1,0 +1,311 @@
+<div class="pagina">
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <button type="button" class="boton-volver" (click)="volver()">
+      <app-icono nombre="arrow_back"></app-icono>
+    </button>
+    <div>
+      <h1>Publicar Trueque</h1>
+      <p>Completa la información de lo que ofreces</p>
+    </div>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
+
+    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
+    <div class="columna-formulario">
+
+      <!-- Paso 1: Tipo de intercambio -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">1. ¿Qué quieres publicar?</h2>
+        <p class="subtitulo-seccion">Elige el tipo de intercambio que mejor se adapte a lo que ofreces.</p>
+
+        <div class="grid-tipos">
+          <div
+            *ngFor="let tipo of tiposIntercambio"
+            class="tarjeta-tipo"
+            [class.seleccionada]="form.get('tipoIntercambio')?.value === tipo.id"
+            (click)="seleccionarTipo(tipo.id)">
+
+            <div class="tarjeta-tipo-encabezado">
+              <div class="icono-circulo" [ngClass]="tipo.colorClase">
+                <app-icono [nombre]="tipo.icono"></app-icono>
+              </div>
+              <span class="radio-personalizado" [class.activo]="form.get('tipoIntercambio')?.value === tipo.id"></span>
+            </div>
+
+            <h3>{{ tipo.titulo }}</h3>
+            <p>{{ tipo.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 2: Información básica -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">2. Información básica</h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Nombre del intercambio <span class="requerido">*</span></label>
+            <input type="text" formControlName="nombre" placeholder="Ej: Bicicleta montaña">
+          </div>
+
+          <div class="campo">
+            <label>Categoría <span class="requerido">*</span></label>
+            <select formControlName="categoria">
+              <option value="" disabled>Selecciona una categoría</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Descripción <span class="requerido">*</span></label>
+          <textarea
+            formControlName="descripcion"
+            [maxlength]="maxDescripcion"
+            placeholder="Describe tu bien, servicio o producto digital. Incluye detalles importantes...">
+          </textarea>
+          <span class="contador-caracteres">{{ form.get('descripcion')?.value?.length || 0 }}/{{ maxDescripcion }}</span>
+        </div>
+      </section>
+
+      <!-- Paso 3: Detalles del intercambio -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">3. Detalles del intercambio</h2>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>¿Qué ofreces exactamente?</label>
+            <input type="text" formControlName="ofreces" placeholder="Explica lo que ofreces...">
+          </div>
+
+          <div class="campo">
+            <label>¿Qué buscas a cambio?</label>
+            <input type="text" formControlName="buscas" placeholder="Ej: Clases de inglés, servicios de diseño, otro producto...">
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label>Disponibilidad <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="event"></app-icono>
+              <select formControlName="disponibilidad">
+                <option value="" disabled>Selecciona disponibilidad</option>
+                <option *ngFor="let opcion of opcionesDisponibilidad" [value]="opcion">{{ opcion }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Cantidad disponible</label>
+            <div class="input-con-icono">
+              <app-icono nombre="tag"></app-icono>
+              <input type="text" formControlName="cantidad" placeholder="Ej: 1 unidad / Horas / Sesiones">
+            </div>
+          </div>
+        </div>
+
+        <div class="campo campo-estado">
+          <label>Estado <span class="requerido">*</span></label>
+          <div class="switch-estado">
+            <label class="switch">
+              <input type="checkbox" formControlName="estado">
+              <span class="slider"></span>
+            </label>
+            <div>
+              <strong>Activo</strong>
+              <p>Tu intercambio será visible para otros usuarios</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 4: Ubicación -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">4.</h2>
+
+        <div class="fila-campos fila-tres">
+          <div class="campo">
+            <label>Departamento</label>
+            <div class="input-con-icono">
+              <app-icono nombre="apartment"></app-icono>
+              <input type="text" [value]="departamento" disabled readonly>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Municipio <span class="requerido">*</span></label>
+            <div class="input-con-icono">
+              <app-icono nombre="account_balance"></app-icono>
+              <select formControlName="municipio">
+                <option value="" disabled>Selecciona municipio</option>
+                <option *ngFor="let municipio of municipiosCasanare" [value]="municipio">{{ municipio }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label>Barrio</label>
+            <div class="input-con-icono">
+              <app-icono nombre="place"></app-icono>
+              <input type="text" formControlName="barrio" placeholder="Ej: 20 de Julio">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 5: Imágenes -->
+      <section class="seccion">
+        <h2 class="titulo-seccion">5. Imágenes del intercambio</h2>
+
+        <div
+          class="zona-carga"
+          [class.arrastrando]="arrastrandoArchivo"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          (click)="inputArchivo.click()">
+
+          <app-icono nombre="cloud_upload"></app-icono>
+          <strong>Sube fotos de tu intercambio</strong>
+          <p>Arrastra y suelta archivos aquí o haz clic para seleccionar</p>
+          <p class="texto-formatos">Formatos: JPG, PNG (Máx. 5MB cada uno)</p>
+
+          <input
+            #inputArchivo
+            type="file"
+            accept="image/jpeg,image/png"
+            multiple
+            hidden
+            (change)="onFileSelected($event)">
+        </div>
+
+        <div class="pie-carga">
+          <span>Puedes subir hasta {{ maxImagenes }} imágenes</span>
+          <span>{{ imagenes.length }}/{{ maxImagenes }}</span>
+        </div>
+
+        <div class="miniaturas" *ngIf="imagenesPreviewUrls.length">
+          <div class="miniatura" *ngFor="let url of imagenesPreviewUrls; let i = index">
+            <img [src]="url" alt="Vista previa de imagen">
+            <button type="button" (click)="eliminarImagen(i)">
+              <app-icono nombre="close"></app-icono>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" class="boton-ubicacion" (click)="seleccionarUbicacionEnMapa()">
+        <app-icono nombre="location_on"></app-icono>
+        Seleccionar ubicación en el mapa
+      </button>
+
+      <button type="submit" class="boton-publicar">Publicar trueque</button>
+    </div>
+
+    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
+    <aside class="columna-vista-previa">
+      <div class="tarjeta-vista-previa">
+        <div class="encabezado-vista-previa">
+          <app-icono nombre="visibility"></app-icono>
+          <div>
+            <strong>Vista previa de tu publicación</strong>
+            <p>Así se verá tu publicación</p>
+          </div>
+        </div>
+
+        <div class="banner-vista-previa" [class.con-imagen]="imagenesPreviewUrls.length">
+
+          <!-- Sin imágenes: se muestra el ícono del tipo de intercambio -->
+          <ng-container *ngIf="!imagenesPreviewUrls.length">
+            <div class="icono-circulo icono-banner" [ngClass]="tipoSeleccionado?.colorClase">
+              <app-icono [nombre]="tipoSeleccionado?.icono || 'inventory_2'"></app-icono>
+            </div>
+            <h3>{{ tituloVistaPrevia }}</h3>
+          </ng-container>
+
+          <!-- Con imágenes: se muestra la foto seleccionada -->
+          <ng-container *ngIf="imagenesPreviewUrls.length">
+            <img class="imagen-banner" [src]="imagenesPreviewUrls[indiceImagenVistaPrevia]" alt="Imagen del intercambio">
+
+            <span class="contador-imagenes" *ngIf="imagenesPreviewUrls.length > 1">
+              {{ indiceImagenVistaPrevia + 1 }}/{{ imagenesPreviewUrls.length }}
+            </span>
+
+            <button
+              type="button"
+              class="flecha-imagen flecha-izquierda"
+              *ngIf="imagenesPreviewUrls.length > 1"
+              (click)="imagenAnterior()">
+              <app-icono nombre="chevron_left"></app-icono>
+            </button>
+
+            <button
+              type="button"
+              class="flecha-imagen flecha-derecha"
+              *ngIf="imagenesPreviewUrls.length > 1"
+              (click)="imagenSiguiente()">
+              <app-icono nombre="chevron_right"></app-icono>
+            </button>
+          </ng-container>
+        </div>
+
+        <ul class="lista-vista-previa">
+          <li>
+            <app-icono nombre="home"></app-icono>
+            <div>
+              <strong>Nombre</strong>
+              <p>{{ form.get('nombre')?.value || 'Ej: Servicios' }}</p>
+            </div>
+          </li>
+          <li>
+            <app-icono nombre="description"></app-icono>
+            <div>
+              <strong>Descripción</strong>
+              <p>{{ form.get('descripcion')?.value || 'Descripción de la categoría' }}</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="fila-datos">
+          <app-icono nombre="check_circle"></app-icono>
+          <strong>Estado</strong>
+          <span class="etiqueta-activo" *ngIf="form.get('estado')?.value">Activo</span>
+          <span class="etiqueta-inactivo" *ngIf="!form.get('estado')?.value">Inactivo</span>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="event"></app-icono>
+          <strong>Disponibilidad</strong>
+          <span>{{ form.get('disponibilidad')?.value || 'Ej: Fines de semana' }}</span>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="place"></app-icono>
+          <strong>Ubicación</strong>
+          <span>
+            {{ form.get('municipio')?.value || 'Ej: Yopal' }}, {{ departamento }}
+          </span>
+        </div>
+
+        <div class="fila-datos">
+          <app-icono nombre="tag"></app-icono>
+          <strong>Cantidad disponible</strong>
+          <span>{{ form.get('cantidad')?.value || 'Ej: 1 unidad' }}</span>
+        </div>
+      </div>
+
+      <div class="caja-consejo">
+        <app-icono nombre="lightbulb"></app-icono>
+        <div>
+          <strong>Consejo</strong>
+          <p>Añade una buena descripción, imágenes claras y detalles específicos para aumentar tus posibilidades de intercambio.</p>
+        </div>
+      </div>
+    </aside>
+
+  </form>
+</div>

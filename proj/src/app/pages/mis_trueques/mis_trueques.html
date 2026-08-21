@@ -1,0 +1,88 @@
+<div class="mt">
+  <header class="mt__top">
+    <button class="mt__back" type="button" (click)="volver()">← Volver</button>
+    <h1 class="mt__title">Mis trueques</h1>
+    <a class="mt__link" routerLink="/mis-publicaciones">Mis publicaciones</a>
+  </header>
+
+  <nav class="mt__tabs">
+    <button
+      type="button"
+      class="mt__tab"
+      [class.mt__tab--active]="pestana() === 'recibidos'"
+      (click)="cambiarPestana('recibidos')"
+    >
+      Recibidos ({{ recibidos().length }})
+      <span class="mt__dot" *ngIf="pendientes() > 0">{{ pendientes() }}</span>
+    </button>
+    <button
+      type="button"
+      class="mt__tab"
+      [class.mt__tab--active]="pestana() === 'enviados'"
+      (click)="cambiarPestana('enviados')"
+    >
+      Enviados ({{ enviados().length }})
+    </button>
+  </nav>
+
+  <p class="mt__empty" *ngIf="listado().length === 0">
+    Todavía no tienes trueques aquí.
+    <a routerLink="/home">Explora publicaciones</a> y propón el primero.
+  </p>
+
+  <ul class="mt__list">
+    <li class="mt__card" *ngFor="let t of listado()">
+      <div class="mt__head">
+        <img class="mt__avatar" [src]="t.solicitanteAvatar" alt="" />
+        <div class="mt__who">
+          <strong>{{ pestana() === 'recibidos' ? t.solicitanteNombre : t.propietarioNombre }}</strong>
+          <a class="mt__pub" [routerLink]="['/trueque', t.publicacionId]">{{ t.publicacionTitulo }}</a>
+        </div>
+        <span [class]="claseEstado(t.estado)">{{ etiquetas[t.estado] }}</span>
+      </div>
+
+      <dl class="mt__deal">
+        <div><dt>Ofrece</dt><dd>{{ t.ofrece }}</dd></div>
+        <div><dt>Busca</dt><dd>{{ t.busca }}</dd></div>
+        <div><dt>Fecha</dt><dd>{{ t.fechaSolicitud }}</dd></div>
+      </dl>
+
+      <div class="mt__actions">
+        <ng-container *ngIf="pestana() === 'recibidos' && t.estado === 'pendiente'">
+          <button class="mt__btn mt__btn--ok" type="button" (click)="aceptar(t)">Aceptar</button>
+          <button class="mt__btn mt__btn--no" type="button" (click)="rechazar(t)">Rechazar</button>
+        </ng-container>
+
+        <ng-container *ngIf="t.estado === 'aceptado'">
+          <button class="mt__btn mt__btn--wa" type="button" (click)="contactar(t)">
+            Negociar por WhatsApp
+          </button>
+          <button
+            class="mt__btn"
+            type="button"
+            [disabled]="esperandoContraparte(t)"
+            (click)="confirmar(t)"
+          >
+            {{ esperandoContraparte(t) ? 'Esperando a la otra parte…' : 'Confirmar trueque' }}
+          </button>
+        </ng-container>
+
+        <div class="mt__stars" *ngIf="t.estado === 'completado'">
+          <span class="mt__stars-label">Califica:</span>
+          <button
+            *ngFor="let n of notas"
+            type="button"
+            class="mt__star"
+            [class.mt__star--on]="n <= miCalificacion(t)"
+            (click)="calificar(t, n)"
+            [attr.aria-label]="n + ' de 5'"
+          >★</button>
+        </div>
+
+        <span class="mt__note" *ngIf="t.estado === 'pendiente' && pestana() === 'enviados'">
+          Esperando respuesta.
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

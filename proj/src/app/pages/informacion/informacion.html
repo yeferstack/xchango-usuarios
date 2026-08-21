@@ -1,0 +1,102 @@
+<div class="perfil-page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="navbar__brand">
+        <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
+            <span class="navbar__brand-name">XchanGo</span>
+        </div>
+
+        <nav class=" navbar__pill">
+            <a class="navbar__link"><app-icono nombre="home"></app-icono> Inicio</a>
+            <a class="navbar__link"><app-icono nombre="search"></app-icono> Explorar</a>
+            <a class="navbar__link"><app-icono nombre="swap_horiz"></app-icono> Mis trueques</a>
+            <a class="navbar__link"><app-icono nombre="apps"></app-icono> Servicios</a>
+            <a class="navbar__link"><app-icono nombre="chat_bubble_outline"></app-icono> Mensajes</a>
+            <a class="navbar__link"><app-icono nombre="favorite_border"></app-icono> Favoritos</a>
+        </nav>
+
+        <div class="navbar__actions">
+            <button class="navbar__icon-btn" aria-label="Notificaciones">
+                <app-icono nombre="notifications_none"></app-icono>
+            </button>
+            <div class="navbar__avatar">
+                <img [src]="avatarUrl" [alt]="nombreUsuario" />
+            </div>
+            <app-icono nombre="expand_more"></app-icono>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="perfil">
+        <section class="perfil__card perfil__hero">
+
+            <!-- Columna izquierda: igual que en /perfil, con link de vuelta -->
+            <div class="perfil__identity">
+                <a routerLink="/perfil" class="perfil__back" aria-label="Volver al perfil">
+                    <app-icono nombre="arrow_back"></app-icono> Volver
+                </a>
+
+                <div class="perfil__avatar-wrap">
+                    <img class="perfil__avatar" [src]="avatarUrl" [alt]="'Foto de perfil de ' + nombreUsuario" />
+                </div>
+
+                <h1 class="perfil__name">{{ nombreUsuario }}</h1>
+
+                <div class="perfil__rating">
+                    <h2 class="perfil__rating-title">Calificaciones y opiniones</h2>
+                    <div class="perfil__stars"
+                        [attr.aria-label]="calificacion + ' de ' + calificacionMaxima + ' estrellas'">
+                        <app-icono nombre="star"></app-icono>
+                    </div>
+                    <p class="perfil__rating-note">
+                        (Solo será visible públicamente tras recibir
+                        {{ totalCalificacionesRequeridas }} calificaciones).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Columna derecha: formulario de "Tu información" -->
+            <div class="info-panel">
+                <div class="info-panel__form">
+                    <h2 class="info-panel__title">Tu información</h2>
+
+                    <label class="info-field">
+                        <span class="info-field__label">Nombre elegido</span>
+                        <input class="info-field__input" type="text" name="nombreElegido" [(ngModel)]="nombreElegido"
+                            placeholder="Escribe tu nombre" />
+                    </label>
+
+                    <label class="info-field">
+                        <span class="info-field__label">Número de Teléfono</span>
+                        <input class="info-field__input" type="tel" name="numeroTelefono" [(ngModel)]="numeroTelefono"
+                            placeholder="Ej: 3001234567" />
+                    </label>
+
+                    <div class="info-field">
+                        <span class="info-field__label">Cambiar foto de Perfil</span>
+
+                        <label class="upload-box" for="fotoInput">
+                            <ng-container *ngIf="!fotoPreviewUrl">
+                                <span class="upload-box__hint">Subir foto</span>
+                                <app-icono nombre="south"></app-icono>
+                            </ng-container>
+
+                            <img *ngIf="fotoPreviewUrl" class="upload-box__preview" [src]="fotoPreviewUrl"
+                                alt="Vista previa de la nueva foto de perfil" />
+                        </label>
+                        <input id="fotoInput" type="file" accept="image/*" class="upload-box__input"
+                            (change)="onArchivoSeleccionado($event)" />
+                    </div>
+
+                    <button class="btn-guardar" type="button" (click)="guardarCambios()">
+                        Guardar
+                    </button>
+                </div>
+
+                <img class="info-panel__mascota" src="Logo-xchango/chango.png" alt="Mascota de XchanGo" />
+            </div>
+
+        </section>
+    </main>
+</div>

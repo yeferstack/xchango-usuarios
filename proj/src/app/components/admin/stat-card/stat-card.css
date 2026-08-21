@@ -1,0 +1,11 @@
+.stat-card { background: #fff; border: 1px solid #eadfd3; border-radius: 14px; padding: 18px; box-shadow: 0 5px 18px rgba(77, 51, 31, .06); }
+.stat-card__top { display: flex; align-items: center; justify-content: space-between; }
+.stat-card__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; color: #7d6144; background: #f5ede5; }
+.stat-card--ok .stat-card__icon { color: #28734d; background: #e7f3ec; }
+.stat-card--warn .stat-card__icon { color: #a66b14; background: #fff3d8; }
+.stat-card--danger .stat-card__icon { color: #b34343; background: #fbe8e8; }
+.stat-card__variacion { color: #28734d; font-size: 12px; font-weight: 800; }
+.stat-card__variacion--negativa { color: #b34343; }
+.stat-card__etiqueta { margin: 17px 0 5px; color: #806f61; font-size: 13px; }
+.stat-card__valor { display: block; color: #211a16; font-size: 28px; line-height: 1.1; }
+.stat-card__detalle { display: block; margin-top: 7px; color: #a08f80; font-size: 12px; }

@@ -1,0 +1,22 @@
+<div class="shell">
+  <div class="shell__lateral" [class.shell__lateral--abierto]="menuAbierto()">
+    <app-sidebar-admin (navegar)="menuAbierto.set(false)" (salir)="cerrarSesion()" />
+  </div>
+
+  @if (menuAbierto()) {
+    <div class="shell__velo" (click)="menuAbierto.set(false)"></div>
+  }
+
+  <div class="shell__principal">
+    <app-header-admin
+      [titulo]="titulo()"
+      [subtitulo]="subtitulo()"
+      (abrirMenu)="menuAbierto.set(true)"
+      (salir)="cerrarSesion()"
+    />
+
+    <main class="shell__contenido">
+      <router-outlet />
+    </main>
+  </div>
+</div>

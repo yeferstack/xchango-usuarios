@@ -1,0 +1,1529 @@
+/* ================================
+   FUENTES XCHANGO
+   ================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+* {
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+}
+
+/* Títulos principales */
+.headline,
+.accent,
+.panel-header h3,
+.product-card h4,
+.feature h4 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+}
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+  color: #191714;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 247, 241, .82),
+      rgba(243, 235, 223, .72) 48%,
+      rgba(236, 223, 205, .78)
+    ),
+    url("/Logo-xchango/fondo.jpg") center / cover no-repeat;
+
+}
+
+main,
+section,
+header {
+  background: transparent;
+}
+
+.hero-blob {
+  display: none !important;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.navbar__brand {
+  position: fixed;
+  top: 14px;
+  left: 18px;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px 8px 8px;
+  text-decoration: none;
+}
+
+/* Semicírculo decorativo */
+
+.navbar__brand::before {
+  content: "";
+
+  position: absolute;
+  width: 290px;
+  height: 285px;
+
+  left: -145px;
+  top: -145px;
+
+  border-radius: 50%;
+  background: #efe6d9;
+
+  box-shadow: 0 10px 30px rgba(96, 77, 51, .05);
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+.navbar__chango {
+  width: 42px;
+  height: 42px;
+  display: block;
+  object-fit: contain;
+}
+
+.navbar__wordmark {
+  width: 112px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   NAVBAR — VIDRIO
+   ========================================================= */
+
+.navbar {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+
+  width: fit-content;
+  height: 64px;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px;
+
+  background: rgba(255, 255, 255, .48);
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: 999px;
+
+  box-shadow:
+    0 14px 35px rgba(96, 77, 51, .08),
+    0 0 0 8px rgba(255, 255, 255, .10),
+    inset 0 2px 5px rgba(255, 255, 255, .65);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px;
+
+  background: rgba(255, 255, 255, .54);
+  border: 1px solid rgba(255, 255, 255, .70);
+  border-radius: 20px;
+
+  box-shadow: 0 8px 20px rgba(102, 78, 44, .05);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.nav-item {
+  min-height: 40px;
+  padding: 0 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  border-radius: 14px;
+  color: #645c52;
+
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+}
+
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+  color: #847a68;
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, .72);
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.nav-item.active {
+  background: rgba(238, 228, 214, .92);
+  color: #111;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .65);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: absolute;
+  z-index: 2;
+
+  top: 105px;
+  right: 60px;
+  bottom: 120px;
+  left: 60px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(340px, 1.08fr)
+    minmax(250px, .70fr)
+    minmax(430px, 1.15fr);
+
+  align-items: center;
+  /* Más aire entre el texto, el teléfono y el panel: antes se
+     sentían pegados y competían por atención */
+  gap: 40px;
+
+  overflow: visible;
+}
+
+.hero-left {
+  position: relative;
+  z-index: 4;
+  grid-column: 1;
+  grid-row: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  min-width: 0;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+
+  color: #a27f59;
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.headline {
+  max-width: 510px;
+
+  color: #111;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(45px, 4vw, 66px);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.025em;
+}
+
+.accent {
+  color: #a27d57;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+}
+
+.subtext {
+  margin-top: 22px;
+
+  /* Antes #6e665d — muy claro sobre fondo blanco, bajaba la
+     legibilidad. Se oscurece sin perder la calidez beige */
+  color: #524b43;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 24px;
+}
+
+.btn {
+  min-height: 49px;
+  padding: 0 22px;
+
+  border-radius: 16px;
+
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-dark {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+
+  /* Se añade un halo dorado sutil: antes el dorado solo
+     aparecía en "quieres." y en el link "Ver todas ›" */
+  box-shadow:
+    0 10px 20px rgba(17, 17, 17, .15),
+    0 0 0 1px rgba(178, 138, 87, .35);
+}
+
+.btn-dark:hover {
+  background: #222;
+}
+
+.btn-outline {
+  border: 1px solid rgba(146, 116, 80, .42);
+  background: rgba(255, 252, 247, .56);
+  color: #4b453e;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, .78);
+}
+
+.arrow {
+  margin-left: 8px;
+  font-size: 17px;
+  color: #cba876;
+}
+
+
+/* =========================================================
+   CENTRO / TELÉFONO
+   ========================================================= */
+
+.hero-center {
+  /* En vez de vivir en la columna del medio (que quedaba
+     descuadrada por ser asimétrica respecto a las otras dos),
+     esta capa se superpone a TODO el ancho del hero para poder
+     centrar el teléfono respecto al total, sin mover
+     hero-left ni hero-right de su columna original */
+  position: relative;
+  z-index: 4;
+  grid-column: 1 / -1;
+  grid-row: 1;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+
+  /* Que no bloquee clics sobre el texto/panel que quedan
+     debajo de sus bordes; el teléfono en sí sí es clickeable
+     (ver regla siguiente) */
+  pointer-events: none;
+}
+
+.hero-center > * {
+  pointer-events: auto;
+}
+
+/* Offset para correr el teléfono hacia la izquierda (o derecha)
+   respecto al centro exacto del hero. Positivo = a la derecha,
+   negativo = a la izquierda. Ajusta este único valor a gusto. */
+.hero-center {
+  --phone-offset-x: -90px;
+  transform: translateX(var(--phone-offset-x));
+}
+
+/* Halo que conecta el teléfono con el fondo */
+
+.hero-center::before {
+  content: "";
+
+  position: absolute;
+
+  /* En proporción al celular de 260px */
+  width: 350px;
+  height: 190px;
+
+  left: 50%;
+  bottom: 8px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(226, 204, 174, .42),
+      rgba(226, 204, 174, .22) 35%,
+      rgba(226, 204, 174, .08) 58%,
+      transparent 75%
+    );
+
+  filter: blur(18px);
+
+  z-index: -2;
+}
+
+/* Base de luz */
+
+.hero-center::after {
+  content: "";
+
+  position: absolute;
+
+  /* En proporción al celular de 260px */
+  width: 275px;
+  height: 44px;
+
+  left: 50%;
+  bottom: 18px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .28);
+
+  box-shadow:
+    0 12px 35px rgba(174, 142, 102, .18),
+    inset 0 1px 8px rgba(255, 255, 255, .55);
+
+  filter: blur(2px);
+
+  z-index: -1;
+}
+
+.phone-wrap {
+  position: relative;
+  z-index: 3;
+
+  width: min(320px, 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-img {
+  width: 320px;
+  max-width: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  /* Ayuda al navegador a priorizar nitidez sobre velocidad al
+     escalar el PNG hacia abajo */
+  image-rendering: -webkit-optimize-contrast;
+
+  /* Promueve su propia capa de composición para que la
+     animación no fuerce un re-rasterizado borroso del resto */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.dot-grid {
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  top: 60px;
+  left: 50%;
+
+  /* Antes usaba "right: -2px" relativo a .hero-center, lo cual
+     funcionaba cuando esa capa tenía casi el ancho del teléfono.
+     Ahora que .hero-center abarca todo el hero (para centrar
+     bien el teléfono), se ancla desde el centro del teléfono
+     con este offset propio, así se queda pegado a él */
+  --dot-grid-offset-x: 35px;
+  transform: translateX(var(--dot-grid-offset-x));
+
+  opacity: .25;
+
+  background-image:
+    radial-gradient(circle, #8f7c63 1.3px, transparent 1.3px);
+
+  background-size: 13px 13px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BASE ANTIGUA DEL TELÉFONO
+   ========================================================= */
+
+.phone-podium {
+  position: absolute;
+
+  /* En proporción al celular de 260px */
+  width: 260px;
+  height: 66px;
+
+  left: 50%;
+  bottom: 18px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 250, 240, .95),
+      rgba(224, 195, 150, .65) 42%,
+      rgba(200, 163, 114, .28) 68%,
+      transparent 76%
+    );
+
+  filter: blur(2px);
+  z-index: 1;
+}
+
+
+/* =========================================================
+   PANEL DERECHO
+   ========================================================= */
+
+.hero-right {
+  position: relative;
+  z-index: 4;
+  grid-column: 3;
+  grid-row: 1;
+
+  height: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Más espacio entre buscador / categorías / destacados para
+     que se lean como bloques propios y no como un solo muro */
+  gap: 18px;
+}
+
+.search-bar {
+  min-height: 61px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 6px 8px 6px 17px;
+
+  border: 1px solid rgba(255, 255, 255, .80);
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, .57);
+
+  box-shadow:
+    0 12px 28px rgba(89, 70, 48, .06),
+    0 0 0 6px rgba(255, 255, 255, .08),
+    inset 0 2px 5px rgba(255, 255, 255, .6);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: #847a68;
+  flex-shrink: 0;
+}
+
+.search-bar input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+
+  border: 0;
+  outline: 0;
+  background: transparent;
+
+  color: #3a352f;
+
+  font: 600 13px "Nunito", sans-serif;
+}
+
+.search-bar input::placeholder {
+  color: #958c81;
+}
+
+.filter-btn {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(151, 123, 88, .16);
+  border-radius: 14px;
+
+  background: rgba(247, 240, 230, .76);
+  color: #847a68;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PANELES
+   ========================================================= */
+
+.panel {
+  width: 100%;
+  padding: 14px 16px;
+
+  border: 1px solid rgba(255, 255, 255, .80);
+  border-radius: 21px;
+
+  background: rgba(255, 255, 255, .56);
+
+  box-shadow:
+    0 12px 30px rgba(97, 72, 41, .06),
+    0 0 0 6px rgba(255, 255, 255, .08),
+    inset 0 2px 5px rgba(255, 255, 255, .6);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+  margin-bottom: 11px;
+}
+
+.panel-header h3 {
+  color: #27231f;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 17px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.see-all {
+  color: #927654;
+
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   CATEGORÍAS — ICONOS EN IMAGEN
+   ========================================================= */
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.category {
+  min-width: 0;
+  min-height: 78px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+  padding: 7px 4px;
+
+  border: 1px solid rgba(255, 255, 255, .70);
+  border-radius: 14px;
+
+  background: rgba(255, 250, 244, .55);
+
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, .55);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+
+/* Contenedor de la imagen */
+
+.category-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+/* Imagen de cada categoría */
+
+.category-icon img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  transition:
+    transform .2s ease,
+    filter .2s ease;
+}
+
+
+/* Texto */
+
+.category span {
+  color: #645d54;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-align: center;
+  line-height: 1.1;
+
+  white-space: nowrap;
+}
+
+
+/* Hover */
+
+.category:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, .78);
+
+  box-shadow:
+    0 8px 18px rgba(96, 77, 51, .08),
+    inset 0 1px 4px rgba(255, 255, 255, .7);
+}
+
+.category:hover .category-icon img {
+  transform: scale(1.08);
+}
+
+.category:hover span {
+  color: #3f3932;
+}
+
+
+/* =========================================================
+   CATEGORÍAS — PANTALLAS HASTA 1280px
+   ========================================================= */
+
+@media (max-width: 1280px) {
+
+  .category {
+    min-height: 69px;
+  }
+
+  .category-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .category span {
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS — PANTALLAS BAJAS
+   ========================================================= */
+
+@media (max-height: 750px) {
+
+  .category-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS — PANTALLAS MUY BAJAS
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+  .category-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .category {
+    min-height: 58px;
+    gap: 3px;
+    padding: 5px 3px;
+  }
+
+  .category span {
+    font-size: 7px;
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTOS
+   ========================================================= */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+
+  transition: opacity .5s ease;
+}
+
+.products.is-fading {
+  opacity: 0;
+}
+
+.product-card {
+  min-width: 0;
+}
+
+.product-img {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1 / .78;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+  background: #eee4d7;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, .78);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .84);
+  color: #847a68;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+}
+
+.fav-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.product-card h4 {
+  margin-top: 6px;
+
+  color: #29251f;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 12px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  margin-top: 4px;
+
+  color: #8a8176;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.location-icon {
+  width: 14px;
+  height: 14px;
+  color: #847a68;
+}
+
+
+/* =========================================================
+   DOTS
+   ========================================================= */
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+  background: rgba(132, 122, 104, .28);
+}
+
+.dot.active {
+  width: 18px;
+  border-radius: 20px;
+  background: #847a68;
+}
+
+
+/* =========================================================
+   FEATURES / FOOTER — VIDRIO
+   ========================================================= */
+
+.features {
+  position: fixed;
+  z-index: 20;
+
+  left: 60px;
+  right: 60px;
+  bottom: 18px;
+
+  height: 92px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+
+  padding: 12px 20px;
+
+  border: 1px solid rgba(255, 255, 255, .82);
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, .57);
+
+  box-shadow:
+    0 14px 35px rgba(91, 69, 43, .07),
+    0 0 0 8px rgba(255, 255, 255, .10),
+    inset 0 2px 5px rgba(255, 255, 255, .55);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.feature {
+  position: relative;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 5px 20px;
+}
+
+.feature + .feature {
+  border-left: 1px solid rgba(139, 119, 93, .15);
+}
+
+.feature-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(146, 121, 88, .14);
+  border-radius: 50%;
+
+  background: rgba(250, 244, 236, .88);
+  color: #847a68;
+}
+
+.feature-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.feature h4 {
+  margin-bottom: 3px;
+
+  color: #2a261f;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.feature p {
+  max-width: 180px;
+
+  color: #82786b;
+  font-size: 9px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.terminos {
+  position: absolute;
+  right: 8px;
+  bottom: -16px;
+}
+
+.terminos a {
+  color: #8a7a67;
+  font-size: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   PANTALLAS GRANDES
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  .hero {
+    left: 78px;
+    right: 78px;
+    top: 105px;
+    bottom: 125px;
+
+    grid-template-columns:
+      minmax(400px, .98fr)
+      minmax(280px, .74fr)
+      minmax(500px, 1.23fr);
+
+    gap: 30px;
+  }
+
+  .features {
+    left: 78px;
+    right: 78px;
+  }
+
+  .headline {
+    font-size: 64px;
+  }
+
+  .phone-img {
+    width: 225px;
+  }
+}
+
+
+/* =========================================================
+   HASTA 1440px
+   ========================================================= */
+
+@media (max-width: 1440px) {
+
+  .hero {
+    left: 45px;
+    right: 45px;
+    top: 100px;
+    bottom: 115px;
+
+    grid-template-columns:
+      minmax(315px, .95fr)
+      minmax(245px, .72fr)
+      minmax(410px, 1.15fr);
+
+    gap: 20px;
+  }
+
+  .features {
+    left: 45px;
+    right: 45px;
+  }
+
+  .headline {
+    font-size: 56px;
+  }
+
+  .phone-img {
+    width: 220px;
+  }
+}
+
+
+/* =========================================================
+   HASTA 1280px
+   ========================================================= */
+
+@media (max-width: 1280px) {
+
+  .navbar {
+    top: 18px;
+    height: 60px;
+  }
+
+  .navbar__brand {
+    top: 10px;
+    left: 14px;
+  }
+
+  .navbar__chango {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navbar__wordmark {
+    width: 100px;
+  }
+
+  .nav-item {
+    min-height: 36px;
+    padding: 0 11px;
+    font-size: 12px;
+  }
+
+  .hero {
+    top: 88px;
+    bottom: 105px;
+    left: 30px;
+    right: 30px;
+
+    grid-template-columns:
+      minmax(295px, .94fr)
+      minmax(220px, .70fr)
+      minmax(390px, 1.10fr);
+
+    gap: 16px;
+  }
+
+  .headline {
+    font-size: 49px;
+  }
+
+  .subtext {
+    font-size: 14px;
+  }
+
+  .cta-row {
+    margin-top: 19px;
+  }
+
+  .btn {
+    min-height: 45px;
+    padding: 0 17px;
+    font-size: 12px;
+  }
+
+  .phone-img {
+    width: 205px;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+
+  .panel-header h3 {
+    font-size: 15px;
+  }
+
+  .category {
+    min-height: 69px;
+  }
+
+  .category-icon {
+    font-size: 22px;
+  }
+
+  .category span {
+    font-size: 8px;
+  }
+
+  .products {
+    gap: 6px;
+  }
+
+  .product-card h4 {
+    font-size: 10px;
+  }
+
+  .location {
+    font-size: 8px;
+  }
+
+  .features {
+    left: 30px;
+    right: 30px;
+    bottom: 12px;
+
+    height: 78px;
+    padding: 8px 12px;
+  }
+
+  .feature {
+    padding: 4px 13px;
+    gap: 8px;
+  }
+
+  .feature-icon {
+    width: 37px;
+    height: 37px;
+  }
+
+  .feature-svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .feature h4 {
+    font-size: 11px;
+  }
+
+  .feature p {
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   PANTALLAS BAJAS
+   ========================================================= */
+
+@media (max-height: 750px) {
+
+  .navbar {
+    top: 10px;
+    height: 56px;
+  }
+
+  .navbar__brand {
+    top: 8px;
+  }
+
+  .hero {
+    top: 78px;
+    bottom: 92px;
+    gap: 12px;
+  }
+
+  .headline {
+    font-size: 40px;
+  }
+
+  .subtext {
+    margin-top: 14px;
+  }
+
+  .cta-row {
+    margin-top: 15px;
+  }
+
+  .phone-img {
+    width: 185px;
+  }
+
+  .features {
+    bottom: 8px;
+    height: 70px;
+  }
+
+  .feature {
+    padding: 3px 8px;
+  }
+
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feature-svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .feature h4 {
+    font-size: 10px;
+  }
+
+  .feature p {
+    font-size: 7px;
+  }
+}
+
+
+/* =========================================================
+   PANTALLAS MUY BAJAS
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+  .navbar {
+    top: 7px;
+    height: 50px;
+  }
+
+  .navbar__brand {
+    top: 6px;
+    left: 10px;
+  }
+
+  .navbar__chango {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar__wordmark {
+    width: 85px;
+  }
+
+  .nav-item {
+    min-height: 30px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  .hero {
+    top: 65px;
+    bottom: 78px;
+    left: 20px;
+    right: 20px;
+    gap: 8px;
+  }
+
+  .headline {
+    font-size: 34px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+
+  .subtext {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .cta-row {
+    margin-top: 10px;
+  }
+
+  .btn {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 9px;
+  }
+
+  .phone-img {
+    width: 155px;
+  }
+
+  .features {
+    left: 20px;
+    right: 20px;
+    bottom: 5px;
+
+    height: 65px;
+    padding: 4px 7px;
+  }
+
+  .feature {
+    gap: 6px;
+  }
+
+  .feature-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .feature-svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .feature h4 {
+    font-size: 9px;
+  }
+
+  .feature p {
+    font-size: 6px;
+  }
+}
+
+
+/* =========================================================
+   TELÉFONO — VERSIÓN FINAL (reemplaza los 3 bloques repetidos
+   que había antes: sólo el último de ellos se aplicaba, así
+   que se consolidan aquí en uno solo, más ligero, para que el
+   teléfono no domine tanto frente al texto y al panel)
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .phone-wrap {
+    /* Antes 205px (quedó muy chico). Se sube a un tamaño
+       intermedio */
+    width: min(260px, 100%);
+    position: relative;
+    /* El celular dentro del PNG está corrido ~8px a la derecha
+       del centro geométrico del archivo (medido), por eso nunca
+       calzaba con la base sin importar el tamaño. Se compensa
+       con este offset */
+    left: -9px;
+    top: -4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    filter: drop-shadow(0 16px 20px rgba(53, 42, 30, .16));
+  }
+
+  .phone-img {
+    width: 260px;
+    max-width: none;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+
+    /* Sin filter acá: solo se anima transform, así el
+       navegador puede renderizar el PNG a máxima nitidez */
+    animation: phoneFloat 4s ease-in-out infinite;
+  }
+
+}
+
+@keyframes phoneFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+}
+
+/* En pantallas pequeñas el teléfono vuelve al centro, sin animar */
+@media (max-width: 768px) {
+
+  .phone-wrap {
+    left: 0;
+    top: 0;
+  }
+
+  .phone-img {
+    animation: none;
+  }
+
+}

@@ -1,0 +1,410 @@
+/* ==========================================================
+   XchanGo · Tu información
+   Misma paleta beige que /perfil + acento navy en el botón
+   ========================================================== */
+
+:host {
+    --bg-app: #F4EEE1;
+    --bg-nav: #FBF8F0;
+    --bg-card: #EFE7D6;
+    --bg-option: #E9E0CC;
+    --bg-option-hover: #E1D5B8;
+    --accent: #C9AD7E;
+    --accent-dark: #B4966A;
+    --text-primary: #1E1B16;
+    --text-secondary: #847A68;
+    --border-soft: #DED1B3;
+    --star-filled: #C9AD7E;
+    --star-empty: #D8CDB6;
+    --navy: #2B2A4C;
+    --navy-dark: #201F3B;
+
+    display: block;
+    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-app);
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.perfil-page {
+    min-height: 100vh;
+    background: var(--bg-app);
+    padding: 24px 40px 60px;
+}
+
+/* ============== NAVBAR (igual que en /perfil) ============== */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.navbar__logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.navbar__brand-name {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+}
+
+.navbar__pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-nav);
+    border-radius: 999px;
+    padding: 8px 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.navbar__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navbar__link app-icono {
+    font-size: 18px;
+}
+
+.navbar__link:hover {
+    background: var(--bg-option);
+    color: var(--text-primary);
+}
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.navbar__icon-btn {
+    background: var(--bg-nav);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.navbar__avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+}
+
+.navbar__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.navbar__chevron {
+    color: var(--text-secondary);
+}
+
+/* ============== TARJETA PRINCIPAL ============== */
+
+.perfil {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.perfil__hero {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 28px;
+    padding: 40px;
+}
+
+/* ---------- Columna izquierda ---------- */
+
+.perfil__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.perfil__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+.perfil__back app-icono {
+    font-size: 18px;
+}
+
+.perfil__back:hover {
+    color: var(--text-primary);
+}
+
+/* --- FOTO DE PERFIL: tamaño corregido + contenida en el círculo --- */
+.perfil__avatar-wrap {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg-app);
+}
+
+.perfil__avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 4px solid var(--bg-app);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.perfil__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 24px;
+}
+
+.perfil__rating-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 10px;
+}
+
+.perfil__stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.perfil__stars app-icono {
+    font-size: 26px;
+    color: var(--star-empty);
+}
+
+.perfil__stars app-icono.is-filled {
+    color: var(--star-filled);
+}
+
+.perfil__rating-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    max-width: 220px;
+    margin: 0;
+}
+
+/* ---------- Columna derecha: panel de información ---------- */
+
+.info-panel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: 22px;
+    padding: 36px 40px;
+    gap: 24px;
+}
+
+.info-panel__form {
+    flex: 1;
+    max-width: 420px;
+}
+
+.info-panel__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 24px;
+}
+
+.info-field {
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.info-field__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.info-field__input {
+    width: 100%;
+    background: var(--bg-app);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.info-field__input:focus {
+    border-color: var(--accent);
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 160px;
+    height: 130px;
+    background: var(--bg-app);
+    border: 1px dashed var(--border-soft);
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.upload-box__hint {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.upload-box__icon {
+    color: var(--text-secondary);
+}
+
+.upload-box__preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.upload-box__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.btn-guardar {
+    margin-top: 8px;
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-guardar:hover {
+    background: var(--navy-dark);
+}
+
+.info-panel__mascota {
+    width: 130px;
+    flex-shrink: 0;
+    align-self: center;
+    object-fit: contain;
+}
+
+/* ============== RESPONSIVE ============== */
+
+@media (max-width: 1024px) {
+    .navbar__pill {
+        display: none;
+    }
+
+    .perfil__hero {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil__identity {
+        align-items: center;
+        text-align: center;
+    }
+
+    .info-panel {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .info-panel__form {
+        max-width: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .perfil-page {
+        padding: 16px;
+    }
+
+    .perfil__hero {
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .info-panel {
+        padding: 24px 20px;
+    }
+
+    .perfil__avatar-wrap {
+        width: 130px;
+        height: 130px;
+    }
+}

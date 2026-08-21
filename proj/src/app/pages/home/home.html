@@ -1,0 +1,198 @@
+<div class="page">
+  <!-- Header -->
+  <app-header
+      (verServicios)="seleccionarFiltro('servicios')"
+    [(busqueda)]="busqueda"
+    [notificaciones]="notificaciones"
+    [cantidadFavoritos]="cantidadFavoritos"
+    [mostrarSoloFavoritos]="mostrarSoloFavoritos"
+    (irAInicio)="irAInicio()"
+    (verSoloFavoritos)="verSoloFavoritos()"
+  ></app-header>
+
+  <div class="body">
+    <!-- Sidebar -->
+    <app-sidebar
+      [categorias]="categorias"
+      [categoriaSeleccionada]="categoriaSeleccionada"
+      (categoriaCambiada)="seleccionarCategoria($event)"
+      (publicar)="publicarTrueque()"
+    ></app-sidebar>
+
+    <!-- Main content -->
+    <main class="content">
+      <div class="toolbar">
+        <div class="tabs">
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'bienes'"
+            (click)="seleccionarFiltro('bienes')"
+          >
+            Bienes Físicos
+          </button>
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'servicios'"
+            (click)="seleccionarFiltro('servicios')"
+          >
+            Servicios
+          </button>
+          <button
+            type="button"
+            class="tabs__item"
+            [class.tabs__item--active]="filtroActivo === 'digitales'"
+            (click)="seleccionarFiltro('digitales')"
+          >
+            Digitales
+          </button>
+        </div>
+
+        <button class="sort" type="button">
+          {{ orden }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <p class="results-info">
+        <span *ngIf="mostrarSoloFavoritos">Mostrando tus favoritos — </span>
+        {{ truequesFiltrados.length }}
+        {{ truequesFiltrados.length === 1 ? 'resultado' : 'resultados' }}
+        <button
+          type="button"
+          class="results-info__clear"
+          *ngIf="
+            busqueda ||
+            filtroActivo !== 'todos' ||
+            categoriaSeleccionada !== 'todos' ||
+            mostrarSoloFavoritos
+          "
+          (click)="limpiarFiltros()"
+        >
+          Limpiar filtros
+        </button>
+      </p>
+
+      <section class="grid">
+        <article
+          class="card"
+          *ngFor="let trueque of truequesFiltrados"
+          role="button"
+          tabindex="0"
+          (click)="irADetalle(trueque)"
+          (keydown.enter)="irADetalle(trueque)"
+        >
+          <div class="card__image-wrap">
+            <img
+              [src]="trueque.imagen"
+              [alt]="trueque.titulo"
+              class="card__image"
+              (error)="manejarErrorImagen($event)"
+            />
+            <span [class]="claseBadge(trueque.tipo)">{{ trueque.tipoEtiqueta }}</span>
+            <button
+              class="card__fav"
+              type="button"
+              [class.card__fav--active]="trueque.favorito"
+              (click)="alternarFavorito(trueque, $event)"
+              aria-label="Agregar a favoritos"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                [attr.fill]="trueque.favorito ? 'currentColor' : 'none'"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="card__body">
+            <h3 class="card__title">{{ trueque.titulo }}</h3>
+            <div class="card__footer">
+              <div class="card__author">
+                <img [src]="trueque.avatar" alt="" class="card__avatar" />
+                <span>por {{ trueque.autor }}</span>
+                <span class="card__dot">·</span>
+                <svg
+                  class="card__pin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>{{ trueque.ciudad }}</span>
+              </div>
+              <button class="card__cta" type="button">Intercambio</button>
+            </div>
+          </div>
+        </article>
+
+        <p class="grid__empty" *ngIf="truequesFiltrados.length === 0">
+          No encontramos trueques con esos filtros. Prueba con otra categoría o búsqueda.
+        </p>
+      </section>
+
+      <section class="benefits">
+        <div class="benefit" *ngFor="let beneficio of beneficios">
+          <span class="benefit__icon">
+            <svg
+              *ngIf="beneficio.icono === 'shield'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"></path>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'users'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="9" cy="8" r="3.5"></circle>
+              <path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"></path>
+              <circle cx="17" cy="9" r="2.5"></circle>
+              <path d="M22 20c0-2.5-1.8-4.5-4-5.3"></path>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'bolt'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2"></polygon>
+            </svg>
+            <svg
+              *ngIf="beneficio.icono === 'chat'"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5c-1.5 0-3-.4-4.3-1.1L3 20l1.1-5.2A8.38 8.38 0 0 1 3.5 11.5 8.38 8.38 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"
+              ></path>
+            </svg>
+          </span>
+          <div>
+            <h4 class="benefit__title">{{ beneficio.titulo }}</h4>
+            <p class="benefit__desc">{{ beneficio.descripcion }}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

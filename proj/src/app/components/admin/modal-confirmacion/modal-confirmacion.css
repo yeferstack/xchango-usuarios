@@ -1,0 +1,6 @@
+.modal__velo { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 20px; background: rgba(36, 27, 21, .45); }
+.modal { width: min(100%, 430px); padding: 25px; border-radius: 14px; background: #fffdfb; box-shadow: 0 20px 60px rgba(36, 27, 21, .25); }
+.modal__icono { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: #a66b14; background: #fff1d5; }
+.modal h2 { margin: 15px 0 7px; color: #2a211b; font-size: 20px; }.modal p { color: #806f61; font-size: 14px; line-height: 1.5; }
+.modal label { display: grid; gap: 7px; margin-top: 16px; color: #5d4a3b; font-size: 12px; font-weight: 700; }.modal textarea { resize: vertical; border: 1px solid #dfd1c3; border-radius: 8px; padding: 9px; font: inherit; }
+.modal__acciones { display: flex; justify-content: flex-end; gap: 9px; margin-top: 21px; }.modal__acciones button { border: 0; border-radius: 8px; padding: 10px 15px; color: #fff; background: #7d6144; cursor: pointer; }.modal__acciones button:first-child { color: #6c5a4c; background: #f0e9e2; }

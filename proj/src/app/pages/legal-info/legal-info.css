@@ -1,0 +1,295 @@
+/* =========================================================
+   TOKENS — mismos valores que ya usa el resto del sitio
+   ========================================================= */
+
+:host {
+  --ink: #191714;
+  --ink-soft: #524b43;
+  --gold: #a27d57;
+  --gold-soft: #a27f59;
+  --gold-muted: #927654;
+  --line: rgba(255, 255, 255, .80);
+  --glass-bg: rgba(255, 255, 255, .56);
+  --glass-bg-soft: rgba(255, 255, 255, .48);
+
+  display: block;
+  font-family: "Nunito", "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+}
+
+
+/* =========================================================
+   LAYOUT GENERAL
+   ========================================================= */
+
+.legal-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.legal-header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+
+  color: var(--gold-soft);
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.headline {
+  color: var(--ink);
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+
+.accent {
+  color: var(--gold-soft);
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+}
+
+.subtext {
+  margin-top: 10px;
+
+  color: var(--ink-soft);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   TABS — mismo estilo pill que .nav-links / .nav-item
+   ========================================================= */
+
+.legal-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  padding: 6px;
+  margin-bottom: 20px;
+
+  width: fit-content;
+  max-width: 100%;
+
+  background: rgba(255, 255, 255, .54);
+  border: 1px solid rgba(255, 255, 255, .70);
+  border-radius: 20px;
+
+  box-shadow: 0 8px 20px rgba(102, 78, 44, .05);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.legal-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  min-height: 42px;
+  padding: 0 16px;
+
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #645c52;
+
+  font: 700 14px "Nunito", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+}
+
+.legal-tab:hover {
+  background: rgba(255, 255, 255, .72);
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.legal-tab.active {
+  background: rgba(238, 228, 214, .92);
+  color: #111;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65);
+}
+
+.legal-tab__icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  color: #847a68;
+  flex-shrink: 0;
+}
+
+.legal-tab.active .legal-tab__icon {
+  color: var(--gold-soft);
+}
+
+.legal-tab__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   PANEL DE VIDRIO — mismo tratamiento que .panel
+   ========================================================= */
+
+.legal-panel {
+  padding: 28px 30px 32px;
+
+  border: 1px solid var(--line);
+  border-radius: 24px;
+
+  background: var(--glass-bg);
+
+  box-shadow:
+    0 12px 30px rgba(97, 72, 41, .06),
+    0 0 0 6px rgba(255, 255, 255, .08),
+    inset 0 2px 5px rgba(255, 255, 255, .6);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.legal-panel__header {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+
+  border-bottom: 1px solid rgba(139, 119, 93, .15);
+}
+
+.legal-panel__eyebrow {
+  margin-bottom: 6px;
+
+  color: var(--gold-muted);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.legal-panel__title {
+  color: #27231f;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.legal-panel__meta {
+  margin-top: 8px;
+
+  color: #8a8176;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.legal-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.legal-block__heading {
+  margin-bottom: 8px;
+
+  color: #29251f;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.legal-block__text {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.legal-block__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-left: 20px;
+}
+
+.legal-block__list li {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.55;
+
+  list-style: none;
+  position: relative;
+}
+
+.legal-block__list li::before {
+  content: "";
+
+  position: absolute;
+  left: -18px;
+  top: 8px;
+
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  background: var(--gold-soft);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .legal-page {
+    padding: 32px 16px 48px;
+  }
+
+  .legal-tab__label {
+    display: none;
+  }
+
+  .legal-tab {
+    padding: 0 12px;
+    min-height: 40px;
+  }
+
+  .legal-panel {
+    padding: 20px 18px 24px;
+  }
+}

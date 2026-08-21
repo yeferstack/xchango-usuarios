@@ -1,0 +1,177 @@
+  <!-- Estado general -->
+  @if (estadoPlataforma(); as e) {
+    <section class="estado">
+      <span [class]="'estado__icono estado__icono--' + e.nivel">
+        <app-icon [name]="e.nivel === 'ok' ? 'check-circle' : 'alert'" [size]="24" />
+      </span>
+
+      <div class="estado__cuerpo">
+        <h2 class="estado__titulo">Estado general: {{ e.texto }}</h2>
+        <p class="estado__detalle">{{ e.detalle }}</p>
+      </div>
+
+      @if (resumen(); as m) {
+        <div class="estado__resumen">
+          <div>
+            <span class="mini__valor">{{ m.usuariosActivos }}</span>
+            <span class="mini__label">Activos</span>
+          </div>
+          <div>
+            <span class="mini__valor">{{ m.publicacionesReportadas }}</span>
+            <span class="mini__label">Reportes</span>
+          </div>
+          <div>
+            <span class="mini__valor">{{ m.usuariosSuspendidos }}</span>
+            <span class="mini__label">Suspendidos</span>
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  <div class="grid">
+    <!-- Servicios -->
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Servicios del sistema</h3>
+          <p class="panel__sub">Estado de los componentes de XchanGo</p>
+        </div>
+      </div>
+
+      <ul class="lista">
+        @for (s of servicios; track s.nombre) {
+          <li class="fila">
+            <span class="punto-servicio"></span>
+            <div class="fila__cuerpo">
+              <p class="fila__titulo">{{ s.nombre }}</p>
+              <p class="fila__texto">{{ s.detalle }}</p>
+            </div>
+            <app-badge-estado [estado]="s.estado" etiqueta="Operativo" />
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Usuarios conectados -->
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Usuarios conectados</h3>
+          <p class="panel__sub">Con actividad reciente</p>
+        </div>
+      </div>
+
+      @if (conectados().length) {
+        <ul class="lista">
+          @for (u of conectados(); track u.id) {
+            <li class="fila">
+              <span class="avatar">
+                {{ u.nombre.charAt(0) }}
+                <span class="avatar__online"></span>
+              </span>
+              <div class="fila__cuerpo">
+                <p class="fila__titulo">{{ u.nombre }}</p>
+                <span class="fila__meta">{{ u.ubicacion }} · {{ u.intercambios }} intercambios</span>
+              </div>
+              <app-badge-estado [estado]="u.nivelActividad" [etiqueta]="'Actividad ' + u.nivelActividad" />
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No hay usuarios conectados.</p>
+      }
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Alertas del sistema -->
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Alertas del sistema</h3>
+          <p class="panel__sub">Detectadas automáticamente</p>
+        </div>
+      </div>
+
+      @if (alertas().length) {
+        <ul class="lista">
+          @for (a of alertas(); track a.id) {
+            <li class="fila" [class.alerta--leida]="a.leida">
+              <span [class]="'icono-caja icono-caja--' + a.prioridad">
+                <app-icon name="alert" [size]="16" />
+              </span>
+              <div class="fila__cuerpo">
+                <p class="fila__titulo">{{ a.titulo }}</p>
+                <p class="fila__texto">{{ a.mensaje }}</p>
+                <span class="fila__meta">{{ a.fecha | date: 'dd MMM yyyy, HH:mm' }}</span>
+              </div>
+              @if (!a.leida) {
+                <button type="button" class="btn-mini" (click)="marcarLeida(a.id)">Marcar leída</button>
+              }
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No hay alertas registradas.</p>
+      }
+    </div>
+
+    <!-- Publicaciones recientes -->
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Publicaciones recientes</h3>
+          <p class="panel__sub">Últimas reportadas en la plataforma</p>
+        </div>
+      </div>
+
+      @if (publicacionesRecientes().length) {
+        <ul class="lista">
+          @for (p of publicacionesRecientes(); track p.id) {
+            <li class="fila">
+              <span class="icono-caja">
+                <app-icon name="package" [size]="16" />
+              </span>
+              <div class="fila__cuerpo">
+                <p class="fila__titulo">{{ p.titulo }}</p>
+                <span class="fila__meta">{{ p.usuarioNombre }} · {{ p.categoria }} · {{ p.fecha | date: 'dd MMM' }}</span>
+              </div>
+              <app-badge-estado [estado]="p.estado" />
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No hay publicaciones recientes.</p>
+      }
+    </div>
+  </div>
+
+  <!-- Acciones administrativas -->
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Acciones administrativas recientes</h3>
+        <p class="panel__sub">Lo último ejecutado por el equipo</p>
+      </div>
+    </div>
+
+    @if (acciones().length) {
+      <ul class="lista">
+        @for (a of acciones(); track a.id) {
+          <li class="fila">
+            <span class="icono-caja">
+              <app-icon name="clock" [size]="16" />
+            </span>
+            <div class="fila__cuerpo">
+              <p class="fila__titulo">{{ a.accion }} · {{ a.usuarioNombre }}</p>
+              <p class="fila__texto">{{ a.descripcion }}</p>
+              <span class="fila__meta">{{ a.administrador }} · {{ a.fecha | date: 'dd MMM yyyy, HH:mm' }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="vacio">Sin acciones registradas.</p>
+    }
+  </div>

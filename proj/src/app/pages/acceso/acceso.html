@@ -1,0 +1,40 @@
+<div class="ac">
+  <form class="ac__card" (ngSubmit)="entrar()">
+    <h1 class="ac__title">Entrar a XchanGo</h1>
+    <p class="ac__sub">Intercambia bienes y servicios en Casanare.</p>
+
+    <label class="ac__label" for="ac-email">Correo</label>
+    <input
+      id="ac-email"
+      class="ac__input"
+      type="email"
+      name="email"
+      placeholder="tucorreo@mail.com"
+      [(ngModel)]="email"
+      required
+    />
+
+    <label class="ac__label" for="ac-pass">Contraseña</label>
+    <input
+      id="ac-pass"
+      class="ac__input"
+      type="password"
+      name="password"
+      placeholder="Tu contraseña"
+      [(ngModel)]="password"
+      required
+    />
+
+    <p class="ac__error" *ngIf="error()">{{ error() }}</p>
+
+    <button class="ac__btn" type="submit">Iniciar sesión</button>
+    <button class="ac__demo" type="button" (click)="entrarDemo()">
+      Entrar como usuario de prueba
+    </button>
+
+    <p class="ac__foot">
+      ¿No tienes cuenta? <a routerLink="/formulario">Regístrate</a>
+      · <a routerLink="/login">Volver al inicio</a>
+    </p>
+  </form>
+</div>

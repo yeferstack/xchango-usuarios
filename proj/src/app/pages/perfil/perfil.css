@@ -1,0 +1,771 @@
+:host {
+    --bg-app: #F4EEE1;
+    --bg-nav: #FBF8F0;
+    --bg-card: #EFE7D6;
+    --bg-option: #E9E0CC;
+    --bg-option-hover: #E1D5B8;
+
+    --accent: #C9AD7E;
+    --accent-dark: #B4966A;
+
+    --text-primary: #1E1B16;
+    --text-secondary: #847A68;
+
+    --border-soft: #DED1B3;
+
+    --star-filled: #C9AD7E;
+    --star-empty: #D8CDB6;
+
+    display: block;
+
+    font-family:
+        'Poppins',
+        'Inter',
+        system-ui,
+        -apple-system,
+        sans-serif;
+
+    background: var(--bg-app);
+
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   GENERAL
+============================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ==============================
+   ICONOS
+============================== */
+
+.icon {
+    display: block;
+
+    width: 24px;
+    height: 24px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    flex-shrink: 0;
+}
+
+
+/* ==============================
+   PAGINA
+============================== */
+
+.perfil-page {
+    min-height: 100vh;
+
+    background: var(--bg-app);
+
+    padding: 24px 40px 60px;
+}
+
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.navbar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+}
+
+
+/* ==============================
+   LOGO XCHANGO
+============================== */
+
+.navbar__brand {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 5px;
+
+    width: fit-content;
+
+    height: 52px;
+
+    margin-top: 20px;
+    margin-left: 10px;
+
+    padding: 0;
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+}
+
+
+/* CHANGO */
+
+.navbar__chango {
+    width: 50px;
+    height: 50px;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    flex-shrink: 0;
+
+    transform: scale(1.05);
+
+    transform-origin: center;
+}
+
+
+/* LETRAS */
+
+.navbar__letras {
+    width: 90px;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+
+/* ==============================
+   NAVBAR CENTRO
+============================== */
+
+.navbar__pill {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    background: var(--bg-nav);
+
+    border-radius: 999px;
+
+    padding: 8px 10px;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+
+.navbar__link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.9rem;
+
+    font-weight: 500;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    text-decoration: none;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+
+.navbar__link .icon {
+    width: 18px;
+    height: 18px;
+}
+
+
+.navbar__link:hover {
+    background: var(--bg-option);
+
+    color: var(--text-primary);
+}
+
+
+.navbar__link:first-child {
+    background: var(--text-primary);
+
+    color: #fff;
+}
+
+
+/* ==============================
+   ACCIONES DERECHA
+============================== */
+
+.navbar__actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-shrink: 0;
+}
+
+
+.navbar__icon-btn {
+    background: var(--bg-nav);
+
+    border: none;
+
+    border-radius: 50%;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: var(--text-primary);
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.navbar__icon-btn:hover {
+    background: var(--bg-option);
+
+    transform: scale(1.05);
+}
+
+
+.navbar__icon-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ==============================
+   AVATAR NAVBAR
+============================== */
+
+.navbar__avatar {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border: 2px solid var(--accent);
+
+    background: var(--bg-option);
+}
+
+
+.navbar__avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.navbar__chevron {
+    width: 20px;
+    height: 20px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+============================== */
+
+.perfil {
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+
+/* ==============================
+   TARJETA PRINCIPAL
+============================== */
+
+.perfil__hero {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 40px;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-soft);
+
+    border-radius: 28px;
+
+    padding: 40px;
+}
+
+
+/* ==============================
+   IDENTIDAD
+============================== */
+
+.perfil__identity {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* ==============================
+   FOTO DE PERFIL
+============================== */
+
+.perfil__avatar-wrap {
+    position: relative;
+
+    width: 250px;
+    height: 250px;
+
+    margin-bottom: 24px;
+}
+
+
+.perfil__avatar {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    border: 5px solid var(--bg-app);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.14);
+
+    background: var(--bg-option);
+}
+
+
+/* ==============================
+   BOTON CAMARA
+============================== */
+
+.perfil__avatar-edit {
+    position: absolute;
+
+    bottom: 8px;
+    right: 8px;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 4px solid var(--bg-card);
+
+    background: var(--accent);
+
+    color: #fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.perfil__avatar-edit:hover {
+    background: var(--accent-dark);
+
+    transform: scale(1.08);
+}
+
+
+.perfil__avatar-edit .icon {
+    width: 21px;
+    height: 21px;
+}
+
+
+/* ==============================
+   NOMBRE
+============================== */
+
+.perfil__name {
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    margin: 0 0 24px;
+}
+
+
+/* ==============================
+   CALIFICACIONES
+============================== */
+
+.perfil__rating-title {
+    font-size: 1.05rem;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    margin: 0 0 10px;
+}
+
+
+.perfil__stars {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    margin-bottom: 8px;
+}
+
+
+.perfil__stars .icon {
+    width: 26px;
+    height: 26px;
+
+    color: var(--star-empty);
+}
+
+
+.perfil__stars .icon.is-filled {
+    color: var(--star-filled);
+
+    fill: var(--star-filled);
+}
+
+
+.perfil__rating-note {
+    font-size: 0.8rem;
+
+    color: var(--text-secondary);
+
+    line-height: 1.4;
+
+    max-width: 220px;
+
+    margin: 0 auto;
+}
+
+
+/* ==============================
+   GRID OPCIONES
+============================== */
+
+.perfil__options {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+    align-content: start;
+}
+
+
+/* ==============================
+   TARJETAS DE OPCIONES
+============================== */
+
+.option-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    text-align: left;
+
+    background: var(--bg-option);
+
+    border: 1px solid var(--border-soft);
+
+    border-radius: 18px;
+
+    padding: 22px 20px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.option-card:hover {
+    background: var(--bg-option-hover);
+
+    transform: translateY(-2px);
+}
+
+
+.option-card--wide {
+    grid-column: 1 / -1;
+}
+
+
+/* ==============================
+   ICONOS OPCIONES
+============================== */
+
+.option-card__icon {
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: var(--bg-app);
+
+    color: var(--accent-dark);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.option-card__icon .icon {
+    width: 22px;
+    height: 22px;
+}
+
+
+/* ==============================
+   TEXTOS
+============================== */
+
+.option-card__title {
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+    margin: 0 0 4px;
+}
+
+
+.option-card__desc {
+    font-size: 0.82rem;
+
+    color: var(--text-secondary);
+
+    margin: 0;
+
+    line-height: 1.35;
+}
+
+
+/* ==============================
+   FLECHAS
+============================== */
+
+.option-card__chevron {
+    margin-left: auto;
+
+    width: 20px;
+    height: 20px;
+
+    color: var(--text-secondary);
+
+    flex-shrink: 0;
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 1200px) {
+
+    .navbar__brand {
+        min-width: 230px;
+    }
+
+    .navbar__chango {
+        width: 45px;
+        height: 45px;
+    }
+
+    .navbar__letras {
+        width: 80px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+
+    .navbar__pill {
+        display: none;
+    }
+
+    .perfil__hero {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil__identity {
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .perfil__rating-note {
+        max-width: none;
+    }
+
+    .navbar__brand {
+        min-width: 230px;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    .perfil-page {
+        padding: 16px;
+    }
+
+
+    .navbar {
+        gap: 10px;
+    }
+
+
+    .navbar__brand {
+        gap: 5px;
+
+        min-width: auto;
+
+        margin-left: 0;
+    }
+
+
+    .navbar__chango {
+        width: 45px;
+        height: 45px;
+    }
+
+
+    .navbar__letras {
+        width: 75px;
+    }
+
+
+    .navbar__actions {
+        gap: 6px;
+    }
+
+
+    .navbar__icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+
+    .navbar__avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .perfil__hero {
+        padding: 24px 18px;
+
+        border-radius: 20px;
+    }
+
+
+    .perfil__options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .perfil__avatar-wrap {
+        width: 160px;
+        height: 160px;
+    }
+
+
+    .perfil__avatar-edit {
+        width: 42px;
+        height: 42px;
+
+        right: 4px;
+        bottom: 4px;
+    }
+
+
+    .option-card--wide {
+        grid-column: auto;
+    }
+
+}

@@ -1,0 +1,428 @@
+:host {
+    display: block;
+}
+
+
+/* ==============================
+   PANEL DE LA SECCION
+============================== */
+
+.seccion {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    align-content: start;
+}
+
+.seccion__head {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 4px;
+}
+
+.seccion__titulo {
+    margin: 0;
+
+    font-size: 1.35rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.seccion__sub {
+    margin: 2px 0 0;
+
+    font-size: 0.85rem;
+
+    color: var(--text-secondary);
+}
+
+.volver {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: var(--bg-app);
+
+    color: var(--text-primary);
+
+    text-decoration: none;
+
+    flex-shrink: 0;
+
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.volver:hover {
+    background: var(--bg-option-hover);
+    transform: scale(1.05);
+}
+
+.aviso {
+    margin: 0;
+
+    padding: 12px 16px;
+
+    border-radius: 12px;
+
+    background: var(--bg-app);
+
+    border-left: 3px solid var(--accent);
+
+    font-size: 0.84rem;
+
+    color: var(--text-secondary);
+}
+
+
+/* ==============================
+   BLOQUES DESPLEGABLES
+============================== */
+
+.bloque {
+    background: var(--bg-option);
+
+    border: 1px solid var(--border-soft);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    transition: background 0.15s ease;
+}
+
+.bloque__cabeza {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 22px 20px;
+
+    background: transparent;
+
+    border: 0;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-family: inherit;
+}
+
+.bloque__cabeza:hover {
+    background: var(--bg-option-hover);
+}
+
+.bloque__cabeza:focus-visible {
+    outline: 2px solid var(--accent-dark);
+    outline-offset: -2px;
+}
+
+.bloque__icono {
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: var(--bg-app);
+
+    color: var(--accent-dark);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+.bloque__texto {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.bloque__titulo {
+    font-size: 1rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.bloque__desc {
+    font-size: 0.82rem;
+
+    color: var(--text-secondary);
+
+    line-height: 1.35;
+}
+
+.bloque__flecha {
+    margin-left: auto;
+
+    color: var(--text-secondary);
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+
+    transition: transform 0.2s ease;
+}
+
+.bloque--abierto {
+    background: var(--bg-option-hover);
+}
+
+.bloque--abierto .bloque__flecha {
+    transform: rotate(180deg);
+}
+
+.bloque__cuerpo {
+    padding: 0 20px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    animation: abrir 0.2s ease;
+}
+
+@keyframes abrir {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+/* ==============================
+   FILAS INTERNAS
+============================== */
+
+.fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    background: var(--bg-app);
+}
+
+.fila--acciones {
+    justify-content: flex-end;
+
+    background: transparent;
+
+    padding: 4px 0 0;
+}
+
+.fila__texto {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.fila__titulo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    color: var(--text-primary);
+}
+
+.fila__desc {
+    font-size: 0.8rem;
+
+    color: var(--text-secondary);
+}
+
+.etiqueta {
+    font-style: normal;
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    letter-spacing: 0.02em;
+
+    padding: 2px 8px;
+
+    border-radius: 999px;
+
+    background: var(--accent);
+
+    color: #fff;
+}
+
+
+/* ==============================
+   SWITCH
+============================== */
+
+.switch {
+    position: relative;
+
+    width: 46px;
+    height: 26px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: var(--star-empty);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: background 0.2s ease;
+}
+
+.switch:focus-visible {
+    outline: 2px solid var(--accent-dark);
+    outline-offset: 2px;
+}
+
+.switch__bolita {
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    transition: transform 0.2s ease;
+}
+
+.switch--on {
+    background: var(--accent);
+}
+
+.switch--on .switch__bolita {
+    transform: translateX(20px);
+}
+
+
+/* ==============================
+   BOTONES
+============================== */
+
+.btn-texto {
+    background: none;
+
+    border: 0;
+
+    padding: 6px 4px;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    color: var(--accent-dark);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.btn-texto:hover {
+    text-decoration: underline;
+}
+
+.btn-secundario {
+    background: transparent;
+
+    border: 1px solid var(--accent);
+
+    color: var(--accent-dark);
+
+    padding: 10px 18px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-secundario:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 640px) {
+
+    .bloque__cabeza {
+        padding: 16px 14px;
+
+        gap: 12px;
+    }
+
+    .bloque__cuerpo {
+        padding: 0 14px 16px;
+    }
+
+    .fila {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .switch {
+        align-self: flex-end;
+    }
+
+    .btn-secundario {
+        width: 100%;
+    }
+}

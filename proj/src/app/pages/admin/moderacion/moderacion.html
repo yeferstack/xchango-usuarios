@@ -1,0 +1,156 @@
+<div class="tabs">
+  <button type="button" class="tab" [class.tab--activo]="pestana() === 'reportadas'" (click)="pestana.set('reportadas')">
+    <app-icon name="shield" [size]="16" />
+    Publicaciones reportadas
+    @if (pendientes() > 0) {
+      <span class="tab__contador">{{ pendientes() }}</span>
+    }
+  </button>
+  <button type="button" class="tab" [class.tab--activo]="pestana() === 'eliminadas'" (click)="pestana.set('eliminadas')">
+    <app-icon name="trash" [size]="16" />
+    Historial de eliminadas
+  </button>
+</div>
+
+@if (pestana() === 'reportadas') {
+  <!-- Filtros HU75 -->
+  <div class="filtros">
+    <select class="select" [value]="motivo()" (change)="filtrar('motivo', $any($event.target).value)">
+      <option value="todos">Todos los motivos</option>
+      @for (m of motivos(); track m) {
+        <option [value]="m">{{ m }}</option>
+      }
+    </select>
+
+    <select class="select" [value]="categoria()" (change)="filtrar('categoria', $any($event.target).value)">
+      <option value="todas">Todas las categorías</option>
+      @for (c of categorias(); track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+
+    <select class="select" [value]="gravedad()" (change)="filtrar('gravedad', $any($event.target).value)">
+      <option value="todas">Toda gravedad</option>
+      <option value="alta">Gravedad alta</option>
+      <option value="media">Gravedad media</option>
+      <option value="baja">Gravedad baja</option>
+    </select>
+
+    <select class="select" [value]="estado()" (change)="filtrar('estado', $any($event.target).value)">
+      <option value="todos">Todos los estados</option>
+      <option value="pendiente">Pendientes</option>
+      <option value="aprobada">Aprobadas</option>
+      <option value="eliminada">Eliminadas</option>
+    </select>
+
+    <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">
+      <app-icon name="refresh" [size]="15" /> Limpiar
+    </button>
+  </div>
+
+  @if (cargando()) {
+    <p class="vacio">Cargando publicaciones...</p>
+  } @else if (listado().length) {
+    <div class="reportes">
+      @for (p of listado(); track p.id) {
+        <article [class]="'reporte reporte--' + p.gravedad">
+          <div class="reporte__top">
+            <div>
+              <h3 class="reporte__titulo">{{ p.titulo }}</h3>
+              <p class="reporte__meta">
+                <app-icon name="users" [size]="13" /> {{ p.usuarioNombre }}
+                · {{ p.categoria }}
+                · {{ p.fecha | date: 'dd MMM yyyy' }}
+              </p>
+            </div>
+          </div>
+
+          <div class="reporte__motivo">
+            <app-icon name="alert" [size]="15" />
+            <span><strong>Motivo:</strong> {{ p.motivo }}</span>
+          </div>
+
+          <div class="reporte__badges">
+            <app-badge-estado [estado]="p.estado" />
+            <app-badge-estado [estado]="p.gravedad" [etiqueta]="'Gravedad ' + p.gravedad" />
+          </div>
+
+          @if (p.estado === 'pendiente') {
+            <div class="reporte__acciones">
+              <button type="button" class="btn-accion btn-accion--ok" (click)="abrirModal('aprobar', p)">
+                <app-icon name="check" [size]="14" /> Aprobar
+              </button>
+              <button type="button" class="btn-accion btn-accion--danger" (click)="abrirModal('eliminar', p)">
+                <app-icon name="trash" [size]="14" /> Eliminar
+              </button>
+              <button type="button" class="btn-accion btn-accion--warn" (click)="abrirModal('advertir', p)">
+                <app-icon name="alert" [size]="14" /> Advertir
+              </button>
+              <button type="button" class="btn-accion btn-accion--danger" (click)="abrirModal('suspender', p)">
+                <app-icon name="ban" [size]="14" /> Suspender
+              </button>
+            </div>
+          }
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="tarjeta">
+      <div class="vacio">
+        <span class="vacio__icono"><app-icon name="check-circle" [size]="24" /></span>
+        No hay publicaciones que coincidan con esos filtros.
+      </div>
+    </div>
+  }
+}
+
+@if (pestana() === 'eliminadas') {
+  <div class="tarjeta">
+    <h3 class="tarjeta__titulo">Historial de publicaciones eliminadas</h3>
+    <p class="tarjeta__sub">Registro de cada retiro con su motivo y el administrador responsable</p>
+
+    @if (eliminadas().length) {
+      <div class="tabla-scroll">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Publicación</th>
+              <th>Usuario</th>
+              <th>Motivo</th>
+              <th>Fecha</th>
+              <th>Administrador</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (e of eliminadas(); track e.id) {
+              <tr>
+                <td class="td-fuerte">{{ e.titulo }}</td>
+                <td>{{ e.usuarioNombre }}</td>
+                <td>{{ e.motivo }}</td>
+                <td>{{ e.fecha | date: 'dd MMM yyyy, HH:mm' }}</td>
+                <td>{{ e.administrador }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="vacio">No se han eliminado publicaciones.</p>
+    }
+  </div>
+}
+
+@if (configModal(); as c) {
+  <app-modal-confirmacion
+    [abierto]="true"
+    [titulo]="c.titulo"
+    [mensaje]="c.mensaje"
+    [textoConfirmar]="c.texto"
+    [icono]="c.icono"
+    [tono]="c.tono"
+    [pideMotivo]="c.pideMotivo"
+    [etiquetaMotivo]="c.etiqueta"
+    (confirmar)="confirmarAccion($event)"
+    (cancelar)="modal.set(null)"
+  />
+}

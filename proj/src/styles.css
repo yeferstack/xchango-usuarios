@@ -1,0 +1,30 @@
+/* Estilos globales de XchanGo.
+   Deliberadamente mínimos: cada componente define sus propias variables CSS
+   (--color-*, --admin-*, etc.) dentro de su hoja con encapsulación de Angular.
+   No agregues aquí un :root con colores; romperías el aislamiento actual. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Nunito", "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f7f3ea;
+  color: #1f1b16;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}

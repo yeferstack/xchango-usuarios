@@ -1,0 +1,13 @@
+<article class="stat-card" [class]="'stat-card stat-card--' + tono()">
+	<div class="stat-card__top">
+		<span class="stat-card__icon"><app-icon [name]="icono()" [size]="20" /></span>
+		@if (variacion() !== null) {
+			<span class="stat-card__variacion" [class.stat-card__variacion--negativa]="variacion()! < 0">
+				{{ variacion()! > 0 ? '+' : '' }}{{ variacion() }}%
+			</span>
+		}
+	</div>
+	<p class="stat-card__etiqueta">{{ etiqueta() }}</p>
+	<strong class="stat-card__valor">{{ valor() }}</strong>
+	<span class="stat-card__detalle">{{ detalle() }}</span>
+</article>

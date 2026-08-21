@@ -1,0 +1,35 @@
+<div class="nt">
+  <header class="nt__top">
+    <button class="nt__back" type="button" (click)="volver()">← Volver</button>
+    <h1 class="nt__title">Notificaciones</h1>
+    <button class="nt__mark" type="button" [disabled]="sinLeer() === 0" (click)="marcarTodas()">
+      Marcar todas como leídas
+    </button>
+  </header>
+
+  <p class="nt__hint">
+    XchanGo no tiene chat interno. Estos son avisos; la negociación continúa por WhatsApp
+    desde <a routerLink="/mis-trueques">Mis trueques</a>.
+  </p>
+
+  <p class="nt__empty" *ngIf="notificaciones().length === 0">
+    No tienes notificaciones por ahora.
+  </p>
+
+  <ul class="nt__list">
+    <li
+      class="nt__item"
+      *ngFor="let n of notificaciones()"
+      [class.nt__item--nueva]="!n.leida"
+      (click)="abrir(n)"
+    >
+      <app-icono class="nt__icon" [nombre]="icono(n.tipo)"></app-icono>
+      <div class="nt__body">
+        <strong class="nt__t">{{ n.titulo }}</strong>
+        <p class="nt__m">{{ n.mensaje }}</p>
+        <span class="nt__f">{{ n.fecha | date: 'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <span class="nt__badge" *ngIf="!n.leida"></span>
+    </li>
+  </ul>
+</div>

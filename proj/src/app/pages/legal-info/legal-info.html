@@ -1,0 +1,74 @@
+<div class="legal-page">
+
+  <!-- Encabezado: reutiliza el mismo lenguaje que el hero (eyebrow + headline) -->
+  <header class="legal-header">
+    <p class="eyebrow">Centro legal y de ayuda</p>
+    <h1 class="headline">
+      Todo lo que necesitas <span class="accent">saber.</span>
+    </h1>
+    <p class="subtext">
+      Términos, privacidad, soporte y contacto — en un solo lugar.
+    </p>
+  </header>
+
+  <!-- Tabs, con el mismo estilo pill que .nav-links / .nav-item -->
+  <nav class="legal-tabs" role="tablist" aria-label="Secciones legales y de ayuda">
+    <button
+      *ngFor="let s of sections"
+      type="button"
+      role="tab"
+      class="legal-tab"
+      [class.active]="activeTab() === s.id"
+      [attr.aria-selected]="activeTab() === s.id"
+      (click)="setTab(s.id)"
+    >
+      <span class="legal-tab__icon">
+        <ng-container [ngSwitch]="s.icon">
+          <!-- Documento (Términos) -->
+          <svg *ngSwitchCase="'doc'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/>
+            <path d="M9 13h6M9 17h6M9 9h1"/>
+          </svg>
+          <!-- Ayuda -->
+          <svg *ngSwitchCase="'help'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <path d="M12 17h.01"/>
+          </svg>
+          <!-- Privacidad -->
+          <svg *ngSwitchCase="'shield'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <!-- Contacto -->
+          <svg *ngSwitchCase="'mail'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 6-10 7L2 6"/>
+          </svg>
+        </ng-container>
+      </span>
+      <span class="legal-tab__label">{{ s.eyebrow }}</span>
+    </button>
+  </nav>
+
+  <!-- Panel de vidrio con el contenido de la sección activa -->
+  <section class="legal-panel" role="tabpanel">
+    <div class="legal-panel__header">
+      <p class="legal-panel__eyebrow">{{ activeSection().eyebrow }}</p>
+      <h2 class="legal-panel__title">{{ activeSection().title }}</h2>
+      <p class="legal-panel__meta" *ngIf="activeSection().meta">{{ activeSection().meta }}</p>
+    </div>
+
+    <div class="legal-panel__body">
+      <ng-container *ngFor="let block of activeSection().blocks">
+        <h3 *ngIf="block.heading" class="legal-block__heading">{{ block.heading }}</h3>
+        <p *ngIf="block.text" class="legal-block__text">{{ block.text }}</p>
+        <ul *ngIf="block.items" class="legal-block__list">
+          <li *ngFor="let item of block.items">{{ item }}</li>
+        </ul>
+      </ng-container>
+    </div>
+  </section>
+
+</div>

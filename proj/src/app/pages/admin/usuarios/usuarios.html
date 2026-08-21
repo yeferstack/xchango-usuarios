@@ -1,0 +1,197 @@
+<!-- Buscador y filtros -->
+<div class="barra">
+  <label class="buscador">
+    <app-icon name="search" [size]="17" />
+    <input
+      type="search"
+      placeholder="Buscar por nombre o correo..."
+      [value]="busqueda()"
+      (input)="buscar($any($event.target).value)"
+    />
+  </label>
+
+  <select class="select" [value]="estado()" (change)="filtrarEstado($any($event.target).value)">
+    <option value="todos">Todos los estados</option>
+    <option value="activo">Activos</option>
+    <option value="advertido">Advertidos</option>
+    <option value="suspendido">Suspendidos</option>
+  </select>
+
+  <select class="select" [value]="nivel()" (change)="filtrarNivel($any($event.target).value)">
+    <option value="todos">Toda actividad</option>
+    <option value="alto">Actividad alta</option>
+    <option value="medio">Actividad media</option>
+    <option value="bajo">Actividad baja</option>
+  </select>
+
+  <select class="select" [value]="ubicacion()" (change)="filtrarUbicacion($any($event.target).value)">
+    <option value="todas">Todas las ubicaciones</option>
+    @for (u of ubicaciones(); track u) {
+      <option [value]="u">{{ u }}</option>
+    }
+  </select>
+
+  <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">
+    <app-icon name="refresh" [size]="15" /> Limpiar
+  </button>
+</div>
+
+<!-- Tabla -->
+<div class="tarjeta">
+  @if (error()) {
+    <p class="vacio">{{ error() }}</p>
+  } @else if (cargando()) {
+    <p class="vacio">Cargando usuarios...</p>
+  } @else if (visibles().length) {
+    <div class="tabla-scroll">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Registro</th>
+            <th>Publicaciones</th>
+            <th>Intercambios</th>
+            <th>Ubicación</th>
+            <th>Actividad</th>
+            <th style="text-align: right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (u of visibles(); track u.id) {
+            <tr>
+              <td>
+                <div class="celda-usuario">
+                  <span class="avatar">{{ u.nombre.charAt(0) }}</span>
+                  <span>
+                    <span class="celda-nombre">{{ u.nombre }}</span>
+                    <span class="celda-email">{{ u.email }}</span>
+                  </span>
+                </div>
+              </td>
+              <td><app-badge-estado [estado]="u.estado" /></td>
+              <td>{{ u.fechaRegistro | date: 'dd MMM yyyy' }}</td>
+              <td><span class="num">{{ u.publicaciones }}</span></td>
+              <td><span class="num">{{ u.intercambios }}</span></td>
+              <td>{{ u.ubicacion }}</td>
+              <td>
+                <span [class]="'nivel nivel--' + u.nivelActividad">
+                  <span class="nivel__barras">
+                    <span class="nivel__b"></span><span class="nivel__b"></span><span class="nivel__b"></span>
+                  </span>
+                  {{ u.nivelActividad }}
+                </span>
+              </td>
+              <td>
+                <div class="acciones">
+                  <button type="button" class="icono-btn" title="Ver usuario" (click)="verDetalle(u)">
+                    <app-icon name="eye" [size]="16" />
+                  </button>
+                  <button type="button" class="icono-btn icono-btn--warn" title="Enviar advertencia" (click)="abrirModal('advertir', u)">
+                    <app-icon name="alert" [size]="16" />
+                  </button>
+                  @if (u.estado === 'suspendido') {
+                    <button type="button" class="icono-btn icono-btn--ok" title="Reactivar usuario" (click)="abrirModal('activar', u)">
+                      <app-icon name="check-circle" [size]="16" />
+                    </button>
+                  } @else {
+                    <button type="button" class="icono-btn icono-btn--danger" title="Suspender usuario" (click)="abrirModal('suspender', u)">
+                      <app-icon name="ban" [size]="16" />
+                    </button>
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <app-paginacion
+      [total]="filtrados().length"
+      [porPagina]="porPagina"
+      [pagina]="pagina()"
+      (cambio)="pagina.set($event)"
+    />
+  } @else {
+    <p class="vacio">No se encontraron usuarios con esos criterios.</p>
+  }
+</div>
+
+<!-- Panel de detalle -->
+@if (detalle(); as u) {
+  <div class="velo" (click)="detalle.set(null)"></div>
+  <aside class="cajon">
+    <div class="cajon__head">
+      <div>
+        <h3 class="cajon__titulo">{{ u.nombre }}</h3>
+        <p class="cajon__sub">{{ u.email }}</p>
+      </div>
+      <button type="button" class="icono-btn" (click)="detalle.set(null)" aria-label="Cerrar">
+        <app-icon name="x" [size]="17" />
+      </button>
+    </div>
+
+    <div class="cajon__cuerpo">
+      <div class="datos">
+        <div class="dato">
+          <p class="dato__label">Publicaciones</p>
+          <p class="dato__valor">{{ u.publicaciones }}</p>
+        </div>
+        <div class="dato">
+          <p class="dato__label">Intercambios</p>
+          <p class="dato__valor">{{ u.intercambios }}</p>
+        </div>
+        <div class="dato">
+          <p class="dato__label">Reportes recibidos</p>
+          <p class="dato__valor">{{ u.reportes }}</p>
+        </div>
+        <div class="dato">
+          <p class="dato__label">Nivel de actividad</p>
+          <p class="dato__valor dato__valor--texto" style="text-transform: capitalize">{{ u.nivelActividad }}</p>
+        </div>
+        <div class="dato">
+          <p class="dato__label">Ubicación</p>
+          <p class="dato__valor dato__valor--texto">{{ u.ubicacion }}</p>
+        </div>
+        <div class="dato">
+          <p class="dato__label">Registro</p>
+          <p class="dato__valor dato__valor--texto">{{ u.fechaRegistro | date: 'dd MMM yyyy' }}</p>
+        </div>
+      </div>
+
+      <h4 class="seccion-titulo">Historial de acciones</h4>
+      @if (historial().length) {
+        <ul class="historial">
+          @for (h of historial(); track h.id) {
+            <li class="historial__item">
+              <span class="historial__punto"></span>
+              <div>
+                <p class="historial__accion">{{ h.accion }}</p>
+                <p class="historial__texto">{{ h.descripcion }}</p>
+                <span class="historial__meta">{{ h.administrador }} · {{ h.fecha | date: 'dd MMM yyyy, HH:mm' }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="cajon__sub">Este usuario no tiene acciones registradas.</p>
+      }
+    </div>
+  </aside>
+}
+
+<!-- Confirmación -->
+@if (configModal(); as c) {
+  <app-modal-confirmacion
+    [abierto]="true"
+    [titulo]="c.titulo"
+    [mensaje]="c.mensaje"
+    [textoConfirmar]="c.texto"
+    [icono]="c.icono"
+    [tono]="c.tono"
+    [pideMotivo]="c.pideMotivo"
+    (confirmar)="confirmarAccion($event)"
+    (cancelar)="modal.set(null)"
+  />
+}
