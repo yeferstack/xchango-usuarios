@@ -1,0 +1,262 @@
+<div class="perfil-page">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
+            <span class="navbar__brand-name">XchanGo</span>
+        </div>
+
+        <nav class="navbar__pill">
+            <a class="navbar__link">
+                <app-icono nombre="home"></app-icono>
+                Inicio
+            </a>
+
+            <a class="navbar__link">
+                <app-icono nombre="search"></app-icono>
+                Explorar
+            </a>
+
+            <a class="navbar__link">
+                <app-icono nombre="swap_horiz"></app-icono>
+                Mis trueques
+            </a>
+
+            <a class="navbar__link">
+                <app-icono nombre="apps"></app-icono>
+                Servicios
+            </a>
+
+            <a class="navbar__link">
+                <app-icono nombre="chat_bubble_outline"></app-icono>
+                Mensajes
+            </a>
+
+            <a class="navbar__link">
+                <app-icono nombre="favorite_border"></app-icono>
+                Favoritos
+            </a>
+        </nav>
+
+        <div class="navbar__actions">
+            <button class="navbar__icon-btn" aria-label="Notificaciones">
+                <app-icono nombre="notifications_none"></app-icono>
+            </button>
+
+            <div class="navbar__avatar">
+                <img [src]="avatarUrl" [alt]="nombreUsuario" />
+            </div>
+
+            <app-icono nombre="expand_more"></app-icono>
+        </div>
+    </header>
+
+
+    <!-- CONTENIDO -->
+    <main class="perfil">
+
+        <section class="perfil__card perfil__hero">
+
+            <!-- Columna izquierda: avatar + nombre + rating -->
+            <div class="perfil__identity">
+
+                <div class="perfil__avatar-wrap">
+                    <img
+                        class="perfil__avatar"
+                        [src]="avatarUrl"
+                        [alt]="'Foto de perfil de ' + nombreUsuario"
+                    />
+                </div>
+
+                <h1 class="perfil__name">
+                    {{ nombreUsuario }}
+                </h1>
+
+                <div class="perfil__rating">
+
+                    <h2 class="perfil__rating-title">
+                        Calificaciones y opiniones
+                    </h2>
+
+                    <div
+                        class="perfil__stars"
+                        [attr.aria-label]="
+                            calificacion + ' de ' + calificacionMaxima + ' estrellas'
+                        "
+                    >
+                        <app-icono nombre="star"></app-icono>
+                    </div>
+
+                    <p class="perfil__rating-note">
+                        (Solo será visible públicamente tras recibir
+                        {{ totalCalificacionesRequeridas }}
+                        calificaciones).
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Columna derecha: grid de opciones -->
+            <div class="perfil__options">
+
+                <!-- TU INFORMACIÓN -->
+                <button
+                    class="option-card"
+                    type="button"
+                    routerLink="/perfil/informacion"
+                >
+                    <app-icono class="option-card__icon" nombre="badge"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Tu información
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Nombre elegido y datos para identificarte.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+
+                <!-- DATOS DE CUENTA -->
+                <button
+                    class="option-card"
+                    type="button"
+                    routerLink="/perfil/cuenta"
+                >
+                    <app-icono class="option-card__icon" nombre="account_circle"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Datos de tu cuenta
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Datos que representan tu cuenta de XchanGo.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+
+                <!-- SEGURIDAD -->
+                <button
+                    class="option-card"
+                    type="button"
+                    routerLink="/perfil/seguridad"
+                >
+                    <app-icono class="option-card__icon" nombre="shield"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Seguridad
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Seguridad de tu cuenta.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+
+                <!-- UBICACIÓN -->
+                <button
+                    class="option-card"
+                    type="button"
+                    routerLink="/perfil/ubicacion"
+                >
+                    <app-icono class="option-card__icon" nombre="location_on"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Ubicación
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Ubicación guardada en tu cuenta.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+
+                <!-- PRIVACIDAD -->
+                <button
+                    class="option-card"
+                    type="button"
+                    routerLink="/perfil/privacidad"
+                >
+                    <app-icono class="option-card__icon" nombre="lock_outline"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Privacidad
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Privacidad y control sobre el uso de tus datos.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+
+                <!-- WHATSAPP -->
+                <a
+                    class="option-card"
+                    href="https://wa.me/573001234567"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <app-icono class="option-card__icon" nombre="chat_bubble_outline"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            WhatsApp
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Escríbenos directamente por WhatsApp.
+                        </p>
+                    </div>
+
+                    <app-icono nombre="open_in_new"></app-icono>
+                </a>
+
+
+                <!-- MIS PUBLICACIONES -->
+                <button
+                    class="option-card option-card--wide"
+                    type="button"
+                    routerLink="/mis-publicaciones"
+                >
+                    <app-icono class="option-card__icon" nombre="grid_view"></app-icono>
+
+                    <div>
+                        <h3 class="option-card__title">
+                            Mis Publicaciones
+                        </h3>
+
+                        <p class="option-card__desc">
+                            Aquí encontrarás todas tus publicaciones.
+                        </p>
+                    </div>
+
+                    <app-icono class="option-card__arrow" nombre="chevron_right"></app-icono>
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+</div>

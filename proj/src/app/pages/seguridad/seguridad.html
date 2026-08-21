@@ -1,0 +1,39 @@
+<section class="panel">
+    <header class="panel__head">
+        <a class="volver" routerLink="/perfil" aria-label="Volver al perfil">
+            <app-icono nombre="arrow_back"></app-icono>
+        </a>
+        <div>
+            <h2 class="panel__titulo">Seguridad</h2>
+            <p class="panel__sub">Protege tu cuenta de XchanGo.</p>
+        </div>
+    </header>
+
+    <p class="aviso" *ngIf="mensaje">{{ mensaje }}</p>
+
+    <!-- ===== Alertas de seguridad ===== -->
+    <article class="bloque" [class.bloque--abierto]="seccionAbierta === 'alertas'">
+        <button type="button" class="bloque__cabeza" (click)="alternarSeccion('alertas')"
+            [attr.aria-expanded]="seccionAbierta === 'alertas'">
+            <app-icono class="bloque__icono" nombre="notifications_active"></app-icono>
+            <span class="bloque__texto">
+                <span class="bloque__titulo">Alertas de seguridad</span>
+                <span class="bloque__desc">Revisa tus alertas y dónde las recibes.</span>
+            </span>
+            <app-icono class="bloque__flecha" nombre="expand_more"></app-icono>
+        </button>
+
+        <div class="bloque__cuerpo" *ngIf="seccionAbierta === 'alertas'">
+            <div class="fila" *ngFor="let a of alertas; trackBy: trackPorId">
+                <div class="fila__texto">
+                    <span class="fila__titulo">{{ a.titulo }}</span>
+                    <span class="fila__desc">{{ a.descripcion }}</span>
+                </div>
+                <button type="button" class="switch" role="switch" [class.switch--on]="a.activo"
+                    [attr.aria-checked]="a.activo" [attr.aria-label]="a.titulo" (click)="alternarOpcion(a)">
+                    <span class="switch__bolita"></span>
+                </button>
+            </div>
+        </div>
+    </article>
+</section>

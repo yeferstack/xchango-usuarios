@@ -1,0 +1,88 @@
+/*
+  Variables del panel administrativo.
+  Al declararlas en :host, todos los componentes hijos las heredan.
+*/
+:host {
+  --admin-bg: #f7f4ef;
+  --admin-surface: #ffffff;
+  --admin-surface-2: #faf7f2;
+  --admin-border: #e8e1d6;
+  --admin-border-fuerte: #ddd2c1;
+  --admin-text: #1c1a17;
+  --admin-text-2: #6f6656;
+  --admin-muted: #9a9184;
+  --admin-accent: #a1785a;
+  --admin-accent-claro: #d3b48c;
+  --admin-accent-soft: #f0e6db;
+  --admin-dark: #17150f;
+  --admin-ok: #2f7d5d;
+  --admin-warn: #b7791f;
+  --admin-danger: #b4453a;
+  --admin-radius: 16px;
+  --admin-sombra: 0 1px 3px rgba(28, 26, 23, 0.05);
+
+  display: block;
+  min-height: 100vh;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 258px 1fr;
+  min-height: 100vh;
+}
+
+.shell__lateral {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.shell__principal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.shell__contenido {
+  flex: 1;
+  padding: 26px;
+  max-width: 1440px;
+  width: 100%;
+  animation: entrar 0.24s ease;
+}
+
+.shell__velo {
+  display: none;
+}
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+
+  .shell__lateral {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 120;
+    transform: translateX(-100%);
+    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 40px rgba(23, 21, 15, 0.3);
+  }
+
+  .shell__lateral--abierto { transform: none; }
+
+  .shell__velo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(23, 21, 15, 0.42);
+    z-index: 110;
+  }
+
+  .shell__contenido { padding: 18px 16px 34px; }
+}

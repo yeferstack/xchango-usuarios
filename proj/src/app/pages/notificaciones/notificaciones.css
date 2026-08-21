@@ -1,0 +1,48 @@
+:host {
+  --nt-bg: #f7f3ea;
+  --nt-card: #fffdf8;
+  --nt-line: #e5dcc8;
+  --nt-ink: #1f1b16;
+  --nt-soft: #7a6f5d;
+  --nt-acc: #c8a86b;
+  display: block;
+  background: var(--nt-bg);
+  min-height: 100vh;
+}
+
+.nt { max-width: 780px; margin: 0 auto; padding: 24px 18px 60px; }
+
+.nt__top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.nt__back, .nt__mark {
+  background: none; border: 0; cursor: pointer; color: var(--nt-soft); font: inherit;
+}
+.nt__mark:disabled { opacity: .45; cursor: default; }
+.nt__back:hover, .nt__mark:hover:not(:disabled) { color: var(--nt-ink); }
+.nt__title { flex: 1; margin: 0; font-family: "Baloo 2", sans-serif; font-size: 1.6rem; color: var(--nt-ink); }
+
+.nt__hint { color: var(--nt-soft); font-size: .9rem; margin: 0 0 18px; }
+.nt__hint a { color: var(--nt-ink); }
+
+.nt__empty {
+  color: var(--nt-soft); background: var(--nt-card); border: 1px dashed var(--nt-line);
+  border-radius: 14px; padding: 28px; text-align: center;
+}
+
+.nt__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.nt__item {
+  display: flex; align-items: flex-start; gap: 14px; cursor: pointer;
+  background: var(--nt-card); border: 1px solid var(--nt-line);
+  border-radius: 14px; padding: 14px 16px; transition: .18s;
+}
+.nt__item:hover { border-color: var(--nt-acc); }
+.nt__item--nueva { background: #fffaef; border-left: 3px solid var(--nt-acc); }
+
+.nt__icon { color: var(--nt-acc); font-size: 22px; margin-top: 2px; }
+.nt__body { flex: 1; }
+.nt__t { display: block; color: var(--nt-ink); margin-bottom: 2px; }
+.nt__m { margin: 0 0 6px; color: var(--nt-soft); font-size: .92rem; }
+.nt__f { color: #a5998a; font-size: .78rem; }
+.nt__badge {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--nt-acc);
+  margin-top: 8px; flex-shrink: 0;
+}

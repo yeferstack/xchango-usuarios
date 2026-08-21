@@ -1,0 +1,5 @@
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 99px; color: #6c5a4c; background: #f0e9e2; font-size: 11px; font-weight: 700; }
+.badge--alta, .badge--danger, .badge--eliminada { color: #a63f3f; background: #fbe7e7; }
+.badge--media, .badge--warn, .badge--pendiente { color: #9c6717; background: #fff1d5; }
+.badge--baja, .badge--ok, .badge--aprobada { color: #27704b; background: #e5f2ea; }
+.badge__punto { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }

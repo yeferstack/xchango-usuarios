@@ -1,0 +1,7 @@
+.header { display: flex; align-items: center; gap: 15px; min-height: 78px; padding: 0 30px; border-bottom: 1px solid #eadfd3; background: #fffdfb; }
+.header h1 { margin: 0; color: #2a211b; font-size: 22px; }
+.header p { margin: 4px 0 0; color: #927e6e; font-size: 12px; }
+.header__menu, .header__salir { display: grid; place-items: center; border: 0; color: #6d5847; background: transparent; cursor: pointer; }
+.header__menu { display: none; }
+.header__salir { margin-left: auto; }
+@media (max-width: 760px) { .header { padding: 0 18px; } .header__menu { display: grid; } }

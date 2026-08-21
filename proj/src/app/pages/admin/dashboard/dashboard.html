@@ -1,0 +1,153 @@
+@if (cargando() && !resumen()) {
+  <div class="cargando">
+    <span class="cargando__spin"></span> Cargando métricas...
+  </div>
+}
+
+@if (resumen(); as m) {
+  <!-- Tarjetas resumen -->
+  <section class="grid-stats">
+    <app-stat-card etiqueta="Total de usuarios" [valor]="m.usuarios" icono="users" [variacion]="variacion('usuarios')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Usuarios activos" [valor]="m.usuariosActivos" icono="activity" tono="ok" detalle="conectados este mes" />
+    <app-stat-card etiqueta="Publicaciones" [valor]="m.publicaciones" icono="package" [variacion]="variacion('publicaciones')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Intercambios" [valor]="m.intercambios" icono="swap" [variacion]="variacion('intercambios')" detalle="vs mes anterior" />
+    <app-stat-card etiqueta="Publicaciones reportadas" [valor]="m.publicacionesReportadas" icono="shield-alert" tono="warn" detalle="pendientes de revisión" />
+    <app-stat-card etiqueta="Usuarios suspendidos" [valor]="m.usuariosSuspendidos" icono="ban" tono="danger" detalle="cuentas bloqueadas" />
+  </section>
+
+  <!-- Gráficos principales -->
+  <section class="grid-charts">
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Actividad de usuarios</h3>
+          <p class="panel__sub">Usuarios activos por mes durante el año</p>
+        </div>
+        <span class="vivo"><span class="vivo__punto"></span> En vivo</span>
+      </div>
+      <app-chart-linea [datos]="actividad()" color="#a1785a" />
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Publicaciones por categoría</h3>
+          <p class="panel__sub">Distribución total</p>
+        </div>
+      </div>
+      <app-chart-dona [datos]="categorias()" unidad="Publicaciones" />
+    </div>
+  </section>
+
+  <section class="grid-charts grid-charts--secundaria">
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Actividad por ubicación</h3>
+          <p class="panel__sub">Municipios de Casanare</p>
+        </div>
+      </div>
+      <app-chart-barras [datos]="ubicaciones()" color="#7d6144" />
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Intercambios realizados</h3>
+          <p class="panel__sub">Trueques completados por mes</p>
+        </div>
+      </div>
+      <app-chart-linea [datos]="intercambios()" color="#2f7d5d" />
+    </div>
+  </section>
+
+  <!-- Actividad y alertas -->
+  <section class="grid-inferior">
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Publicaciones reportadas recientes</h3>
+          <p class="panel__sub">Requieren tu revisión</p>
+        </div>
+        <a class="panel__link" routerLink="/admin/moderacion">
+          Ver todas <app-icon name="chevron-right" [size]="14" />
+        </a>
+      </div>
+
+      @if (reportesRecientes().length) {
+        <ul class="lista">
+          @for (p of reportesRecientes(); track p.id) {
+            <li class="item">
+              <span [class]="'item__icono item__icono--' + p.gravedad">
+                <app-icon name="file-text" [size]="16" />
+              </span>
+              <div class="item__cuerpo">
+                <p class="item__titulo">{{ p.titulo }}</p>
+                <p class="item__texto">{{ p.motivo }}</p>
+                <span class="item__meta">
+                  {{ p.usuarioNombre }} · {{ p.categoria }} · {{ p.fecha | date: 'dd MMM' }}
+                </span>
+              </div>
+              <span class="item__der">
+                <app-badge-estado [estado]="p.gravedad" [etiqueta]="'Gravedad ' + p.gravedad" />
+              </span>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No hay publicaciones pendientes. Todo en orden.</p>
+      }
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">
+        <div>
+          <h3 class="panel__titulo">Alertas del sistema</h3>
+          <p class="panel__sub">Sin leer</p>
+        </div>
+        <a class="panel__link" routerLink="/admin/administracion">
+          Ver todas <app-icon name="chevron-right" [size]="14" />
+        </a>
+      </div>
+
+      @if (alertasActivas().length) {
+        <ul class="lista">
+          @for (a of alertasActivas(); track a.id) {
+            <li class="item">
+              <span [class]="'item__icono item__icono--' + a.prioridad">
+                <app-icon name="alert" [size]="16" />
+              </span>
+              <div class="item__cuerpo">
+                <p class="item__titulo">{{ a.titulo }}</p>
+                <p class="item__texto">{{ a.mensaje }}</p>
+                <span class="item__meta">{{ a.fecha | date: 'dd MMM, HH:mm' }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="vacio">No hay alertas sin leer.</p>
+      }
+
+      <div class="panel__head" style="margin-top: 22px">
+        <h3 class="panel__titulo">Últimas acciones</h3>
+      </div>
+
+      <ul class="lista">
+        @for (a of accionesRecientes(); track a.id) {
+          <li class="item">
+            <span class="item__icono">
+              <app-icon name="clock" [size]="16" />
+            </span>
+            <div class="item__cuerpo">
+              <p class="item__titulo">{{ a.accion }} · {{ a.usuarioNombre }}</p>
+              <span class="item__meta">{{ a.administrador }} · {{ a.fecha | date: 'dd MMM, HH:mm' }}</span>
+            </div>
+          </li>
+        } @empty {
+          <li><p class="vacio">Sin acciones registradas.</p></li>
+        }
+      </ul>
+    </div>
+  </section>
+}

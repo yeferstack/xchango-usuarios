@@ -1,0 +1,9 @@
+.sidebar { display: flex; flex-direction: column; height: 100%; padding: 24px 16px; background: #241b15; color: #f8f2eb; }
+.sidebar__marca { display: flex; align-items: center; gap: 9px; padding: 0 10px 30px; font-size: 20px; }
+.sidebar__logo { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 9px; background: #d9b997; color: #241b15; font-weight: 900; }
+.sidebar__marca small { margin-left: auto; color: #d9b997; font-size: 9px; letter-spacing: 1px; }
+.sidebar__seccion { padding: 0 12px; color: #a9917e; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.sidebar__nav { display: grid; gap: 5px; }
+.sidebar__nav a, .sidebar__salir { display: flex; align-items: center; gap: 11px; padding: 12px; border: 0; border-radius: 9px; color: #d8c8ba; background: transparent; font: inherit; font-size: 13px; text-decoration: none; cursor: pointer; }
+.sidebar__nav a:hover, .sidebar__link--activo { background: #47372b; color: #fff; }
+.sidebar__salir { margin-top: auto; color: #d9b997; }

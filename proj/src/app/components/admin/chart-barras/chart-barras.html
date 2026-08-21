@@ -1,0 +1,9 @@
+<div class="barras">
+	@for (dato of datos(); track dato.label) {
+		<div class="barra">
+			<span class="barra__label">{{ dato.label }}</span>
+			<div class="barra__fondo"><span class="barra__valor" [style.width.%]="(magnitud(dato.valor) / maximo()) * 100" [style.background]="color()"></span></div>
+			<strong>{{ dato.valor }}</strong>
+		</div>
+	}
+</div>

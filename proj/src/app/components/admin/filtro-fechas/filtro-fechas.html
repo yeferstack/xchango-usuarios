@@ -1,0 +1,9 @@
+<div class="filtro-fechas">
+	<select [ngModel]="periodo()" (ngModelChange)="cambiarPeriodo($event)">
+		<option value="hoy">Hoy</option><option value="semana">Últimos 7 días</option><option value="mes">Últimos 30 días</option><option value="año">Últimos 90 días</option><option value="personalizado">Personalizado</option>
+	</select>
+	@if (periodo() === 'personalizado') {
+		<input type="date" [ngModel]="desde()" (ngModelChange)="desde.set($event); emitir()" />
+		<input type="date" [ngModel]="hasta()" (ngModelChange)="hasta.set($event); emitir()" />
+	}
+</div>

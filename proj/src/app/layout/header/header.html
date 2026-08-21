@@ -1,0 +1,73 @@
+<header class="header">
+  <div class="logo">
+    <span class="logo__mark">🐵</span>
+    <span class="logo__text">XchanGo</span>
+  </div>
+
+  <div class="search">
+    <svg
+      class="search__icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <circle cx="11" cy="11" r="7"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="text"
+      placeholder="Buscar trueques..."
+      [ngModel]="busqueda"
+      (ngModelChange)="onBusquedaChange($event)"
+      class="search__input"
+    />
+  </div>
+
+  <nav class="nav">
+    <a
+      class="nav__item"
+      [class.nav__item--active]="!mostrarSoloFavoritos"
+      href="javascript:void(0)"
+      (click)="onInicio()"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 11l9-8 9 8"></path>
+        <path d="M5 10v10h14V10"></path>
+      </svg>
+      Inicio
+    </a>
+    <a class="nav__item" routerLink="/home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 3v18M3 12h18"></path>
+      </svg>
+      Explorar
+    </a>
+    <a class="nav__item" (click)="onServicios()" href="javascript:void(0)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      Servicios
+    </a>
+  </nav>
+
+  <div class="header__actions">
+    <button class="icon-btn" type="button" aria-label="Notificaciones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
+      </svg>
+      <span class="icon-btn__badge" *ngIf="notificaciones > 0">{{ notificaciones }}</span>
+    </button>
+    <button class="avatar-btn" type="button" (click)="irAPerfil()" title="Ver mi perfil">
+      <img [src]="avatarUrl" alt="Foto de perfil" class="avatar-btn__img" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+  </div>
+</header>

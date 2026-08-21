@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cat1",
+    "nombre": "Electrónicos",
+    "icono": "phone"
+  },
+  {
+    "id": "cat2",
+    "nombre": "Vehículos",
+    "icono": "car"
+  },
+  {
+    "id": "cat3",
+    "nombre": "Ropa y accesorios",
+    "icono": "shirt"
+  },
+  {
+    "id": "cat4",
+    "nombre": "Hogar y muebles",
+    "icono": "home"
+  },
+  {
+    "id": "cat5",
+    "nombre": "Deportes",
+    "icono": "bike"
+  },
+  {
+    "id": "cat6",
+    "nombre": "Videojuegos",
+    "icono": "gamepad"
+  },
+  {
+    "id": "cat7",
+    "nombre": "Servicios profesionales",
+    "icono": "tools"
+  },
+  {
+    "id": "cat8",
+    "nombre": "Recursos digitales",
+    "icono": "book"
+  }
+]

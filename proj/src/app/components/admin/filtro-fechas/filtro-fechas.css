@@ -1,0 +1,1 @@
+.filtro-fechas { display: flex; flex-wrap: wrap; gap: 8px; }.filtro-fechas select, .filtro-fechas input { border: 1px solid #dfd1c3; border-radius: 8px; padding: 8px 10px; color: #6c5a4c; background: #fffdfb; font: inherit; font-size: 12px; }

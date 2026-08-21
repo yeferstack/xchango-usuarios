@@ -1,0 +1,18 @@
+/* El SVG se mide en "em", igual que una fuente de iconos.
+   Así las reglas de CSS que ya existían (font-size: 18px, color, etc.)
+   siguen funcionando sin tener que reescribirlas. */
+.icono {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+}

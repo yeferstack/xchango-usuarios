@@ -1,0 +1,105 @@
+<!-- HU77: comparativas mensuales -->
+<section class="grid-comparativas">
+  @for (c of comparativas(); track c.clave) {
+    <article class="comp">
+      <div class="comp__head">
+        <span class="comp__icono"><app-icon [name]="c.icono" [size]="16" /></span>
+        <span class="comp__label">{{ c.texto }}</span>
+      </div>
+
+      <div class="comp__cifras">
+        <span class="comp__actual">{{ c.datos.actual }}</span>
+        <span class="comp__anterior">antes {{ c.datos.anterior }}</span>
+      </div>
+
+      <span [class]="c.datos.porcentaje >= 0 ? 'comp__delta comp__delta--sube' : 'comp__delta comp__delta--baja'">
+        <app-icon [name]="c.datos.porcentaje >= 0 ? 'trending-up' : 'trending-down'" [size]="13" />
+        {{ c.datos.porcentaje >= 0 ? '+' : '' }}{{ c.datos.porcentaje }}% vs mes anterior
+      </span>
+
+      <div class="comp__pista">
+        <span [style.width.%]="c.datos.actual / (c.datos.actual + c.datos.anterior) * 100"></span>
+      </div>
+    </article>
+  } @empty {
+    <p class="vacio">Cargando comparativas...</p>
+  }
+</section>
+
+<div class="grid-2">
+  <!-- Ranking de usuarios -->
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Ranking de usuarios</h3>
+        <p class="panel__sub">Top 8 según el criterio seleccionado</p>
+      </div>
+
+      <div class="tabs">
+        @for (c of criterios; track c.id) {
+          <button type="button" class="tab" [class.tab--activo]="criterio() === c.id" (click)="criterio.set(c.id)">
+            <app-icon [name]="c.icono" [size]="14" />
+            {{ c.texto }}
+          </button>
+        }
+      </div>
+    </div>
+
+    @if (top().length) {
+      <ul class="rank">
+        @for (u of top(); track u.id; let i = $index) {
+          <li class="rank__item">
+            <span [class]="'rank__pos rank__pos--' + (i + 1)">{{ i + 1 }}</span>
+            <span class="rank__avatar">{{ u.nombre.charAt(0) }}</span>
+            <div class="rank__cuerpo">
+              <p class="rank__nombre">{{ u.nombre }}</p>
+              <span class="rank__meta">
+                <app-icon name="map-pin" [size]="12" /> {{ u.ubicacion }}
+                · {{ u.publicaciones }} pub · {{ u.intercambios }} int
+              </span>
+            </div>
+            <app-badge-estado [estado]="u.nivelActividad" [etiqueta]="u.nivelActividad" [punto]="false" />
+            <span class="rank__valor">{{ valorDe(u) }}</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="vacio">Cargando usuarios...</p>
+    }
+  </div>
+
+  <!-- Categorías más usadas -->
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Categorías más utilizadas</h3>
+        <p class="panel__sub">Total de publicaciones</p>
+      </div>
+    </div>
+    <app-chart-barras [datos]="categorias()" color="#a1785a" />
+  </div>
+</div>
+
+<div class="grid-2">
+  <!-- Ubicaciones -->
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Ubicaciones con mayor actividad</h3>
+        <p class="panel__sub">Municipios de Casanare</p>
+      </div>
+    </div>
+    <app-chart-barras [datos]="ubicaciones()" color="#7d6144" />
+  </div>
+
+  <!-- Crecimiento -->
+  <div class="panel">
+    <div class="panel__head">
+      <div>
+        <h3 class="panel__titulo">Categorías con mayor crecimiento</h3>
+        <p class="panel__sub">Variación respecto al mes anterior</p>
+      </div>
+    </div>
+    <app-chart-barras [datos]="crecimiento()" color="#2f7d5d" [modoCrecimiento]="true" />
+  </div>
+</div>

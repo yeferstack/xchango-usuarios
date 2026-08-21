@@ -1,0 +1,122 @@
+<div class="acceso">
+  <!-- Lado de marca -->
+  <section class="acceso__marca">
+    <div class="marca__top">
+      <span class="marca__logo">
+        <span class="marca__cuadro">X</span>
+        <span class="marca__nombre">XchanGo</span>
+      </span>
+    </div>
+
+    <div class="marca__medio">
+      <h2 class="marca__titulo">Control total de la <span>plataforma.</span></h2>
+      <p class="marca__texto">
+        Supervisa usuarios, modera publicaciones y revisa las métricas de todos los
+        trueques desde un solo lugar.
+      </p>
+
+      <ul class="marca__puntos">
+        <li class="marca__punto">
+          <span class="marca__check"><app-icon name="check" [size]="14" /></span>
+          Métricas de usuarios e intercambios en tiempo real
+        </li>
+        <li class="marca__punto">
+          <span class="marca__check"><app-icon name="check" [size]="14" /></span>
+          Moderación de contenido reportado
+        </li>
+        <li class="marca__punto">
+          <span class="marca__check"><app-icon name="check" [size]="14" /></span>
+          Historial completo de acciones administrativas
+        </li>
+      </ul>
+    </div>
+
+    <p class="marca__pie">XchanGo · Panel administrativo · Yopal, Casanare</p>
+  </section>
+
+  <!-- Lado del formulario -->
+  <section class="acceso__panel">
+    <form class="form" (ngSubmit)="enviar()">
+      <span class="form__etiqueta">
+        <app-icon name="lock" [size]="13" />
+        Acceso restringido
+      </span>
+
+      <h1 class="form__titulo">Administración XchanGo</h1>
+      <p class="form__sub">Ingresa con tus credenciales de administrador o moderador.</p>
+
+      @if (error()) {
+        <div class="form__error" role="alert">
+          <app-icon name="alert" [size]="16" />
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <div class="campo">
+        <label class="campo__label" for="email">Correo electrónico</label>
+        <div class="campo__caja" [class.campo__caja--error]="error()">
+          <app-icon name="mail" [size]="17" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            placeholder="admin@xchango.com"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)"
+            [disabled]="cargando()"
+          />
+        </div>
+      </div>
+
+      <div class="campo">
+        <label class="campo__label" for="password">Contraseña</label>
+        <div class="campo__caja" [class.campo__caja--error]="error()">
+          <app-icon name="lock" [size]="17" />
+          <input
+            id="password"
+            name="password"
+            [type]="verPassword() ? 'text' : 'password'"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            [ngModel]="password()"
+            (ngModelChange)="password.set($event)"
+            [disabled]="cargando()"
+          />
+          <button
+            type="button"
+            class="campo__ojo"
+            (click)="verPassword.set(!verPassword())"
+            [attr.aria-label]="verPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          >
+            <app-icon [name]="verPassword() ? 'eye-off' : 'eye'" [size]="17" />
+          </button>
+        </div>
+      </div>
+
+      <div class="form__fila">
+        <label class="form__recordar">
+          <input type="checkbox" name="recordar" />
+          Mantener sesión
+        </label>
+        <a class="form__link" href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button type="submit" class="form__boton" [disabled]="cargando()">
+        @if (cargando()) {
+          <span class="spinner"></span>
+          Verificando...
+        } @else {
+          Iniciar sesión
+          <app-icon name="chevron-right" [size]="17" />
+        }
+      </button>
+
+      <p class="form__ayuda">
+        <strong>Credenciales de prueba</strong><br />
+        admin&#64;xchango.com / admin123<br />
+        moderador&#64;xchango.com / mod123
+      </p>
+    </form>
+  </section>
+</div>

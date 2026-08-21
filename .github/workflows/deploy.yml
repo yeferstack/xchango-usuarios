@@ -1,0 +1,85 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - release
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build Angular
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: proj/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./proj
+        run: npm ci
+
+      - name: Build Angular
+        working-directory: ./proj
+        run: npm run build -- --base-href=/xchango-usuarios/
+
+      - name: Show build output
+        run: |
+          echo "Contenido de proj/dist:"
+          find proj/dist -maxdepth 5 -type f | sort
+
+      - name: Find Angular output
+        run: |
+          INDEX=$(find proj/dist -name index.html -type f | head -n 1)
+
+          if [ -z "$INDEX" ]; then
+            echo "ERROR: No se encontró index.html dentro de proj/dist"
+            exit 1
+          fi
+
+          echo "index.html encontrado en:"
+          echo "$INDEX"
+
+          DIST_DIR=$(dirname "$INDEX")
+
+          echo "Carpeta final de Angular:"
+          echo "$DIST_DIR"
+
+          cp "$INDEX" "$DIST_DIR/404.html"
+
+          echo "DIST_DIR=$DIST_DIR" >> "$GITHUB_ENV"
+
+      - name: Verify deployment files
+        run: |
+          echo "Archivos que se van a publicar:"
+          find "$DIST_DIR" -maxdepth 2 -type f | sort
+
+      - name: Upload GitHub Pages artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ env.DIST_DIR }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

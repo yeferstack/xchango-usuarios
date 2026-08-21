@@ -1,0 +1,10 @@
+@if (abierto()) {
+	<div class="modal__velo" (click)="cancelar.emit()">
+		<section class="modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+			<div class="modal__icono"><app-icon [name]="icono()" [size]="22" /></div>
+			<h2>{{ titulo() }}</h2><p>{{ mensaje() }}</p>
+			@if (pideMotivo()) { <label>{{ etiquetaMotivo() }}<textarea rows="3" (input)="motivo.set($any($event.target).value)"></textarea></label> }
+			<div class="modal__acciones"><button type="button" (click)="cancelar.emit()">Cancelar</button><button type="button" (click)="confirmar.emit(motivo())">{{ textoConfirmar() }}</button></div>
+		</section>
+	</div>
+}

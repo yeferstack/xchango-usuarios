@@ -1,0 +1,5 @@
+<header class="header">
+	<button class="header__menu" type="button" aria-label="Abrir menú" (click)="abrirMenu.emit()"><app-icon name="menu" [size]="21" /></button>
+	<div><h1>{{ titulo() }}</h1><p>{{ subtitulo() }}</p></div>
+	<button class="header__salir" type="button" aria-label="Cerrar sesión" (click)="salir.emit()"><app-icon name="log-out" [size]="18" /></button>
+</header>

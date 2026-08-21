@@ -1,0 +1,56 @@
+[
+  {
+    "id": "al1",
+    "tipo": "sospechosa",
+    "titulo": "Actividad inusual detectada",
+    "mensaje": "El usuario Ricardo Fonseca creó 5 publicaciones en menos de 10 minutos.",
+    "fecha": "2026-08-18T08:45:00",
+    "leida": false,
+    "prioridad": "alta"
+  },
+  {
+    "id": "al2",
+    "tipo": "moderacion",
+    "titulo": "Publicaciones pendientes de revisión",
+    "mensaje": "Hay reportes de publicaciones esperando revisión.",
+    "fecha": "2026-08-18T07:30:00",
+    "leida": false,
+    "prioridad": "media"
+  },
+  {
+    "id": "al3",
+    "tipo": "usuario",
+    "titulo": "Usuario con múltiples reportes",
+    "mensaje": "Ricardo Fonseca acumula varios reportes en los últimos 30 días.",
+    "fecha": "2026-08-17T20:15:00",
+    "leida": false,
+    "prioridad": "alta"
+  },
+  {
+    "id": "al4",
+    "tipo": "sistema",
+    "titulo": "Respaldo completado",
+    "mensaje": "La copia de seguridad diaria finalizó correctamente.",
+    "fecha": "2026-08-17T02:00:00",
+    "leida": true,
+    "prioridad": "baja"
+  },
+  {
+    "id": "al5",
+    "tipo": "sospechosa",
+    "titulo": "Intentos de acceso fallidos",
+    "mensaje": "Se registraron 12 intentos fallidos de inicio de sesión desde la misma IP.",
+    "fecha": "2026-08-16T23:18:00",
+    "leida": false,
+    "prioridad": "media"
+  },
+  {
+    "id": "al6",
+    "tipo": "moderacion",
+    "titulo": "Categoría con aumento de reportes",
+    "mensaje": "La categoría Electrónicos duplicó sus reportes esta semana.",
+    "fecha": "2026-08-16T10:05:00",
+    "leida": true,
+    "prioridad": "baja"
+  }
+]

@@ -1,0 +1,250 @@
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+    <a class="marca" routerLink="/home">
+        <img src="/Logo-xchango/logo-xchango.png" alt="" class="logo" />
+        <span class="marca-texto">XchanGo</span>
+    </a>
+
+    <nav class="nav-pill">
+        <a routerLink="/home" class="nav-item activo">
+            <app-icono nombre="home"></app-icono> Inicio
+        </a>
+        <a routerLink="/explorar" class="nav-item">
+            <app-icono nombre="search"></app-icono> Explorar
+        </a>
+        <a routerLink="/mis-trueques" class="nav-item">
+            <app-icono nombre="swap_horiz"></app-icono> Mis trueques
+        </a>
+        <a routerLink="/servicios" class="nav-item">
+            <app-icono nombre="apps"></app-icono> Servicios
+        </a>
+        <a routerLink="/mensajes" class="nav-item">
+            <app-icono nombre="chat_bubble_outline"></app-icono> Mensajes
+        </a>
+        <a routerLink="/favoritos" class="nav-item">
+            <app-icono nombre="favorite_border"></app-icono> Favoritos
+        </a>
+    </nav>
+
+    <div class="nav-derecha">
+        <button class="btn-campana" type="button">
+            <app-icono nombre="notifications_none"></app-icono>
+        </button>
+        <div class="avatar-nav">
+            <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+        </div>
+        <app-icono nombre="expand_more"></app-icono>
+    </div>
+</header>
+
+<!-- ===== CONTENEDOR BEIGE ===== -->
+<main class="contenedor">
+    <div class="panel">
+
+        <!-- Columna izquierda: identidad -->
+        <aside class="columna-identidad">
+            <button class="btn-volver" type="button" (click)="volver()">
+                <app-icono nombre="arrow_back"></app-icono> Volver
+            </button>
+
+            <div class="foto-perfil">
+                <img src="/Logo-xchango/avatar-miguel.jpeg" alt="" />
+            </div>
+
+            <h2 class="nombre">Miguel Perez</h2>
+
+            <h3 class="subtitulo-calif">Calificaciones y opiniones</h3>
+            <div class="estrellas">
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+                <app-icono nombre="star"></app-icono>
+            </div>
+            <p class="nota-calif">(Solo será visible públicamente tras recibir 5 calificaciones).</p>
+        </aside>
+
+        <!-- Tarjeta blanca: contenido -->
+        <section class="tarjeta">
+
+            <header class="tarjeta-encabezado">
+                <h1 class="titulo">Datos de tu cuenta</h1>
+                <p class="descripcion">Datos que representan tu cuenta de XchanGo.</p>
+            </header>
+
+            <!-- ===== GRUPO: Información de la cuenta ===== -->
+            <div class="grupo">
+                <div class="grupo-cabecera">
+                    <span class="icono-caja"><app-icono nombre="account_circle"></app-icono></span>
+                    <span class="acordeon-texto">
+                        <strong>Información de la cuenta</strong>
+                        <small>Datos con los que te identificamos dentro de la plataforma.</small>
+                    </span>
+                </div>
+
+                <ul class="filas">
+
+                    <!-- Correo -->
+                    <li class="fila">
+                        <app-icono nombre="mail"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Correo electrónico</strong>
+                            <small *ngIf="editando() !== 'correo'">{{ correo() }}</small>
+                            <input class="campo-edicion" *ngIf="editando() === 'correo'" type="email"
+                                [ngModel]="valorTemporal()" (ngModelChange)="valorTemporal.set($event)"
+                                placeholder="tucorreo@ejemplo.com" />
+                        </span>
+
+                        <span class="insignia" [class.pendiente]="!correoVerificado()" *ngIf="editando() !== 'correo'">
+                            {{ correoVerificado() ? 'Verificado' : 'Sin verificar' }}
+                        </span>
+
+                        <button class="btn-secundario" type="button" *ngIf="editando() !== 'correo'"
+                            (click)="iniciarEdicion('correo', correo())">
+                            Cambiar
+                        </button>
+
+                        <span class="acciones-edicion" *ngIf="editando() === 'correo'">
+                            <button class="btn-secundario" type="button" (click)="cancelarEdicion()">Cancelar</button>
+                            <button class="btn-mini" type="button" (click)="guardarEdicion('correo')">Guardar</button>
+                        </span>
+                    </li>
+
+                    <!-- Nombre de usuario -->
+                    <li class="fila">
+                        <app-icono nombre="alternate_email"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Nombre de usuario</strong>
+                            <small *ngIf="editando() !== 'usuario'">{{ usuario() }}</small>
+                            <input class="campo-edicion" *ngIf="editando() === 'usuario'" type="text"
+                                [ngModel]="valorTemporal()" (ngModelChange)="valorTemporal.set($event)"
+                                placeholder="@tuusuario" />
+                        </span>
+
+                        <button class="btn-secundario" type="button" *ngIf="editando() !== 'usuario'"
+                            (click)="iniciarEdicion('usuario', usuario())">
+                            Cambiar
+                        </button>
+
+                        <span class="acciones-edicion" *ngIf="editando() === 'usuario'">
+                            <button class="btn-secundario" type="button" (click)="cancelarEdicion()">Cancelar</button>
+                            <button class="btn-mini" type="button" (click)="guardarEdicion('usuario')">Guardar</button>
+                        </span>
+                    </li>
+
+                    <!-- ID de cuenta -->
+                    <li class="fila">
+                        <app-icono nombre="badge"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Identificador de cuenta</strong>
+                            <small>{{ idCuenta() }}</small>
+                        </span>
+                        <span class="valor-fijo">No editable</span>
+                    </li>
+
+                    <!-- Tipo de cuenta -->
+                    <li class="fila">
+                        <app-icono nombre="workspace_premium"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Tipo de cuenta</strong>
+                            <small>Cuenta {{ tipoCuenta() }}</small>
+                        </span>
+                    </li>
+
+                    <!-- Fecha de registro -->
+                    <li class="fila">
+                        <app-icono nombre="event"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Miembro desde</strong>
+                            <small>{{ fechaRegistro() }}</small>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- ===== GRUPO: Acceso ===== -->
+            <div class="grupo">
+                <div class="grupo-cabecera">
+                    <span class="icono-caja"><app-icono nombre="key"></app-icono></span>
+                    <span class="acordeon-texto">
+                        <strong>Acceso</strong>
+                        <small>Credenciales con las que ingresas a XchanGo.</small>
+                    </span>
+                </div>
+
+                <ul class="filas">
+                    <li class="fila">
+                        <app-icono nombre="lock_outline"></app-icono>
+                        <span class="fila-texto">
+                            <strong>Contraseña</strong>
+                            <small>Actualizada hace 2 meses.</small>
+                        </span>
+                        <button class="btn-secundario" type="button">Cambiar contraseña</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ===== GRUPO: Preferencias ===== -->
+            <div class="grupo">
+                <div class="grupo-cabecera">
+                    <span class="icono-caja"><app-icono nombre="tune"></app-icono></span>
+                    <span class="acordeon-texto">
+                        <strong>Preferencias de la cuenta</strong>
+                        <small>Ajustes generales de correos y sesión.</small>
+                    </span>
+                </div>
+
+                <ul class="filas">
+                    <li class="fila" *ngFor="let p of preferencias()">
+                        <span class="fila-texto">
+                            <strong>{{ p.titulo }}</strong>
+                            <small>{{ p.detalle }}</small>
+                        </span>
+                        <button class="switch" type="button" [class.on]="p.activo" [attr.aria-pressed]="p.activo"
+                            (click)="togglePreferencia(p.id)">
+                            <span class="bolita"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ===== ZONA DE RIESGO ===== -->
+            <div class="grupo grupo--riesgo">
+                <div class="grupo-cabecera">
+                    <span class="icono-caja icono-caja--riesgo">
+                        <app-icono nombre="warning_amber"></app-icono>
+                    </span>
+                    <span class="acordeon-texto">
+                        <strong>Zona de riesgo</strong>
+                        <small>Estas acciones afectan de forma permanente tu cuenta.</small>
+                    </span>
+                </div>
+
+                <ul class="filas">
+                    <li class="fila">
+                        <span class="fila-texto">
+                            <strong>Desactivar cuenta temporalmente</strong>
+                            <small>Tu perfil y publicaciones dejan de ser visibles hasta que vuelvas a entrar.</small>
+                        </span>
+                        <button class="btn-secundario" type="button">Desactivar</button>
+                    </li>
+
+                    <li class="fila">
+                        <span class="fila-texto">
+                            <strong>Eliminar cuenta</strong>
+                            <small>Se borran tus publicaciones, trueques y calificaciones. No se puede deshacer.</small>
+                        </span>
+                        <button class="btn-peligro" type="button">Eliminar cuenta</button>
+                    </li>
+                </ul>
+            </div>
+
+            <footer class="tarjeta-pie">
+                <button class="btn-guardar" type="button">Guardar cambios</button>
+            </footer>
+
+        </section>
+
+    </div>
+</main>

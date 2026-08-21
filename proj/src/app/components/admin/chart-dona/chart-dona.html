@@ -1,0 +1,8 @@
+<div class="dona">
+	<div class="dona__total"><strong>{{ total() }}</strong><span>{{ unidad() }}</span></div>
+	<ul class="dona__lista">
+		@for (dato of datos(); track dato.label; let i = $index) {
+			<li><span class="dona__punto" [class]="'dona__punto dona__punto--' + (i % 5)"></span><span>{{ dato.label }}</span><strong>{{ dato.valor }}</strong></li>
+		}
+	</ul>
+</div>

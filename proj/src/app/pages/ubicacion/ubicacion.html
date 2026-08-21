@@ -1,0 +1,736 @@
+<!-- ==============================
+     NAVBAR
+================================ -->
+
+<header class="navbar">
+
+    <a class="marca" routerLink="/home">
+        <img src="/Logo-xchango/logo-xchango.png" alt="XchanGo" class="logo" />
+
+        <span class="marca-texto">
+            XchanGo
+        </span>
+    </a>
+
+
+    <nav class="nav-pill">
+
+        <a routerLink="/home" class="nav-item activo">
+            <app-icono nombre="home"></app-icono>
+            Inicio
+        </a>
+
+        <a routerLink="/explorar" class="nav-item">
+            <app-icono nombre="search"></app-icono>
+            Explorar
+        </a>
+
+        <a routerLink="/mis-trueques" class="nav-item">
+            <app-icono nombre="swap_horiz"></app-icono>
+            Mis trueques
+        </a>
+
+        <a routerLink="/servicios" class="nav-item">
+            <app-icono nombre="apps"></app-icono>
+            Servicios
+        </a>
+
+        <a routerLink="/mensajes" class="nav-item">
+            <app-icono nombre="chat_bubble_outline"></app-icono>
+            Mensajes
+        </a>
+
+        <a routerLink="/favoritos" class="nav-item">
+            <app-icono nombre="favorite_border"></app-icono>
+            Favoritos
+        </a>
+
+    </nav>
+
+
+    <div class="nav-derecha">
+
+        <button class="btn-campana" type="button">
+            <app-icono nombre="notifications_none"></app-icono>
+        </button>
+
+        <div class="avatar-nav">
+            <img src="/Logo-xchango/avatar-miguel.jpeg" alt="Miguel Perez" />
+        </div>
+
+        <app-icono nombre="expand_more"></app-icono>
+
+    </div>
+
+</header>
+
+
+<!-- ==============================
+     CONTENEDOR
+================================ -->
+
+<main class="contenedor">
+
+    <div class="panel">
+
+
+        <!-- ==============================
+             COLUMNA IZQUIERDA
+        ============================== -->
+
+        <aside class="columna-identidad">
+
+            <button class="btn-volver" type="button" (click)="volver()">
+                <app-icono nombre="arrow_back"></app-icono>
+
+                Volver
+            </button>
+
+
+            <div class="foto-perfil">
+
+                <img src="/Logo-xchango/avatar-miguel.jpeg" alt="Foto de Miguel Perez" />
+
+            </div>
+
+
+            <h2 class="nombre">
+                Miguel Perez
+            </h2>
+
+
+            <h3 class="subtitulo-calif">
+                Calificaciones y opiniones
+            </h3>
+
+
+            <div class="estrellas">
+
+                <app-icono nombre="star"></app-icono>
+
+                <app-icono nombre="star"></app-icono>
+
+                <app-icono nombre="star"></app-icono>
+
+                <app-icono nombre="star"></app-icono>
+
+                <app-icono nombre="star"></app-icono>
+
+            </div>
+
+
+            <p class="nota-calif">
+                Solo será visible públicamente tras recibir
+                5 calificaciones.
+            </p>
+
+        </aside>
+
+
+
+        <!-- ==============================
+             CONTENIDO
+        ============================== -->
+
+        <section class="tarjeta">
+
+
+            <!-- ENCABEZADO -->
+
+            <header class="tarjeta-encabezado">
+
+                <div>
+
+                    <span class="titulo-etiqueta">
+                        PERFIL · UBICACIÓN
+                    </span>
+
+                    <h1 class="titulo">
+                        Tu ubicación
+                    </h1>
+
+                    <p class="descripcion">
+                        Encuentra trueques cerca de ti y elige
+                        dónde realizar tus intercambios.
+                    </p>
+
+                </div>
+
+
+                <div class="estado-ubicacion">
+
+                    <span class="estado-punto"></span>
+
+                    <span>
+                        {{ municipio() }}, Casanare
+                    </span>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ==============================
+                 MAPA
+            ============================== -->
+
+            <div class="mapa-seccion">
+
+                <div class="mapa-encabezado">
+
+                    <div>
+
+                        <h2>
+                            Trueques cerca de ti
+                        </h2>
+
+                        <p>
+                            Mostrando publicaciones dentro de
+                            {{ radio() }} km.
+                        </p>
+
+                    </div>
+
+
+                    <button class="btn-mapa" type="button" (click)="usarUbicacionActual()"
+                        [disabled]="obteniendoUbicacion()">
+
+                        <app-icono nombre="my_location"></app-icono>
+
+                        {{
+                        obteniendoUbicacion()
+                        ? 'Buscando...'
+                        : 'Usar mi ubicación'
+                        }}
+
+                    </button>
+
+                </div>
+
+
+                <!-- MAPA VISUAL -->
+
+                <div class="mapa-principal">
+
+                    <div class="mapa-cuadricula"></div>
+
+
+                    <!-- Calles -->
+
+                    <div class="calle calle-1"></div>
+                    <div class="calle calle-2"></div>
+                    <div class="calle calle-3"></div>
+                    <div class="calle calle-4"></div>
+
+
+                    <!-- Radio -->
+
+                    <div class="mapa-radio" [style.width.%]="radio() / 1.25" [style.height.%]="radio() / 1.25"></div>
+
+
+                    <!-- Usuario -->
+
+                    <div class="marcador-usuario">
+
+                        <div class="pulso"></div>
+
+                        <div class="marcador-centro">
+                            <app-icono nombre="person_pin_circle"></app-icono>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Trueques -->
+
+                    <button class="marcador-trueque" type="button" *ngFor="let trueque of truequesCercanos()"
+                        [style.left.%]="trueque.x" [style.top.%]="trueque.y" [attr.aria-label]="trueque.titulo">
+
+                        <app-icono nombre="swap_horiz"></app-icono>
+
+                    </button>
+
+
+                    <!-- Etiqueta ubicación -->
+
+                    <div class="etiqueta-mapa">
+
+                        <app-icono nombre="location_on"></app-icono>
+
+                        <div>
+
+                            <strong>
+                                Tu ubicación
+                            </strong>
+
+                            <small>
+                                {{ municipio() }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Leyenda -->
+
+                    <div class="leyenda-mapa">
+
+                        <div>
+                            <span class="leyenda-punto usuario"></span>
+                            Tu ubicación
+                        </div>
+
+                        <div>
+                            <span class="leyenda-punto trueque"></span>
+                            Trueques
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RESUMEN DEL MAPA -->
+
+                <div class="resumen-mapa">
+
+                    <div class="resumen-item">
+
+                        <app-icono nombre="swap_horiz"></app-icono>
+
+                        <div>
+
+                            <strong>
+                                {{ truequesCercanos().length }}
+                                trueques cercanos
+                            </strong>
+
+                            <small>
+                                Dentro de tu radio de búsqueda
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="separador-resumen"></div>
+
+
+                    <div class="resumen-item">
+
+                        <app-icono nombre="explore"></app-icono>
+
+                        <div>
+
+                            <strong>
+                                {{ radio() }} km
+                            </strong>
+
+                            <small>
+                                Radio actual
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 UBICACIÓN PRINCIPAL
+            ============================== -->
+
+            <div class="grupo">
+
+                <div class="grupo-cabecera">
+
+                    <span class="icono-caja">
+                        <app-icono nombre="location_on"></app-icono>
+                    </span>
+
+                    <span class="acordeon-texto">
+
+                        <strong>
+                            Ubicación principal
+                        </strong>
+
+                        <small>
+                            Se utiliza para mostrarte trueques
+                            cercanos.
+                        </small>
+
+                    </span>
+
+                </div>
+
+
+                <!-- VISTA NORMAL -->
+
+                <div class="ubicacion-actual" *ngIf="!editando()">
+
+                    <div class="mapa-mini">
+
+                        <app-icono nombre="location_on"></app-icono>
+
+                    </div>
+
+
+                    <div class="ubicacion-datos">
+
+                        <strong class="municipio-actual">
+                            {{ municipio() }}, Casanare
+                        </strong>
+
+                        <span class="dato" *ngIf="barrio()">
+                            Barrio {{ barrio() }}
+                        </span>
+
+                        <span class="dato" *ngIf="referencia()">
+                            {{ referencia() }}
+                        </span>
+
+                        <span class="dato sin-dato" *ngIf="!barrio() && !referencia()">
+                            Sin barrio ni referencia registrados.
+                        </span>
+
+                    </div>
+
+
+                    <button class="btn-secundario" type="button" (click)="iniciarEdicion()">
+                        Editar
+                    </button>
+
+                </div>
+
+
+
+                <!-- FORMULARIO -->
+
+                <div class="formulario" *ngIf="editando()">
+
+                    <div class="campo">
+
+                        <label for="municipio">
+                            Municipio
+                        </label>
+
+                        <select id="municipio" class="entrada" [ngModel]="tempMunicipio()"
+                            (ngModelChange)="tempMunicipio.set($event)">
+
+                            <option *ngFor="let m of municipios" [value]="m">
+                                {{ m }}
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="barrio">
+                            Barrio o vereda
+                        </label>
+
+                        <input id="barrio" class="entrada" type="text" placeholder="Ej: El Triunfo"
+                            [ngModel]="tempBarrio()" (ngModelChange)="tempBarrio.set($event)" />
+
+                    </div>
+
+
+                    <div class="campo campo--ancho">
+
+                        <label for="referencia">
+                            Punto de referencia
+                        </label>
+
+                        <input id="referencia" class="entrada" type="text" placeholder="Ej: Cerca al parque principal"
+                            [ngModel]="tempReferencia()" (ngModelChange)="tempReferencia.set($event)" />
+
+                        <small class="ayuda">
+                            Tu dirección exacta nunca se mostrará
+                            públicamente.
+                        </small>
+
+                    </div>
+
+
+                    <div class="acciones-formulario">
+
+                        <button class="btn-secundario" type="button" (click)="cancelarEdicion()">
+                            Cancelar
+                        </button>
+
+                        <button class="btn-mini" type="button" (click)="guardarUbicacion()">
+                            Guardar ubicación
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 RADIO
+            ============================== -->
+
+            <div class="grupo">
+
+                <div class="grupo-cabecera">
+
+                    <span class="icono-caja">
+                        <app-icono nombre="my_location"></app-icono>
+                    </span>
+
+                    <span class="acordeon-texto">
+
+                        <strong>
+                            Radio de búsqueda
+                        </strong>
+
+                        <small>
+                            Define qué tan lejos quieres buscar
+                            trueques.
+                        </small>
+
+                    </span>
+
+                </div>
+
+
+                <div class="bloque-radio">
+
+                    <div class="radio-valor">
+
+                        <span class="numero">
+                            {{ radio() }}
+                        </span>
+
+                        <span class="unidad">
+                            km a la redonda
+                        </span>
+
+                    </div>
+
+
+                    <input class="deslizador" type="range" min="5" max="100" step="5" [value]="radio()"
+                        (input)="cambiarRadio($any($event.target).value)" />
+
+
+                    <div class="radio-limites">
+
+                        <span>
+                            5 km
+                        </span>
+
+                        <span>
+                            100 km
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 PUNTOS DE ENCUENTRO
+            ============================== -->
+
+            <div class="grupo">
+
+                <div class="grupo-cabecera">
+
+                    <span class="icono-caja">
+                        <app-icono nombre="handshake"></app-icono>
+                    </span>
+
+                    <span class="acordeon-texto">
+
+                        <strong>
+                            Puntos de encuentro
+                        </strong>
+
+                        <small>
+                            Lugares públicos recomendados para
+                            realizar tus trueques.
+                        </small>
+
+                    </span>
+
+                </div>
+
+
+                <ul class="filas">
+
+                    <li class="fila" *ngFor="let p of puntos()">
+
+                        <app-icono nombre="pin_drop"></app-icono>
+
+
+                        <span class="fila-texto">
+
+                            <strong>
+                                {{ p.nombre }}
+                            </strong>
+
+                            <small>
+                                {{ p.detalle }}
+                            </small>
+
+                        </span>
+
+
+                        <button class="btn-ruta" type="button" (click)="abrirGoogleMaps(p.nombre)"
+                            title="Abrir en Google Maps">
+
+                            <app-icono nombre="directions"></app-icono>
+
+                        </button>
+
+
+                        <button class="btn-icono" type="button" (click)="eliminarPunto(p.id)" title="Eliminar punto">
+
+                            <app-icono nombre="delete_outline"></app-icono>
+
+                        </button>
+
+                    </li>
+
+
+                    <li class="fila" *ngIf="puntos().length === 0">
+
+                        <span class="fila-texto">
+
+                            <small>
+                                Aún no has agregado puntos de encuentro.
+                            </small>
+
+                        </span>
+
+                    </li>
+
+                </ul>
+
+
+                <div class="agregar-punto">
+
+                    <input class="entrada" type="text" placeholder="Ej: Parque de la Iglesia" [ngModel]="nuevoPunto()"
+                        (ngModelChange)="nuevoPunto.set($event)" (keyup.enter)="agregarPunto()" />
+
+                    <button class="btn-mini" type="button" (click)="agregarPunto()">
+
+                        <app-icono nombre="add"></app-icono>
+
+                        Agregar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 PREFERENCIAS
+            ============================== -->
+
+            <div class="grupo">
+
+                <div class="grupo-cabecera">
+
+                    <span class="icono-caja">
+                        <app-icono nombre="tune"></app-icono>
+                    </span>
+
+                    <span class="acordeon-texto">
+
+                        <strong>
+                            Privacidad y preferencias
+                        </strong>
+
+                        <small>
+                            Controla cómo XchanGo utiliza tu ubicación.
+                        </small>
+
+                    </span>
+
+                </div>
+
+
+                <ul class="filas">
+
+                    <li class="fila" *ngFor="let p of preferencias()">
+
+                        <span class="fila-texto">
+
+                            <strong>
+                                {{ p.titulo }}
+                            </strong>
+
+                            <small>
+                                {{ p.detalle }}
+                            </small>
+
+                        </span>
+
+
+                        <button class="switch" type="button" [class.on]="p.activo" [attr.aria-pressed]="p.activo"
+                            (click)="togglePreferencia(p.id)">
+
+                            <span class="bolita"></span>
+
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- ==============================
+                 PIE
+            ============================== -->
+
+            <footer class="tarjeta-pie">
+
+                <div class="mensaje-guardado" *ngIf="guardado()">
+
+                    <app-icono nombre="check_circle"></app-icono>
+
+                    Cambios guardados
+
+                </div>
+
+
+                <button class="btn-guardar" type="button" (click)="guardarCambios()">
+
+                    <app-icono nombre="save"></app-icono>
+
+                    Guardar cambios
+
+                </button>
+
+            </footer>
+
+        </section>
+
+    </div>
+
+</main>

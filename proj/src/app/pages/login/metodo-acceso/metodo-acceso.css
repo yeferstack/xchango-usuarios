@@ -1,0 +1,401 @@
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.ma-overlay {
+
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(25, 23, 20, .45);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  animation: maOverlayIn .22s ease;
+
+}
+
+@keyframes maOverlayIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.ma-modal {
+
+  position: relative;
+
+  width: 100%;
+  max-width: 400px;
+
+  padding: 32px 28px 28px;
+
+  background: #fffdfa;
+
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 26px;
+
+  box-shadow:
+    0 24px 60px rgba(60, 45, 26, .22),
+    0 0 0 8px rgba(255, 255, 255, .06),
+    inset 0 2px 5px rgba(255, 255, 255, .65);
+
+  animation: maModalIn .24s cubic-bezier(.2, .8, .2, 1);
+
+}
+
+@keyframes maModalIn {
+
+  from {
+    opacity: 0;
+    transform: scale(.94) translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   CERRAR
+   ========================================================= */
+
+.ma-close {
+
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(151, 123, 88, .16);
+  border-radius: 50%;
+
+  background: rgba(247, 240, 230, .76);
+  color: #847a68;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+
+}
+
+.ma-close:hover {
+
+  background: rgba(238, 228, 214, .92);
+  color: #111;
+  transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.ma-logo {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+}
+
+.ma-logo__chango {
+
+  width: 34px;
+  height: 34px;
+  display: block;
+  object-fit: contain;
+
+}
+
+.ma-logo__wordmark {
+
+  width: 96px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+
+}
+
+
+/* =========================================================
+   TÍTULOS
+   ========================================================= */
+
+.ma-titulo {
+
+  color: #111;
+
+  font-family: "Baloo 2", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+
+}
+
+.ma-subtitulo {
+
+  margin-top: 6px;
+
+  color: #524b43;
+
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+
+}
+
+
+/* =========================================================
+   MÉTODOS
+   ========================================================= */
+
+.ma-metodos {
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 24px;
+  gap: 11px;
+
+}
+
+.ma-metodo {
+
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 0 18px;
+
+  border: 1px solid rgba(146, 116, 80, .30);
+  border-radius: 16px;
+
+  background: rgba(255, 252, 247, .70);
+  color: #29251f;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+
+}
+
+.ma-metodo:hover {
+
+  background: #fff;
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(96, 77, 51, .10);
+
+}
+
+.ma-metodo__icono {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+}
+
+.ma-metodo__texto {
+
+  white-space: nowrap;
+
+}
+
+.ma-metodo--correo {
+
+  background: #111;
+  border-color: #111;
+  color: #fff;
+
+  box-shadow: 0 0 0 1px rgba(178, 138, 87, .35);
+
+}
+
+.ma-metodo--correo:hover {
+
+  background: #222;
+
+}
+
+.ma-metodo--correo .ma-metodo__icono svg {
+
+  stroke: #fff;
+
+}
+
+
+/* =========================================================
+   DIVISOR
+   ========================================================= */
+
+.ma-divisor {
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 4px 0;
+
+}
+
+.ma-divisor::before,
+.ma-divisor::after {
+
+  content: "";
+
+  flex: 1;
+  height: 1px;
+
+  background: rgba(146, 116, 80, .22);
+
+}
+
+.ma-divisor span {
+
+  padding: 0 12px;
+
+  color: #958c81;
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+
+}
+
+
+/* =========================================================
+   CAMBIO DE MODO
+   ========================================================= */
+
+.ma-cambio-modo {
+
+  margin-top: 22px;
+
+  color: #6e665d;
+
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+
+}
+
+.ma-cambio-modo__accion {
+
+  margin-left: 4px;
+
+  border: none;
+  background: none;
+
+  color: #927654;
+
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  cursor: pointer;
+
+}
+
+.ma-cambio-modo__accion:hover {
+
+  color: #6a4f30;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .ma-modal {
+
+    max-width: 420px;
+    padding: 28px 22px 24px;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — CELULAR
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .ma-overlay {
+
+    padding: 12px;
+    align-items: flex-end;
+
+  }
+
+  .ma-modal {
+
+    border-radius: 24px 24px 20px 20px;
+    padding: 26px 18px 22px;
+
+  }
+
+  .ma-titulo {
+
+    font-size: 21px;
+
+  }
+
+}

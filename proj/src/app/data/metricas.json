@@ -1,0 +1,203 @@
+{
+  "resumen": {
+    "usuarios": 15,
+    "usuariosActivos": 11,
+    "publicaciones": 10,
+    "intercambios": 5,
+    "publicacionesReportadas": 5,
+    "usuariosSuspendidos": 2
+  },
+  "actividadMensual": [
+    {
+      "label": "Ene",
+      "valor": 120
+    },
+    {
+      "label": "Feb",
+      "valor": 168
+    },
+    {
+      "label": "Mar",
+      "valor": 210
+    },
+    {
+      "label": "Abr",
+      "valor": 195
+    },
+    {
+      "label": "May",
+      "valor": 260
+    },
+    {
+      "label": "Jun",
+      "valor": 310
+    },
+    {
+      "label": "Jul",
+      "valor": 355
+    },
+    {
+      "label": "Ago",
+      "valor": 412
+    }
+  ],
+  "intercambiosPorMes": [
+    {
+      "label": "Ene",
+      "valor": 42
+    },
+    {
+      "label": "Feb",
+      "valor": 58
+    },
+    {
+      "label": "Mar",
+      "valor": 71
+    },
+    {
+      "label": "Abr",
+      "valor": 65
+    },
+    {
+      "label": "May",
+      "valor": 88
+    },
+    {
+      "label": "Jun",
+      "valor": 104
+    },
+    {
+      "label": "Jul",
+      "valor": 121
+    },
+    {
+      "label": "Ago",
+      "valor": 139
+    }
+  ],
+  "publicacionesPorCategoria": [
+    {
+      "label": "Electrónicos",
+      "valor": 342
+    },
+    {
+      "label": "Ropa y accesorios",
+      "valor": 218
+    },
+    {
+      "label": "Hogar y muebles",
+      "valor": 176
+    },
+    {
+      "label": "Vehículos",
+      "valor": 143
+    },
+    {
+      "label": "Videojuegos",
+      "valor": 128
+    },
+    {
+      "label": "Servicios profesionales",
+      "valor": 112
+    },
+    {
+      "label": "Deportes",
+      "valor": 96
+    },
+    {
+      "label": "Recursos digitales",
+      "valor": 74
+    }
+  ],
+  "actividadPorUbicacion": [
+    {
+      "label": "Yopal",
+      "valor": 486
+    },
+    {
+      "label": "Aguazul",
+      "valor": 194
+    },
+    {
+      "label": "Villanueva",
+      "valor": 132
+    },
+    {
+      "label": "Tauramena",
+      "valor": 108
+    },
+    {
+      "label": "Monterrey",
+      "valor": 87
+    },
+    {
+      "label": "Maní",
+      "valor": 64
+    },
+    {
+      "label": "Paz de Ariporo",
+      "valor": 51
+    }
+  ],
+  "comparativas": {
+    "usuarios": {
+      "actual": 412,
+      "anterior": 355,
+      "porcentaje": 16.1
+    },
+    "publicaciones": {
+      "actual": 186,
+      "anterior": 164,
+      "porcentaje": 13.4
+    },
+    "intercambios": {
+      "actual": 139,
+      "anterior": 121,
+      "porcentaje": 14.9
+    },
+    "usuariosNuevos": {
+      "actual": 57,
+      "anterior": 45,
+      "porcentaje": 26.7
+    },
+    "reportes": {
+      "actual": 12,
+      "anterior": 17,
+      "porcentaje": -29.4
+    }
+  },
+  "crecimientoCategorias": [
+    {
+      "label": "Videojuegos",
+      "valor": 34
+    },
+    {
+      "label": "Electrónicos",
+      "valor": 21
+    },
+    {
+      "label": "Recursos digitales",
+      "valor": 19
+    },
+    {
+      "label": "Hogar y muebles",
+      "valor": 18
+    },
+    {
+      "label": "Servicios profesionales",
+      "valor": 12
+    },
+    {
+      "label": "Ropa y accesorios",
+      "valor": 9
+    },
+    {
+      "label": "Deportes",
+      "valor": 6
+    },
+    {
+      "label": "Vehículos",
+      "valor": -4
+    }
+  ]
+}
