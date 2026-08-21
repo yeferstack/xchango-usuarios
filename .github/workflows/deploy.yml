@@ -35,12 +35,12 @@ jobs:
         run: npm run build -- --base-href=/xchango-usuarios/
 
       - name: Copy index.html to 404.html for SPA routing
-        run: cp proj/dist/xchango/browser/index.html proj/dist/xchango/browser/404.html
+        run: cp proj/dist/xchango/index.html proj/dist/xchango/404.html
 
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-pages-artifact@v4
         with:
-          path: proj/dist/xchango/browser
+          path: proj/dist/xchango
 
   deploy:
     name: Deploy to GitHub Pages
