@@ -1,4 +1,5 @@
 name: Deploy Angular to GitHub Pages
+
 on:
   push:
     branches:
@@ -16,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -31,7 +32,7 @@ jobs:
 
       - name: Build Angular
         working-directory: ./proj
-        run: npm run build -- --base-href=/Xchango/
+        run: npm run build -- --base-href=/Xchango-usuarios/
 
       - name: Copy index.html to 404.html for SPA routing
         run: cp proj/dist/xchango/browser/index.html proj/dist/xchango/browser/404.html
