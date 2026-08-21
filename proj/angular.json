@@ -36,6 +36,14 @@
           },
           "defaultConfiguration": "production"
         },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "xchango:build:development",
+            "tsConfig": "tsconfig.spec.json",
+            "runner": "karma"
+          }
+        },
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
