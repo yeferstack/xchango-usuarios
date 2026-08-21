@@ -34,13 +34,41 @@ jobs:
         working-directory: ./proj
         run: npm run build -- --base-href=/xchango-usuarios/
 
-      - name: Copy index.html to 404.html for SPA routing
-        run: cp proj/dist/xchango/index.html proj/dist/xchango/404.html
+      - name: Show build output
+        run: |
+          echo "Contenido de proj/dist:"
+          find proj/dist -maxdepth 5 -type f | sort
+
+      - name: Find Angular output
+        run: |
+          INDEX=$(find proj/dist -name index.html -type f | head -n 1)
+
+          if [ -z "$INDEX" ]; then
+            echo "ERROR: No se encontró index.html dentro de proj/dist"
+            exit 1
+          fi
+
+          echo "index.html encontrado en:"
+          echo "$INDEX"
+
+          DIST_DIR=$(dirname "$INDEX")
+
+          echo "Carpeta final de Angular:"
+          echo "$DIST_DIR"
+
+          cp "$INDEX" "$DIST_DIR/404.html"
+
+          echo "DIST_DIR=$DIST_DIR" >> "$GITHUB_ENV"
+
+      - name: Verify deployment files
+        run: |
+          echo "Archivos que se van a publicar:"
+          find "$DIST_DIR" -maxdepth 2 -type f | sort
 
       - name: Upload GitHub Pages artifacts
         uses: actions/upload-pages-artifact@v4
         with:
-          path: proj/dist/xchango
+          path: ${{ env.DIST_DIR }}
 
   deploy:
     name: Deploy to GitHub Pages
