@@ -1,324 +1,499 @@
-<a href="/" class="brand-logo">
-  <img
-    src="Logo-xchango/chango.png"
-    alt="Logo XchanGo"
-    class="brand-logo__chango"
-  >
-  <img
-    src="Logo-xchango/letras-chango.png"
-    alt="XchanGo"
-    class="brand-logo__wordmark"
-  >
-</a>
+<div class="page-wrapper">
+  <div class="form-card">
+    <header class="form-header">
+      <div class="header-icon-wrap">
+        <span class="dot dot-tl"></span>
+        <span class="dot dot-tr"></span>
+        <span class="dot dot-bl"></span>
+        <div class="header-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="8" r="4" />
+            <path d="M2 20c0-4 3-6 7-6s7 2 7 6" />
+            <path d="M19 8v6M16 11h6" />
+          </svg>
+        </div>
+      </div>
+      <h1>Únete a la red de intercambio <span class="accent-text">XchanGo</span></h1>
+      <p class="subtitle">Crea tu cuenta y comienza a intercambiar.</p>
+    </header>
 
-<div class="pagina">
+    <form class="registro-form" (ngSubmit)="onSubmit()" #registroForm="ngForm">
+      <!-- Información personal -->
+      <section class="form-section">
+        <div class="section-header">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+          </svg>
+          <h2>Información personal</h2>
+        </div>
 
-  <!-- ===================== ENCABEZADO ===================== -->
-  <header class="encabezado">
-    <button type="button" class="boton-volver" (click)="volver()">
-      <app-icono nombre="arrow_back"></app-icono>
-    </button>
-    <div>
-      <h1>Publicar Trueque</h1>
-      <p>Completa la información de lo que ofreces</p>
-    </div>
-  </header>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contenedor-principal">
-
-    <!-- ===================== COLUMNA IZQUIERDA (FORMULARIO) ===================== -->
-    <div class="columna-formulario">
-
-      <!-- Paso 1: Tipo de intercambio -->
-      <section class="seccion">
-        <h2 class="titulo-seccion">1. ¿Qué quieres publicar?</h2>
-        <p class="subtitulo-seccion">Elige el tipo de intercambio que mejor se adapte a lo que ofreces.</p>
-
-        <div class="grid-tipos">
-          <div
-            *ngFor="let tipo of tiposIntercambio"
-            class="tarjeta-tipo"
-            [class.seleccionada]="form.get('tipoIntercambio')?.value === tipo.id"
-            (click)="seleccionarTipo(tipo.id)">
-
-            <div class="tarjeta-tipo-encabezado">
-              <div class="icono-circulo" [ngClass]="tipo.colorClase">
-                <app-icono [nombre]="tipo.icono"></app-icono>
-              </div>
-              <span class="radio-personalizado" [class.activo]="form.get('tipoIntercambio')?.value === tipo.id"></span>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombres">NOMBRES</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+                </svg>
+              </span>
+              <input
+                id="nombres"
+                name="nombres"
+                type="text"
+                placeholder="Ej: Juan"
+                [(ngModel)]="modelo.nombres"
+                required
+              />
             </div>
-
-            <h3>{{ tipo.titulo }}</h3>
-            <p>{{ tipo.descripcion }}</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Paso 2: Información básica -->
-      <section class="seccion">
-        <h2 class="titulo-seccion">2. Información básica</h2>
-
-        <div class="fila-campos">
-          <div class="campo">
-            <label>Nombre del intercambio <span class="requerido">*</span></label>
-            <input type="text" formControlName="nombre" placeholder="Ej: Bicicleta montaña">
           </div>
 
-          <div class="campo">
-            <label>Categoría <span class="requerido">*</span></label>
-            <select formControlName="categoria">
-              <option value="" disabled>Selecciona una categoría</option>
-              <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="campo">
-          <label>Descripción <span class="requerido">*</span></label>
-          <textarea
-            formControlName="descripcion"
-            [maxlength]="maxDescripcion"
-            placeholder="Describe tu bien, servicio o producto digital. Incluye detalles importantes...">
-          </textarea>
-          <span class="contador-caracteres">{{ form.get('descripcion')?.value?.length || 0 }}/{{ maxDescripcion }}</span>
-        </div>
-      </section>
-
-      <!-- Paso 3: Detalles del intercambio -->
-      <section class="seccion">
-        <h2 class="titulo-seccion">3. Detalles del intercambio</h2>
-
-        <div class="fila-campos">
-          <div class="campo">
-            <label>¿Qué ofreces exactamente?</label>
-            <input type="text" formControlName="ofreces" placeholder="Explica lo que ofreces...">
-          </div>
-
-          <div class="campo">
-            <label>¿Qué buscas a cambio?</label>
-            <input type="text" formControlName="buscas" placeholder="Ej: Clases de inglés, servicios de diseño, otro producto...">
+          <div class="form-group">
+            <label for="apellidos">APELLIDOS</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+                </svg>
+              </span>
+              <input
+                id="apellidos"
+                name="apellidos"
+                type="text"
+                placeholder="Ej: Pérez"
+                [(ngModel)]="modelo.apellidos"
+                required
+              />
+            </div>
           </div>
         </div>
 
-        <div class="fila-campos">
-          <div class="campo">
-            <label>Disponibilidad <span class="requerido">*</span></label>
-            <div class="input-con-icono">
-              <app-icono nombre="event"></app-icono>
-              <select formControlName="disponibilidad">
-                <option value="" disabled>Selecciona disponibilidad</option>
-                <option *ngFor="let opcion of opcionesDisponibilidad" [value]="opcion">{{ opcion }}</option>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fechaNacimiento">FECHA DE NACIMIENTO</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+              </span>
+              <input
+                id="fechaNacimiento"
+                name="fechaNacimiento"
+                type="date"
+                [(ngModel)]="modelo.fechaNacimiento"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sexo">SEXO</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="10" cy="14" r="5" />
+                  <path d="M19 5l-5.4 5.4M14 5h5v5" />
+                </svg>
+              </span>
+              <select id="sexo" name="sexo" [(ngModel)]="modelo.sexo">
+                <option value="" disabled selected>Selecciona</option>
+                <option *ngFor="let opcion of opcionesSexo" [value]="opcion.value">
+                  {{ opcion.label }}
+                </option>
               </select>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="campo">
-            <label>Cantidad disponible</label>
-            <div class="input-con-icono">
-              <app-icono nombre="tag"></app-icono>
-              <input type="text" formControlName="cantidad" placeholder="Ej: 1 unidad / Horas / Sesiones">
+      <!-- Ubicación -->
+      <section class="form-section">
+        <div class="section-header">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22s7-7.58 7-12A7 7 0 1 0 5 10c0 4.42 7 12 7 12Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+          <h2>Ubicación</h2>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="direccion">DIRECCIÓN DE RESIDENCIA</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 10.5 12 3l9 7.5" />
+                  <path d="M5 9.5V21h14V9.5" />
+                </svg>
+              </span>
+              <input
+                id="direccion"
+                name="direccion"
+                type="text"
+                placeholder="Calle, número, apartamento"
+                [(ngModel)]="modelo.direccion"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ciudad">CIUDAD</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="4" y="3" width="16" height="18" rx="1" />
+                  <path d="M9 21v-4h6v4M8 7h1M8 11h1M15 7h1M15 11h1" />
+                </svg>
+              </span>
+              <input
+                id="ciudad"
+                name="ciudad"
+                type="text"
+                placeholder="Ej: Yopal"
+                [(ngModel)]="modelo.ciudad"
+              />
             </div>
           </div>
         </div>
 
-        <div class="campo campo-estado">
-          <label>Estado <span class="requerido">*</span></label>
-          <div class="switch-estado">
-            <label class="switch">
-              <input type="checkbox" formControlName="estado">
-              <span class="slider"></span>
-            </label>
-            <div>
-              <strong>Activo</strong>
-              <p>Tu intercambio será visible para otros usuarios</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="estado">ESTADO / PROVINCIA</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" />
+                  <path d="M9 4v14M15 6v14" />
+                </svg>
+              </span>
+              <input
+                id="estado"
+                name="estado"
+                type="text"
+                placeholder="Ej: Casanare"
+                [(ngModel)]="modelo.estado"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="barrio">BARRIO</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 22s7-7.58 7-12A7 7 0 1 0 5 10c0 4.42 7 12 7 12Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              </span>
+              <input
+                id="barrio"
+                name="barrio"
+                type="text"
+                placeholder="Ej: El Centro"
+                [(ngModel)]="modelo.barrio"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Paso 4: Ubicación -->
-      <section class="seccion">
-        <h2 class="titulo-seccion">4.</h2>
+      <!-- Contacto -->
+      <section class="form-section">
+        <div class="section-header">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.2 2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L7.1 8.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9Z"
+            />
+          </svg>
+          <h2>Contacto</h2>
+        </div>
 
-        <div class="fila-campos fila-tres">
-          <div class="campo">
-            <label>Departamento</label>
-            <div class="input-con-icono">
-              <app-icono nombre="apartment"></app-icono>
-              <input type="text" [value]="departamento" disabled readonly>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+              </span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="ejemplo@correo.com"
+                [(ngModel)]="modelo.email"
+                required
+              />
             </div>
           </div>
 
-          <div class="campo">
-            <label>Municipio <span class="requerido">*</span></label>
-            <div class="input-con-icono">
-              <app-icono nombre="account_balance"></app-icono>
-              <select formControlName="municipio">
-                <option value="" disabled>Selecciona municipio</option>
-                <option *ngFor="let municipio of municipiosCasanare" [value]="municipio">{{ municipio }}</option>
+          <div class="form-group">
+            <label for="password">CONTRASEÑA</label>
+            <div class="field-icon">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Mínimo 8 caracteres"
+                [(ngModel)]="password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">NÚMERO DE TELÉFONO</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.2 2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L7.1 8.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9Z"
+                  />
+                </svg>
+              </span>
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                placeholder="+57 300 123 4567"
+                [(ngModel)]="modelo.telefono"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Documentos -->
+      <section class="form-section">
+        <div class="section-header">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <circle cx="8" cy="12" r="2" />
+            <path d="M14 10h5M14 14h3" />
+          </svg>
+          <h2>Documentos</h2>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>FOTO DE PERFIL</label>
+            <div
+              class="dropzone"
+              [class.dropzone-active]="isDragOver"
+              (click)="fotoPerfilInput.click()"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
+            >
+              <input
+                #fotoPerfilInput
+                type="file"
+                accept="image/png, image/jpeg"
+                (change)="onFotoPerfilSeleccionada($event)"
+                hidden
+              />
+              <ng-container *ngIf="!fotoPerfilNombre; else archivoElegido">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M7 18a4.6 4.6 0 0 1-1.6-8.9A5.5 5.5 0 0 1 16 8h.5A4.5 4.5 0 0 1 17 18H7Z"
+                  />
+                  <path d="M12 12v6m0-6 3 3m-3-3-3 3" />
+                </svg>
+                <span class="dropzone-title">Sube tu foto</span>
+                <span class="dropzone-hint">JPG, PNG (máx. 5MB)</span>
+              </ng-container>
+              <ng-template #archivoElegido>
+                <span class="dropzone-title">{{ fotoPerfilNombre }}</span>
+                <span class="dropzone-hint">Haz clic para cambiar la foto</span>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tipoDocumento">DOCUMENTO DE IDENTIDAD</label>
+            <div class="field-icon">
+              <span class="icon-box">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <circle cx="8" cy="12" r="2" />
+                  <path d="M14 10h5M14 14h3" />
+                </svg>
+              </span>
+              <select id="tipoDocumento" name="tipoDocumento" [(ngModel)]="modelo.tipoDocumento">
+                <option value="" disabled selected>Selecciona tipo de documento</option>
+                <option *ngFor="let opcion of tiposDocumento" [value]="opcion.value">
+                  {{ opcion.label }}
+                </option>
               </select>
             </div>
-          </div>
 
-          <div class="campo">
-            <label>Barrio</label>
-            <div class="input-con-icono">
-              <app-icono nombre="place"></app-icono>
-              <input type="text" formControlName="barrio" placeholder="Ej: 20 de Julio">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Paso 5: Imágenes -->
-      <section class="seccion">
-        <h2 class="titulo-seccion">5. Imágenes del intercambio</h2>
-
-        <div
-          class="zona-carga"
-          [class.arrastrando]="arrastrandoArchivo"
-          (dragover)="onDragOver($event)"
-          (dragleave)="onDragLeave($event)"
-          (drop)="onDrop($event)"
-          (click)="inputArchivo.click()">
-
-          <app-icono nombre="cloud_upload"></app-icono>
-          <strong>Sube fotos de tu intercambio</strong>
-          <p>Arrastra y suelta archivos aquí o haz clic para seleccionar</p>
-          <p class="texto-formatos">Formatos: JPG, PNG (Máx. 5MB cada uno)</p>
-
-          <input
-            #inputArchivo
-            type="file"
-            accept="image/jpeg,image/png"
-            multiple
-            hidden
-            (change)="onFileSelected($event)">
-        </div>
-
-        <div class="pie-carga">
-          <span>Puedes subir hasta {{ maxImagenes }} imágenes</span>
-          <span>{{ imagenes.length }}/{{ maxImagenes }}</span>
-        </div>
-
-        <div class="miniaturas" *ngIf="imagenesPreviewUrls.length">
-          <div class="miniatura" *ngFor="let url of imagenesPreviewUrls; let i = index">
-            <img [src]="url" alt="Vista previa de imagen">
-            <button type="button" (click)="eliminarImagen(i)">
-              <app-icono nombre="close"></app-icono>
-            </button>
+            <input
+              class="documento-numero"
+              name="numeroDocumento"
+              type="text"
+              placeholder="Número de documento"
+              [(ngModel)]="modelo.numeroDocumento"
+            />
           </div>
         </div>
       </section>
 
-      <button type="button" class="boton-ubicacion" (click)="seleccionarUbicacionEnMapa()">
-        <app-icono nombre="location_on"></app-icono>
-        Seleccionar ubicación en el mapa
+      <p class="error-registro" *ngIf="errorRegistro" style="color:#a8453b;margin:0 0 10px;">{{ errorRegistro }}</p>
+      <button type="submit" class="btn-primary">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="9" cy="8" r="4" />
+          <path d="M2 20c0-4 3-6 7-6s7 2 7 6" />
+          <path d="M19 8v6M16 11h6" />
+        </svg>
+        Crear Usuario
       </button>
 
-      <button type="submit" class="boton-publicar">Publicar trueque</button>
-    </div>
-
-    <!-- ===================== COLUMNA DERECHA (VISTA PREVIA) ===================== -->
-    <aside class="columna-vista-previa">
-      <div class="tarjeta-vista-previa">
-        <div class="encabezado-vista-previa">
-          <app-icono nombre="visibility"></app-icono>
-          <div>
-            <strong>Vista previa de tu publicación</strong>
-            <p>Así se verá tu publicación</p>
-          </div>
-        </div>
-
-        <div class="banner-vista-previa" [class.con-imagen]="imagenesPreviewUrls.length">
-
-          <!-- Sin imágenes: se muestra el ícono del tipo de intercambio -->
-          <ng-container *ngIf="!imagenesPreviewUrls.length">
-            <div class="icono-circulo icono-banner" [ngClass]="tipoSeleccionado?.colorClase">
-              <app-icono [nombre]="tipoSeleccionado?.icono || 'inventory_2'"></app-icono>
-            </div>
-            <h3>{{ tituloVistaPrevia }}</h3>
-          </ng-container>
-
-          <!-- Con imágenes: se muestra la foto seleccionada -->
-          <ng-container *ngIf="imagenesPreviewUrls.length">
-            <img class="imagen-banner" [src]="imagenesPreviewUrls[indiceImagenVistaPrevia]" alt="Imagen del intercambio">
-
-            <span class="contador-imagenes" *ngIf="imagenesPreviewUrls.length > 1">
-              {{ indiceImagenVistaPrevia + 1 }}/{{ imagenesPreviewUrls.length }}
-            </span>
-
-            <button
-              type="button"
-              class="flecha-imagen flecha-izquierda"
-              *ngIf="imagenesPreviewUrls.length > 1"
-              (click)="imagenAnterior()">
-              <app-icono nombre="chevron_left"></app-icono>
-            </button>
-
-            <button
-              type="button"
-              class="flecha-imagen flecha-derecha"
-              *ngIf="imagenesPreviewUrls.length > 1"
-              (click)="imagenSiguiente()">
-              <app-icono nombre="chevron_right"></app-icono>
-            </button>
-          </ng-container>
-        </div>
-
-        <ul class="lista-vista-previa">
-          <li>
-            <app-icono nombre="home"></app-icono>
-            <div>
-              <strong>Nombre</strong>
-              <p>{{ form.get('nombre')?.value || 'Ej: Servicios' }}</p>
-            </div>
-          </li>
-          <li>
-            <app-icono nombre="description"></app-icono>
-            <div>
-              <strong>Descripción</strong>
-              <p>{{ form.get('descripcion')?.value || 'Descripción de la categoría' }}</p>
-            </div>
-          </li>
-        </ul>
-
-        <div class="fila-datos">
-          <app-icono nombre="check_circle"></app-icono>
-          <strong>Estado</strong>
-          <span class="etiqueta-activo" *ngIf="form.get('estado')?.value">Activo</span>
-          <span class="etiqueta-inactivo" *ngIf="!form.get('estado')?.value">Inactivo</span>
-        </div>
-
-        <div class="fila-datos">
-          <app-icono nombre="event"></app-icono>
-          <strong>Disponibilidad</strong>
-          <span>{{ form.get('disponibilidad')?.value || 'Ej: Fines de semana' }}</span>
-        </div>
-
-        <div class="fila-datos">
-          <app-icono nombre="place"></app-icono>
-          <strong>Ubicación</strong>
-          <span>
-            {{ form.get('municipio')?.value || 'Ej: Yopal' }}, {{ departamento }}
-          </span>
-        </div>
-
-        <div class="fila-datos">
-          <app-icono nombre="tag"></app-icono>
-          <strong>Cantidad disponible</strong>
-          <span>{{ form.get('cantidad')?.value || 'Ej: 1 unidad' }}</span>
-        </div>
-      </div>
-
-      <div class="caja-consejo">
-        <app-icono nombre="lightbulb"></app-icono>
-        <div>
-          <strong>Consejo</strong>
-          <p>Añade una buena descripción, imágenes claras y detalles específicos para aumentar tus posibilidades de intercambio.</p>
-        </div>
-      </div>
-    </aside>
-
-  </form>
+      <p class="terms-note">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="4" y="10" width="16" height="10" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+        </svg>
+        Al crear una cuenta, aceptas nuestros
+        <a href="#">Términos y Condiciones</a> y nuestra <a href="#">Política de Privacidad</a>.
+      </p>
+    </form>
+  </div>
 </div>

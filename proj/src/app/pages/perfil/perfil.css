@@ -41,33 +41,7 @@
 
 
 /* ==============================
-   ICONOS APP-ICONO (Material Icons)
-   Sin este bloque, los <app-icono nombre="..."> no
-   renderizan como ícono y se ven como texto plano.
-============================== */
-
-app-icono {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 20px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga';
-}
-
-
-/* ==============================
-   ICONOS SVG (si en algún punto se usan íconos
-   inline en vez de app-icono)
+   ICONOS
 ============================== */
 
 .icon {
@@ -231,8 +205,9 @@ app-icono {
 }
 
 
-.navbar__link app-icono {
-    font-size: 18px;
+.navbar__link .icon {
+    width: 18px;
+    height: 18px;
 }
 
 
@@ -297,8 +272,9 @@ app-icono {
 }
 
 
-.navbar__icon-btn app-icono {
-    font-size: 20px;
+.navbar__icon-btn .icon {
+    width: 20px;
+    height: 20px;
 }
 
 
@@ -331,7 +307,8 @@ app-icono {
 
 
 .navbar__chevron {
-    font-size: 20px;
+    width: 20px;
+    height: 20px;
 
     color: var(--text-secondary);
 }
@@ -460,8 +437,9 @@ app-icono {
 }
 
 
-.perfil__avatar-edit app-icono {
-    font-size: 21px;
+.perfil__avatar-edit .icon {
+    width: 21px;
+    height: 21px;
 }
 
 
@@ -506,15 +484,18 @@ app-icono {
 }
 
 
-.perfil__stars app-icono {
-    font-size: 26px;
+.perfil__stars .icon {
+    width: 26px;
+    height: 26px;
 
     color: var(--star-empty);
 }
 
 
-.perfil__stars app-icono.is-filled {
+.perfil__stars .icon.is-filled {
     color: var(--star-filled);
+
+    fill: var(--star-filled);
 }
 
 
@@ -612,8 +593,9 @@ app-icono {
 }
 
 
-.option-card__icon app-icono {
-    font-size: 22px;
+.option-card__icon .icon {
+    width: 22px;
+    height: 22px;
 }
 
 
@@ -647,10 +629,11 @@ app-icono {
    FLECHAS
 ============================== */
 
-.option-card__arrow {
+.option-card__chevron {
     margin-left: auto;
 
-    font-size: 20px;
+    width: 20px;
+    height: 20px;
 
     color: var(--text-secondary);
 
