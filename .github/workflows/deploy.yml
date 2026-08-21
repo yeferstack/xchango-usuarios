@@ -32,7 +32,7 @@ jobs:
 
       - name: Build Angular
         working-directory: ./proj
-        run: npm run build -- --base-href=/Xchango-usuarios/
+        run: npm run build -- --base-href=/xchango-usuarios/
 
       - name: Copy index.html to 404.html for SPA routing
         run: cp proj/dist/xchango/browser/index.html proj/dist/xchango/browser/404.html
