@@ -1,3 +1,16 @@
+<a href="/" class="brand-logo">
+  <img
+    src="Logo-xchango/chango.png"
+    alt="Logo XchanGo"
+    class="brand-logo__chango"
+  >
+  <img
+    src="Logo-xchango/letras-chango.png"
+    alt="XchanGo"
+    class="brand-logo__wordmark"
+  >
+</a>
+
 <div class="pagina">
 
   <!-- ===================== ENCABEZADO ===================== -->
@@ -5,8 +18,18 @@
     <button type="button" class="boton-volver" (click)="volver()">
       <app-icono nombre="arrow_back"></app-icono>
     </button>
+
+    <div class="header-icon-wrap">
+      <span class="dot dot-tl"></span>
+      <span class="dot dot-tr"></span>
+      <span class="dot dot-bl"></span>
+      <div class="header-icon">
+        <app-icono nombre="swap_horiz"></app-icono>
+      </div>
+    </div>
+
     <div>
-      <h1>Publicar Trueque</h1>
+      <h1>Publicar <span class="accent-text">Trueque</span></h1>
       <p>Completa la información de lo que ofreces</p>
     </div>
   </header>

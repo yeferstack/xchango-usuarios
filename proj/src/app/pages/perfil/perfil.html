@@ -2,10 +2,10 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-        <div class="navbar__brand">
-            <img src="Logo-xchango/chango.png" alt="XchanGo" class="navbar__logo" />
-            <span class="navbar__brand-name">XchanGo</span>
-        </div>
+        <a href="/" class="navbar__brand">
+            <img src="Logo-xchango/chango.png" alt="Logo XchanGo" class="navbar__chango" />
+            <img src="Logo-xchango/letras-chango.png" alt="XchanGo" class="navbar__letras" />
+        </a>
 
         <nav class="navbar__pill">
             <a class="navbar__link">
@@ -48,7 +48,7 @@
                 <img [src]="avatarUrl" [alt]="nombreUsuario" />
             </div>
 
-            <app-icono nombre="expand_more"></app-icono>
+            <app-icono class="navbar__chevron" nombre="expand_more"></app-icono>
         </div>
     </header>
 
@@ -56,7 +56,7 @@
     <!-- CONTENIDO -->
     <main class="perfil">
 
-        <section class="perfil__card perfil__hero">
+        <section class="perfil__hero">
 
             <!-- Columna izquierda: avatar + nombre + rating -->
             <div class="perfil__identity">
@@ -67,6 +67,10 @@
                         [src]="avatarUrl"
                         [alt]="'Foto de perfil de ' + nombreUsuario"
                     />
+
+                    <button type="button" class="perfil__avatar-edit" aria-label="Cambiar foto de perfil">
+                        <app-icono nombre="photo_camera"></app-icono>
+                    </button>
                 </div>
 
                 <h1 class="perfil__name">
@@ -85,7 +89,11 @@
                             calificacion + ' de ' + calificacionMaxima + ' estrellas'
                         "
                     >
-                        <app-icono nombre="star"></app-icono>
+                        <app-icono
+                            *ngFor="let estrella of [1, 2, 3, 4, 5]"
+                            nombre="star"
+                            [class.is-filled]="estrella <= calificacion"
+                        ></app-icono>
                     </div>
 
                     <p class="perfil__rating-note">
@@ -107,7 +115,9 @@
                     type="button"
                     routerLink="/perfil/informacion"
                 >
-                    <app-icono class="option-card__icon" nombre="badge"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="badge"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -129,7 +139,9 @@
                     type="button"
                     routerLink="/perfil/cuenta"
                 >
-                    <app-icono class="option-card__icon" nombre="account_circle"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="account_circle"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -151,7 +163,9 @@
                     type="button"
                     routerLink="/perfil/seguridad"
                 >
-                    <app-icono class="option-card__icon" nombre="shield"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="shield"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -173,7 +187,9 @@
                     type="button"
                     routerLink="/perfil/ubicacion"
                 >
-                    <app-icono class="option-card__icon" nombre="location_on"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="location_on"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -195,7 +211,9 @@
                     type="button"
                     routerLink="/perfil/privacidad"
                 >
-                    <app-icono class="option-card__icon" nombre="lock_outline"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="lock_outline"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -218,7 +236,9 @@
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <app-icono class="option-card__icon" nombre="chat_bubble_outline"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="chat_bubble_outline"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
@@ -230,7 +250,7 @@
                         </p>
                     </div>
 
-                    <app-icono nombre="open_in_new"></app-icono>
+                    <app-icono class="option-card__arrow" nombre="open_in_new"></app-icono>
                 </a>
 
 
@@ -240,7 +260,9 @@
                     type="button"
                     routerLink="/mis-publicaciones"
                 >
-                    <app-icono class="option-card__icon" nombre="grid_view"></app-icono>
+                    <div class="option-card__icon">
+                        <app-icono nombre="grid_view"></app-icono>
+                    </div>
 
                     <div>
                         <h3 class="option-card__title">
